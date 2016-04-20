@@ -1,21 +1,12 @@
 {
-  "name": "react-native-webpack-starter-kit",
-  "version": "0.1.0",
-  "description": ":herb: Write your React Native app using ES7+ with Webpack and Babel.",
-  "author": "Josh Habdas <jhabdas@gmail.com> (http://habd.as)",
+  "name": "react_native_boilerplate",
+  "version": "0.0.1",
+  "description": ":beginner: React Native boilerplate using redux and webpack",
+  "author": "Siyuan Gao <siyuangao@gmail.com> (http://ricebank.ca)",
   "license": "MIT",
   "keywords": [
-    "mobile",
-    "native",
-    "immutable",
-    "javascript",
-    "react-native",
-    "starter-kit",
-    "webpack",
-    "babel",
-    "eslint",
-    "greenkeeper",
-    "es2015"
+      "React",
+      "Native"
   ],
   "scripts": {
     "android-setup-port": "adb reverse tcp:8081 tcp:8080",
@@ -26,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jhabdas/react-native-webpack-starter-kit"
+    "url": "https://github.com/r1cebank/react-native-boilerplate"
   },
   "engines": {
     "node": ">=4",

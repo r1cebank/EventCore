@@ -6,4 +6,4 @@ const {
   AppRegistry
 } = React;
 
-AppRegistry.registerComponent("App", () => Root);
+AppRegistry.registerComponent("react_native_boilerplate", () => Root);
