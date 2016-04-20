@@ -1,6 +1,9 @@
 {
   "root": true,
-  "extends": "airbnb/base",
+  "plugins": [
+    "react"
+  ],
+  "extends": "airbnb",
   "parser": "babel-eslint",
   "rules": {
     "max-len": 1,
@@ -22,7 +25,8 @@
     ]
   },
   "ecmaFeatures": {
-    "generators": true
+    "generators": true,
+    "jsx": true
   },
   "envs": {
     "node": true,

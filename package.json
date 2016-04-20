@@ -5,14 +5,14 @@
   "author": "Siyuan Gao <siyuangao@gmail.com> (http://ricebank.ca)",
   "license": "MIT",
   "keywords": [
-      "React",
-      "Native"
+    "React",
+    "Native"
   ],
   "scripts": {
     "android-setup-port": "adb reverse tcp:8081 tcp:8080",
     "bundle": "rnws bundle",
     "test": "mocha --require react-native-mock/mock.js --compilers js:babel-core/register --recursive test/*.js",
-    "lint": "eslint src",
+    "lint": "eslint src -f node_modules/eslint-html-reporter/reporter.js -o report.html",
     "start": "rnws start"
   },
   "repository": {
@@ -45,6 +45,7 @@
     "enzyme": "^2.2.0",
     "eslint": "~2.8.0",
     "eslint-config-airbnb": "^7.0.0",
+    "eslint-html-reporter": "^0.5.2",
     "eslint-loader": "^1.1.1",
     "eslint-plugin-immutable": "^1.0.0",
     "eslint-plugin-jsx-a11y": "^0.6.2",
