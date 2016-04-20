@@ -5,15 +5,19 @@
 (function() {
   'use strict'
 
-  var path = require('path')
-  var webpack = require('webpack')
+  var path = require('path');
+  var webpack = require('webpack');
+  var WebpackNotifierPlugin = require('webpack-notifier');
 
   module.exports = {
     debug: true,
     devtool: 'source-map',
+    plugins: [
+        new WebpackNotifierPlugin()
+    ],
     entry: {
-      'index.ios': ['./main.ios.js'],
-      'index.android': ['./main.android.js'],
+      'index.ios': ['./index.ios.js'],
+      'index.android': ['./index.android.js'],
     },
     output: {
       path: path.resolve(__dirname, 'build'),

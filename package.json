@@ -56,6 +56,7 @@
     "react-native-mock": "0.0.7",
     "react-native-webpack-server": "^0.9.0",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.0"
+    "webpack-dev-server": "^1.14.0",
+    "webpack-notifier": "^1.3.0"
   }
 }
