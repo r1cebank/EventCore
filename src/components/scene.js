@@ -37,7 +37,7 @@ class Scene extends React.Component {
               renderScene={this.renderScene}
               initialRoute={{
                   component: App,
-                  title: 'Starter App'
+                  title: 'React Native Boilerplate'
               }}
             />
         );

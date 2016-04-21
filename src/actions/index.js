@@ -18,7 +18,7 @@ export const receiveData = (data: Object): Object => ({
 export const fetchData = (): Function => (dispatch) => {
     dispatch(requestData());
     return setTimeout(() => {
-        const data = { message: 'Hello World!' };
+        const data = { message: 'Welcome to React Native Boilerplate' };
         dispatch(receiveData(data));
     }, 300);
 };

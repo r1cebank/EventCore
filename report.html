@@ -251,13 +251,13 @@
                 </tr>
                 <tr>
                   <td>Warnings</td>
-                  <td>0</td>
+                  <td>1</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <td>Total alerts</td>
-                  <td>0</td>
+                  <td>1</td>
                 </tr>
               </tfoot>
           </table>
@@ -271,11 +271,11 @@
                 </tr>
                 <tr>
                   <td>Files with only warnings</td>
-                  <td>0</td>
+                  <td>1</td>
                 </tr>
                 <tr>
                   <td>Clean files</td>
-                  <td>7</td>
+                  <td>6</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -288,6 +288,27 @@
         </div>
       </div>
 
+        <h2>Most-Common Errors and Warnings</h2>
+        
+        <div class="table-wrapper occurances">
+          <div class="table-column">
+            <h3>Errors</h3>
+        
+              <p>No errors were found!</p>
+          </div>
+          <div class="table-column">
+            <h3>Warnings</h3>
+        
+              <table class="summary-table">
+                <tbody>
+                    <tr class="occurance row-0">
+                        <td><a href="http://eslint.org/docs/rules/react/prefer-stateless-function">react/prefer-stateless-function</a></td>
+                      <td>1</td>
+                    </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
 
       <h2>File Breakdown
           <a id="toggle" href="javascript:;" onclick="toggleAllDetails(this)" class="toggle-all-link">(expand all)</a></h2>
@@ -300,15 +321,27 @@
             <th class="warning-col">Warnings</th>
           </tr>
         </thead>
-        <tbody><tr class="success"><td>/Users/siyuangao/Documents/react-native-boilerplate/src/actions/index.js</td>
+        <tbody><tr class="warning"><td>            <a class="toggle-link" href="javascript:;" onclick="toggleDetails(this)">/Users/siyuangao/Documents/react-native-boilerplate/src/containers/root.js</a></td>
+              <td>0</td>
+              <td>1</td></tr><tr class="details-row hidden">
+                <td colspan="3">
+                  <table class="details-table">
+                    <tbody><tr class="msg-warning"><td class="location-col">
+                              10:1
+                          </td>
+                          <td class="severity-col">Warning</td>
+                          <td class="message-col">Component should be written as a pure function</td>
+                            <td class="rule-col"><a href="http://eslint.org/docs/rules/react/prefer-stateless-function">react/prefer-stateless-function</a></td>
+      </tr></tbody>
+                  </table>
+                </td>
+              </tr><tr class="success"><td>/Users/siyuangao/Documents/react-native-boilerplate/src/actions/index.js</td>
               <td>0</td>
               <td>0</td></tr><tr class="success"><td>/Users/siyuangao/Documents/react-native-boilerplate/src/components/navigation-bar.js</td>
               <td>0</td>
               <td>0</td></tr><tr class="success"><td>/Users/siyuangao/Documents/react-native-boilerplate/src/components/scene.js</td>
               <td>0</td>
               <td>0</td></tr><tr class="success"><td>/Users/siyuangao/Documents/react-native-boilerplate/src/containers/app.js</td>
-              <td>0</td>
-              <td>0</td></tr><tr class="success"><td>/Users/siyuangao/Documents/react-native-boilerplate/src/containers/root.js</td>
               <td>0</td>
               <td>0</td></tr><tr class="success"><td>/Users/siyuangao/Documents/react-native-boilerplate/src/reducers/index.js</td>
               <td>0</td>
