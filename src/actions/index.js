@@ -1,28 +1,24 @@
 /* @flow */
-/*global setTimeout*/
+/* global setTimeout */
+/* eslint arrow-body-style: ["warn", "as-needed"]*/
 
-export const REQUEST_DATA = "REQUEST_DATA";
-export const RECEIVE_DATA = "RECEIVE_DATA";
+export const REQUEST_DATA = 'REQUEST_DATA';
+export const RECEIVE_DATA = 'RECEIVE_DATA';
 
-export const requestData = (): Object => {
-  return {
+export const requestData = (): Object => ({
     type: REQUEST_DATA
-  };
-};
+});
 
-export const receiveData = (data: Object): Object => {
-  return {
+
+export const receiveData = (data: Object): Object => ({
     type: RECEIVE_DATA,
     data
-  };
-};
+});
 
-export const fetchData = (): Function => {
-  return (dispatch) => {
+export const fetchData = (): Function => (dispatch) => {
     dispatch(requestData());
     return setTimeout(() => {
-      const data = {message: "Hello World!"};
-      dispatch(receiveData(data));
+        const data = { message: 'Hello World!' };
+        dispatch(receiveData(data));
     }, 300);
-  };
 };
