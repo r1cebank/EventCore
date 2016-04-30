@@ -25,17 +25,29 @@ const config = {
                 loader: 'eslint-loader'
             }
         ],
-        loaders: [{
-            test: /\.js$/,
-            include: [
-                path.resolve(__dirname, 'src'),
-                path.resolve(__dirname, 'node_modules/react-native-navbar')
-            ],
-            loader: 'babel',
-            query: {
-                presets: ['es2015', 'stage-0', 'react']
+        loaders: [
+            {
+                test: /\.js$/,
+                include: [
+                    path.resolve(__dirname, 'src'),
+                    path.resolve(__dirname, 'node_modules/react-native-navbar')
+                ],
+                loader: 'babel',
+                query: {
+                    cacheDirectory: true,
+                    presets: ['es2015', 'stage-1', 'react']
+                }
+            },
+            {
+                test: /\.(js|jsx|es6)$/,
+                exclude: /node_modules/,
+                loader: 'babel',
+                query: {
+                    cacheDirectory: true,
+                    presets: ['es2015', 'stage-1', 'react']
+                }
             }
-        }]
+        ]
     }
 };
 
