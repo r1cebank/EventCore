@@ -4,12 +4,12 @@
 
 import React, { View, Text, StyleSheet } from 'react-native';
 import { shallow } from 'enzyme';
-import Scene from '../src/components/scene';
+import Home from '../src/components/home';
 import { expect } from 'chai';
 
-describe('<Scene />', () => {
+describe('<Home />', () => {
     it('should render stuff', () => {
-        const wrapper = shallow(<Scene />);
+        const wrapper = shallow(<Home />);
         expect(wrapper.length).to.equal(1);
     });
 });
