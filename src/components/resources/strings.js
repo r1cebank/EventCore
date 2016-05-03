@@ -1,4 +1,4 @@
-import LocalizedStrings from 'react-native-localization';
+import LocalizedStrings from 'rctn-localization';
 
 const strings = new LocalizedStrings({
     en: {
