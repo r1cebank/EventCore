@@ -8,8 +8,8 @@ import Home from '../src/components/home';
 import { expect } from 'chai';
 
 describe('<Home />', () => {
-    it('should render stuff', () => {
+    it('should render correctly', () => {
         const wrapper = shallow(<Home />);
-        expect(wrapper.length).to.equal(1);
+        expect(wrapper.contains(<Text>Hello World</Text>)).to.equal(true);
     });
 });
