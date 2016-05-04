@@ -5,7 +5,7 @@
  */
 
 const views = {
-    home: require('../components/home')
+    home: require('../views/home')
 };
 
 export default views;

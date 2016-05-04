@@ -4,8 +4,8 @@ import React from 'react-native';
 import { Actions, Scene, Router } from 'react-native-router-flux';
 
 // Global includes
-import Routes from '../includes/routes';
-import Views from '../includes/views';
+import Routes from './includes/routes';
+import Views from './includes/views';
 
 // Creating scenes from the routes
 const scenes = Actions.create(
