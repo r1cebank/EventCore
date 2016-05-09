@@ -4,7 +4,7 @@
 
 import React, { View, Text, StyleSheet } from 'react-native';
 import { shallow } from 'enzyme';
-import Home from '../src/views/home';
+import Home from '../src/components/home/index';
 import { expect } from 'chai';
 
 describe('<Home />', () => {
