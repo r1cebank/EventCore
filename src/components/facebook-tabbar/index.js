@@ -11,12 +11,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Styles from './resources/style';
 
 class FacebookTabBar extends React.Component {
-    tabIcons = [];
-
     static propTypes = {
         goToPage: React.PropTypes.func,
         activeTab: React.PropTypes.number,
-        tabs: React.PropTypes.array
+        tabs: React.PropTypes.array,
+        scrollValue: React.PropTypes.number,
+        containerWidth: React.PropTypes.number
     };
 
     componentDidMount() {
@@ -34,6 +34,8 @@ class FacebookTabBar extends React.Component {
             });
         });
     }
+
+    tabIcons = [];
 
     // color between rgb(59,89,152) and rgb(204,204,204)
     iconColor(progress) {
@@ -55,12 +57,12 @@ class FacebookTabBar extends React.Component {
                 {this.props.tabs.map((tab, i) => {
                     return (
                         <TouchableOpacity key={tab} onPress={() => this.props.goToPage(i)} style={Styles.tab}>
-                        <Icon
-                          name={tab}
-                          size={30}
-                          color={this.props.activeTab === i ? 'rgb(59,89,152)' : 'rgb(204,204,204)'}
-                          ref={(icon) => { this.tabIcons[i] = icon; }}
-                        />
+                            <Icon
+                              name={tab}
+                              size={30}
+                              color={this.props.activeTab === i ? 'rgb(59,89,152)' : 'rgb(204,204,204)'}
+                              ref={(icon) => { this.tabIcons[i] = icon; }}
+                            />
                         </TouchableOpacity>
                     );
                 })}
