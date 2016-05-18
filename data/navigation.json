@@ -12,7 +12,7 @@
                 "tabbar": "FacebookTabBar"
             }
         },
-        "links": [
+        "pages": [
             {
                 "icon": "ios-paper",
                 "label": "ios-paper",
