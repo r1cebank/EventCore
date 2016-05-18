@@ -6,7 +6,7 @@ import {
     ScrollView
 } from 'react-native';
 
-import FacebookTabBar from '../facebook-tabbar/index';
+const FacebookTabBar = require('../facebook-tabbar/index');
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 // Include navigation setting
@@ -18,12 +18,12 @@ import Views from '../../global/includes/views';
 
 import Styles from './resources/styles';
 
-class HomeView extends React.Component {
+class TabView extends React.Component {
     render() {
         return (
             <View style={Styles.container}>
-                <ScrollableTabView initialPage={NavItems.data.defaults.initialPage} renderTabBar={() => <FacebookTabBar />}>
-                    {NavItems.data.navigation.map((navItem, index) =>
+                <ScrollableTabView initialPage={NavItems.data.config.defaults.initialPage} renderTabBar={() => <FacebookTabBar />}>
+                    {NavItems.data.links.map((navItem, index) =>
                         <ScrollView tabLabel={navItem.label} key={index} style={Styles.tabView}>
                             {(() => {
                                 const ComponentView = Views[navItem.view];
@@ -37,4 +37,4 @@ class HomeView extends React.Component {
     }
 }
 
-module.exports = HomeView;
+module.exports = TabView;

@@ -74,4 +74,4 @@ class FacebookTabBar extends React.Component {
 }
 
 
-export default FacebookTabBar;
+module.exports = FacebookTabBar;

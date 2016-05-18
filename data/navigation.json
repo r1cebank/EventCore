@@ -3,17 +3,23 @@
         "version": "0.0.1"
     },
     "data": {
-        "defaults": {
-            "initialPage": 0
+        "config": {
+            "type": "ScrollableTabView",
+            "defaults": {
+                "initialPage": 0
+            },
+            "typeconfig": {
+                "tabbar": "FacebookTabBar"
+            }
         },
-        "navigation": [
+        "links": [
             {
                 "icon": "ios-paper",
                 "label": "ios-paper",
                 "title": "News",
                 "style": "",
                 "view": "card",
-                "extra": {
+                "config": {
 
                 }
             },
@@ -23,7 +29,7 @@
                 "title": "News",
                 "style": "",
                 "view": "card",
-                "extra": {
+                "config": {
 
                 }
             },
@@ -33,7 +39,7 @@
                 "title": "News",
                 "style": "",
                 "view": "card",
-                "extra": {
+                "config": {
 
                 }
             }
