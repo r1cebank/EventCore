@@ -1,0 +1,42 @@
+{
+    "info": {
+        "version": "0.0.1"
+    },
+    "data": {
+        "defaults": {
+            "initialPage": 0
+        },
+        "navigation": [
+            {
+                "icon": "ios-paper",
+                "label": "ios-paper",
+                "title": "News",
+                "style": "",
+                "view": "card",
+                "extra": {
+
+                }
+            },
+            {
+                "icon": "person-stalker",
+                "label": "person-stalker",
+                "title": "News",
+                "style": "",
+                "view": "card",
+                "extra": {
+
+                }
+            },
+            {
+                "icon": "ios-chatboxes",
+                "label": "ios-chatboxes",
+                "title": "News",
+                "style": "",
+                "view": "card",
+                "extra": {
+
+                }
+            }
+        ]
+    }
+}

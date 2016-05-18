@@ -9,38 +9,28 @@ import {
 import FacebookTabBar from '../facebook-tabbar/index';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
+// Include navigation setting
+import NavItems from '../../../data/navigation.json';
+
+// Include global
+import Views from '../../global/includes/views';
+
+
 import Styles from './resources/styles';
 
 class HomeView extends React.Component {
     render() {
         return (
             <View style={Styles.container}>
-                <ScrollableTabView initialPage={1} renderTabBar={() => <FacebookTabBar />}>
-                    <ScrollView tabLabel="ios-paper" style={Styles.tabView}>
-                        <View style={Styles.card}>
-                            <Text>News</Text>
-                        </View>
-                    </ScrollView>
-                    <ScrollView tabLabel="person-stalker" style={Styles.tabView}>
-                        <View style={Styles.card}>
-                            <Text>Friends</Text>
-                        </View>
-                    </ScrollView>
-                    <ScrollView tabLabel="ios-chatboxes" style={Styles.tabView}>
-                        <View style={Styles.card}>
-                            <Text>Messenger</Text>
-                        </View>
-                    </ScrollView>
-                    <ScrollView tabLabel="ios-world" style={Styles.tabView}>
-                        <View style={Styles.card}>
-                            <Text>Notifications</Text>
-                        </View>
-                    </ScrollView>
-                    <ScrollView tabLabel="navicon-round" style={Styles.tabView}>
-                        <View style={Styles.card}>
-                            <Text>Other nav</Text>
-                        </View>
-                    </ScrollView>
+                <ScrollableTabView initialPage={NavItems.data.defaults.initialPage} renderTabBar={() => <FacebookTabBar />}>
+                    {NavItems.data.navigation.map((navItem, index) =>
+                        <ScrollView tabLabel={navItem.label} key={index} style={Styles.tabView}>
+                            {(() => {
+                                const ComponentView = Views[navItem.view];
+                                return <ComponentView />;
+                            })()}
+                        </ScrollView>
+                    )}
                 </ScrollableTabView>
             </View>
         );

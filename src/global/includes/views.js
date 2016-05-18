@@ -5,7 +5,7 @@
  */
 
 const views = {
-    home: require('../views/home')
+    card: require('../../views/card')
 };
 
 export default views;

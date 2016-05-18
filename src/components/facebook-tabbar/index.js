@@ -15,7 +15,8 @@ class FacebookTabBar extends React.Component {
         goToPage: React.PropTypes.func,
         activeTab: React.PropTypes.number,
         tabs: React.PropTypes.array,
-        scrollValue: React.PropTypes.number,
+        scrollValue: React.PropTypes.object,
+        style: React.PropTypes.object,
         containerWidth: React.PropTypes.number
     };
 
@@ -48,14 +49,14 @@ class FacebookTabBar extends React.Component {
     render() {
         const tabWidth = this.props.containerWidth / this.props.tabs.length;
         const left = this.props.scrollValue.interpolate({
-            inputRange: [0, 1], outputRange: [0, tabWidth]
+            inputRange: [0, 1],
+            outputRange: [0, tabWidth]
         });
 
         return (
                 <View>
                 <View style={[Styles.tabs, this.props.style]}>
-                {this.props.tabs.map((tab, i) => {
-                    return (
+                {this.props.tabs.map((tab, i) =>
                         <TouchableOpacity key={tab} onPress={() => this.props.goToPage(i)} style={Styles.tab}>
                             <Icon
                               name={tab}
@@ -64,8 +65,7 @@ class FacebookTabBar extends React.Component {
                               ref={(icon) => { this.tabIcons[i] = icon; }}
                             />
                         </TouchableOpacity>
-                    );
-                })}
+                )}
                 </View>
                 <Animated.View style={[Styles.tabUnderlineStyle, { width: tabWidth }, { left }]} />
                 </View>
