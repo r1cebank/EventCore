@@ -5,12 +5,16 @@
 
 import React from 'react';
 
-import Home from '../components/tab-view/index';
+import NavigationSetting from '../../data/navigation.json';
+import Views from '../global/includes/views';
 
 class HomeView extends React.Component {
     render() {
         return (
-            <Home />
+            (() => {
+                const NavigationView = Views[NavigationSetting.data.config.type];
+                return <NavigationView />;
+            })()
         );
     }
 }

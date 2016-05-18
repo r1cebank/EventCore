@@ -5,7 +5,8 @@
  */
 
 const views = {
-    card: require('../../views/card')
+    card: require('../../views/card'),
+    ScrollableTabView: require('../../views/tab-view/index')
 };
 
 export default views;
