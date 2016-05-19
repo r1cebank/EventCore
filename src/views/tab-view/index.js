@@ -1,7 +1,10 @@
+/*
+ *  VabView is the view that use tab bar component to display each page
+ */
+
 import React from 'react';
 
 import {
-    Text,
     View,
     ScrollView
 } from 'react-native';
@@ -22,21 +25,21 @@ class TabView extends React.Component {
     render() {
         return (
             <View style={Styles.container}>
-                <ScrollableTabView
-                  initialPage={NavigationSetting.data.config.defaults.initialPage}
-                  renderTabBar={(() => {
-                      const TabBarComponent = Components[NavigationSetting.data.config.typeconfig.tabbar];
-                      return <TabBarComponent />;
-                  })}>
-                    {NavigationSetting.data.pages.map((navItem, index) =>
-                        <ScrollView tabLabel={navItem.label} key={index} style={Styles.tabView}>
-                            {(() => {
-                                const ComponentView = Views[navItem.view];
-                                return <ComponentView />;
-                            })()}
-                        </ScrollView>
-                    )}
-                </ScrollableTabView>
+            <ScrollableTabView
+            initialPage={NavigationSetting.data.config.defaults.initialPage}
+            renderTabBar={(() => {
+                const TabBarComponent = Components[NavigationSetting.data.config.typeconfig.tabbar];
+                return <TabBarComponent />;
+            })}>
+            {NavigationSetting.data.pages.map((navItem, index) =>
+                <ScrollView tabLabel={navItem.label} key={index} style={Styles.tabView}>
+                {(() => {
+                    const ComponentView = Views[navItem.view];
+                    return <ComponentView />;
+                })()}
+                </ScrollView>
+            )}
+            </ScrollableTabView>
             </View>
         );
     }

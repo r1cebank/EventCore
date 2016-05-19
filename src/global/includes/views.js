@@ -4,6 +4,8 @@
  *  file.
  */
 
+/* eslint-disable global-require */
+
 const views = {
     card: require('../../views/card'),
     ScrollableTabView: require('../../views/tab-view/index')
