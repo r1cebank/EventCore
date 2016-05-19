@@ -5,7 +5,7 @@
 
 /* @flow */
 
-import React from 'react-native';
+import React from 'react';
 
 // The root view is definatly the navigation component which define a default view
 import Navigation from './global/navigation';

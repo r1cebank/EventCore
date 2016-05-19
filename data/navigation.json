@@ -24,8 +24,8 @@
                 }
             },
             {
-                "icon": "person-stalker",
-                "label": "person-stalker",
+                "icon": "ios-albums-outline",
+                "label": "ios-albums-outline",
                 "title": "News",
                 "style": "",
                 "view": "card",
