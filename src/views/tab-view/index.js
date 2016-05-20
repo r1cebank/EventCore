@@ -28,13 +28,19 @@ class TabView extends React.Component {
             initialPage={NavigationSetting.data.config.defaults.initialPage}
             renderTabBar={(() => {
                 let TabBarComponent = Components[NavigationSetting.data.config.typeconfig.tabbar];
+                // If the component is missing, fallback to default
                 TabBarComponent = TabBarComponent || Defaults.blankView;
                 return <TabBarComponent />;
             })}>
             {NavigationSetting.data.pages.map((navItem, index) =>
                 <ScrollView tabLabel={navItem.label} key={index} style={Styles.tabView}>
                 {(() => {
-                    const ComponentView = Views[navItem.view];
+                    let ComponentView = Views[navItem.view];
+                    // If the component is missing, fallback to default with message
+                    if (!ComponentView) {
+                        const warningText = 'View ' + navItem.view + ' not found';
+                        return <Defaults.warningView warningText={warningText} />;
+                    }
                     return <ComponentView />;
                 })()}
                 </ScrollView>
