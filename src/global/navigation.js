@@ -6,7 +6,8 @@
 import React from 'react';
 
 import NavigationSetting from '../../data/navigation.json';
-import Views from '../global/includes/views';
+
+import { Views } from './global-includes';
 
 class HomeView extends React.Component {
     render() {

@@ -15,8 +15,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import NavigationSetting from '../../../data/navigation.json';
 
 // Include global
-import Views from '../../global/includes/views';
-import Components from '../../global/includes/components';
+import { Views, Components, Defaults } from '../../global/global-includes';
 
 
 import Styles from './resources/styles';
@@ -28,7 +27,8 @@ class TabView extends React.Component {
             <ScrollableTabView
             initialPage={NavigationSetting.data.config.defaults.initialPage}
             renderTabBar={(() => {
-                const TabBarComponent = Components[NavigationSetting.data.config.typeconfig.tabbar];
+                let TabBarComponent = Components[NavigationSetting.data.config.typeconfig.tabbar];
+                TabBarComponent = TabBarComponent || Defaults.blankView;
                 return <TabBarComponent />;
             })}>
             {NavigationSetting.data.pages.map((navItem, index) =>
