@@ -38,7 +38,7 @@ class TabView extends React.Component {
                     let ComponentView = Views[navItem.view];
                     // If the component is missing, fallback to default with message
                     if (!ComponentView) {
-                        const warningText = 'View ' + navItem.view + ' not found';
+                        const warningText = `View ${navItem.view} not found`;
                         return <Defaults.warningView warningText={warningText} />;
                     }
                     return <ComponentView />;

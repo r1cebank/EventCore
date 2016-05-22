@@ -1,11 +1,11 @@
-var blacklist = require('react-native/packager/blacklist');
+const blacklist = require('react-native/packager/blacklist');
 
-var config = {
-  getBlacklistRE(platform) {
-    return blacklist(platform, [
-      /node_modules\/react-native-mock\/.*/
-    ]);
-  }
+const config = {
+    getBlacklistRE(platform) {
+        return blacklist(platform, [
+            /node_modules\/react-native-mock\/.*/
+        ]);
+    }
 };
 
 module.exports = config;
