@@ -19,7 +19,10 @@
     "no-const-assign": 2,
     "no-param-reassign": 0,
     "indent": [2, 4],
-    "react/prefer-stateless-function": 1,
+    "react/prefer-stateless-function": 0,
+    "react/jsx-indent": 0,
+    "react/jsx-indent-props": 0,
+    "react/jsx-closing-bracket-location": 0,
     "comma-dangle": [
       1,
       "never"

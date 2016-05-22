@@ -1,4 +1,5 @@
-import React, { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -18,14 +19,4 @@ const styles = StyleSheet.create({
     }
 });
 
-class Home extends React.Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>Hello World</Text>
-            </View>
-        );
-    }
-}
-
-export default Home;
+export default styles;
