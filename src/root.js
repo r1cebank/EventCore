@@ -9,12 +9,15 @@ import React from 'react';
 
 // The root view is definatly the navigation component which define a default view
 import Navigation from './global/navigation';
+import App from './global/app';
 
 // Construct the root element
 class Root extends React.Component {
     render() {
         return (
-            <Navigation />
+            <App>
+                <Navigation />
+            </App>
         );
     }
 }
