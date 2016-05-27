@@ -22,6 +22,8 @@
     "npm": ">=2 <4"
   },
   "dependencies": {
+    "frisbee": "^1.0.5",
+    "jsondiffpatch": "^0.1.43",
     "lodash": "^4.12.0",
     "rctn-localization": "^0.1.14",
     "react": "15.0.2",
