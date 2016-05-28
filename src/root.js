@@ -6,18 +6,26 @@
 /* @flow */
 
 import React from 'react';
+import { Provider } from 'react-redux';
 
 // The root view is definatly the navigation component which define a default view
 import Navigation from './global/navigation';
 import App from './global/app';
 
+import configureStore from './global/state/configure-store';
+
+// Configure Global store
+const store = configureStore();
+
 // Construct the root element
 class Root extends React.Component {
     render() {
         return (
-            <App>
-                <Navigation />
-            </App>
+            <Provider store={store}>
+                <App>
+                    <Navigation />
+                </App>
+            </Provider>
         );
     }
 }
