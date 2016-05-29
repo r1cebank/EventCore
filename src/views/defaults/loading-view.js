@@ -1,15 +1,24 @@
-import { View, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import React from 'react';
 import Spinner from 'react-native-spinkit';
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#d35400'
+    }
+});
+
 class LoadingView extends React.Component {
     static propTypes = {
-        warningText: React.PropTypes.string.isRequired
+        loadingText: React.PropTypes.string
     };
     render() {
         return (
             <View style={styles.container}>
-                <Spinner style={styles.spinner} isVisible={this.state.isVisible} size={this.state.size} type={type} color={this.state.color}/>
+                <Spinner color="#FFFFFF" />
             </View>
         );
     }

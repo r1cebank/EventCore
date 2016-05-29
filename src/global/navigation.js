@@ -6,13 +6,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import NavigationSetting from '../../data/navigation.json';
-
 import { Views, Defaults } from './global-includes';
 
 class HomeView extends React.Component {
     static propTypes = {
-        loading: React.PropTypes.bool
+        loading: React.PropTypes.bool,
+        navigation: React.PropTypes.object
     };
     render() {
         return (
@@ -22,10 +21,10 @@ class HomeView extends React.Component {
                     const loadingText = '';
                     return <Defaults.loadingView loadingText={loadingText} />;
                 }
-                const NavigationView = Views[NavigationSetting.data.config.type];
+                const NavigationView = Views[this.props.navigation.data.config.type];
                 //  If the component is missing, fallback to default with message
                 if (!NavigationView) {
-                    const warningText = `View ${NavigationSetting.data.config.type} not found`;
+                    const warningText = `View ${this.props.navigation.data.config.type} not found`;
                     return <Defaults.warningView warningText={warningText} />;
                 }
                 return <NavigationView />;
@@ -37,5 +36,5 @@ class HomeView extends React.Component {
 
 module.exports = connect((state) => ({
     loading: state.appstate.loading,
-    navigationSetting: state.appstate.navigationSetting
+    navigation: state.appstate.navigation
 }))(HomeView);

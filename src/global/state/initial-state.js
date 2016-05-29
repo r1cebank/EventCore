@@ -1,7 +1,7 @@
 
 const initialState = {
     loading: true,
-    navigationSetting: {}
+    navigation: {}
 };
 
 export default initialState;

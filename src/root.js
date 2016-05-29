@@ -12,20 +12,22 @@ import { Provider } from 'react-redux';
 import Navigation from './global/navigation';
 import App from './global/app';
 
-import configureStore from './global/state/configure-store';
+import { Store } from './global/global-includes';
 
-// Configure Global store
-const store = configureStore();
+// Global Actions
+import * as Actions from './global/state/actions/actions';
 
 // Construct the root element
 class Root extends React.Component {
     componentWillMount() {
         // Navigation startup code
         // 1) Populate settings
+        // 2) Populate navigation
+        Store.appStore.dispatch(Actions.fetchNavigation());
     }
     render() {
         return (
-            <Provider store={store}>
+            <Provider store={Store.appStore}>
                 <App>
                     <Navigation />
                 </App>
