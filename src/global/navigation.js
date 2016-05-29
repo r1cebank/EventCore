@@ -14,9 +14,6 @@ class HomeView extends React.Component {
     static propTypes = {
         loading: React.PropTypes.bool
     };
-    componentWillMount() {
-        //  Navigation startup code
-    }
     render() {
         return (
             (() => {

@@ -19,6 +19,10 @@ const store = configureStore();
 
 // Construct the root element
 class Root extends React.Component {
+    componentWillMount() {
+        // Navigation startup code
+        // 1) Populate settings
+    }
     render() {
         return (
             <Provider store={store}>
