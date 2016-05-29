@@ -2,6 +2,7 @@
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { routerReducer } from 'react-native-redux-router';
+import devTools from 'remote-redux-devtools';
 
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
@@ -22,7 +23,7 @@ const rootReducer = combineReducers({
 });
 
 const configureStore = function (initialState: Object = {}): Function {
-    return createStoreWithMiddleware(rootReducer, initialState);
+    return createStoreWithMiddleware(rootReducer, initialState, devTools());
 };
 
 export default configureStore;

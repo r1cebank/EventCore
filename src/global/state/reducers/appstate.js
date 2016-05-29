@@ -16,12 +16,16 @@ function appState(state = initialState, action) {
             };
         }
         case ActionType.NAVIGATION_FETCHED: {
-            // TODO: Adding real configs
-            debugger;
             return {
                 ...state,
                 loading: false,
                 navigation: action.data
+            };
+        }
+        case ActionType.UPDATE_NAVIGATION: {
+            Storage.Navigation.update();
+            return {
+                ...state
             };
         }
         default:
