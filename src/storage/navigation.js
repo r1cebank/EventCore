@@ -7,7 +7,7 @@
 import { AsyncStorage } from 'react-native';
 
 // Global Actions
-import * as Actions from '../global/state/actions/actions';
+import * as Actions from '../state/actions/actions';
 
 // Global Includes
 import { Store } from '../global/global-includes';

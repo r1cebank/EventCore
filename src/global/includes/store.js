@@ -4,7 +4,7 @@
 
 /* eslint-disable global-require */
 
-import configureStore from '../state/configure-store';
+import configureStore from '../../state/configure-store';
 
 
 export const appStore = configureStore();

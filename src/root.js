@@ -15,7 +15,7 @@ import App from './global/app';
 import { Store } from './global/global-includes';
 
 // Global Actions
-import * as Actions from './global/state/actions/actions';
+import * as Actions from './state/actions/actions';
 
 // Construct the root element
 class Root extends React.Component {

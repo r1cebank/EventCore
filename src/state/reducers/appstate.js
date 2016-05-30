@@ -2,7 +2,7 @@
  * This file includes all the basic app stage reducers
  */
 
-import { Storage } from '../../global-includes';
+import { Storage } from '../../global/global-includes';
 import * as ActionType from '../actions/actionTypes';
 import initialState from '../initial-state';
 
