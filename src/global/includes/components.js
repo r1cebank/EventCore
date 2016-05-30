@@ -4,4 +4,4 @@
 
 /* eslint-disable global-require */
 
-export const FacebookTabBar = require('../../components/facebook-tabbar/index');
+export const FacebookTabBar = require('../../components/facebook-tabbar');

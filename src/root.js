@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 
 // The root view is definatly the navigation component which define a default view
 import Navigation from './global/navigation';
-import App from './global/app';
+import App from './views/app';
 
 import { Store } from './global/global-includes';
 
