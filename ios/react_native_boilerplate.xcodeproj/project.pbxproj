@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -23,6 +22,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		161FFBC310FD4F93B9554B66 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F357BA71BD247E08B623004 /* Octicons.ttf */; };
+		18F506B0CB134F328CC31C16 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0416CBBB9840B6A1772C12 /* libRNSpinkit.a */; };
 		287F849A5ACA4CB69BEDF501 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E10DB5E4951A4C9BB10DBE26 /* Zocial.ttf */; };
 		2D4323B460FB4F67AFA66D60 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A448B77A5AF9482AA7EFC966 /* Ionicons.ttf */; };
 		42ACE366EDB54D6F9D09F3B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3651A7FBEFAA425187FB9B2B /* libz.tbd */; };
@@ -129,6 +129,13 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		EC8047601CF8066200C77C56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4EE007263B849E2B147FEE2 /* RNSpinkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D42CB3511B2538DE00FD0AE2;
+			remoteInfo = RNSpinkit;
+		};
 		ECDF8B4E1CEEBA62005FC154 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B9F11207DEFD4025B19F8987 /* RealmReact.xcodeproj */;
@@ -171,7 +178,9 @@
 		8A5EDF95246D4B20919B3D79 /* ReactNativeLocalization.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeLocalization.xcodeproj; path = "../node_modules/rctn-localization/ReactNativeLocalization.xcodeproj"; sourceTree = "<group>"; };
 		8F357BA71BD247E08B623004 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		A448B77A5AF9482AA7EFC966 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		B4EE007263B849E2B147FEE2 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		B9F11207DEFD4025B19F8987 /* RealmReact.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RealmReact.xcodeproj; path = "../node_modules/realm/react-native/ios/RealmReact.xcodeproj"; sourceTree = "<group>"; };
+		BE0416CBBB9840B6A1772C12 /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
 		C0B77F544F8743D88D8279B1 /* libc++.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		C8F06A5B24734F96801C1415 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		D9B1F29620FC425085E84BC2 /* libReactNativeLocalization.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeLocalization.a; sourceTree = "<group>"; };
@@ -205,6 +214,7 @@
 				CF6BC1559A9943129EE6E2B4 /* libRealmReact.a in Frameworks */,
 				5E25050A5CD7405FB42404F6 /* libc++.tbd in Frameworks */,
 				42ACE366EDB54D6F9D09F3B4 /* libz.tbd in Frameworks */,
+				18F506B0CB134F328CC31C16 /* libRNSpinkit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +355,7 @@
 				8A5EDF95246D4B20919B3D79 /* ReactNativeLocalization.xcodeproj */,
 				02E269F1385643CA906042F9 /* RNVectorIcons.xcodeproj */,
 				B9F11207DEFD4025B19F8987 /* RealmReact.xcodeproj */,
+				B4EE007263B849E2B147FEE2 /* RNSpinkit.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -405,6 +416,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		EC8047511CF8066200C77C56 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC8047611CF8066200C77C56 /* libRNSpinkit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		ECDF8B401CEEBA62005FC154 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,7 +477,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 730;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -526,6 +545,10 @@
 				{
 					ProductGroup = ECDF8B401CEEBA62005FC154 /* Products */;
 					ProjectRef = B9F11207DEFD4025B19F8987 /* RealmReact.xcodeproj */;
+				},
+				{
+					ProductGroup = EC8047511CF8066200C77C56 /* Products */;
+					ProjectRef = B4EE007263B849E2B147FEE2 /* RNSpinkit.xcodeproj */;
 				},
 				{
 					ProductGroup = EC2DE9841CED35BB00350756 /* Products */;
@@ -623,6 +646,13 @@
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = EC2DE9961CED35BD00350756 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EC8047611CF8066200C77C56 /* libRNSpinkit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSpinkit.a;
+			remoteRef = EC8047601CF8066200C77C56 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		ECDF8B4F1CEEBA62005FC154 /* libRealmReact.a */ = {
@@ -735,6 +765,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -752,6 +783,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -774,6 +806,7 @@
 					"$(SRCROOT)/../node_modules/rctn-localization",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/realm/src/**",
+					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 				);
 				INFOPLIST_FILE = react_native_boilerplate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -798,6 +831,7 @@
 					"$(SRCROOT)/../node_modules/rctn-localization",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/realm/src/**",
+					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 				);
 				INFOPLIST_FILE = react_native_boilerplate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -853,6 +887,7 @@
 					"$(SRCROOT)/../node_modules/rctn-localization",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/realm/src/**",
+					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -896,6 +931,7 @@
 					"$(SRCROOT)/../node_modules/rctn-localization",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/realm/src/**",
+					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

@@ -6,5 +6,5 @@
 
 /* eslint-disable global-require */
 
-export const card = require('../../views/card/index');
-export const ScrollableTabView = require('../../views/tab-view/index');
+export const card = require('../../views/card');
+export const ScrollableTabView = require('../../views/tab-view');

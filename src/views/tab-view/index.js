@@ -9,10 +9,10 @@ import {
     ScrollView
 } from 'react-native';
 
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+import { connect } from 'react-redux';
 
-// Include navigation setting
-import NavigationSetting from '../../../data/navigation.json';
+
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 // Include global
 import { Views, Components, Defaults } from '../../global/global-includes';
@@ -21,18 +21,21 @@ import { Views, Components, Defaults } from '../../global/global-includes';
 import Styles from './resources/styles';
 
 class TabView extends React.Component {
+    static propTypes = {
+        navigation: React.PropTypes.object
+    };
     render() {
         return (
             <View style={Styles.container}>
             <ScrollableTabView
-            initialPage={NavigationSetting.data.config.defaults.initialPage}
+            initialPage={this.props.navigation.data.config.defaults.initialPage}
             renderTabBar={(() => {
-                let TabBarComponent = Components[NavigationSetting.data.config.typeconfig.tabbar];
+                let TabBarComponent = Components[this.props.navigation.data.config.typeconfig.tabbar];
                 // If the component is missing, fallback to default
                 TabBarComponent = TabBarComponent || Defaults.blankView;
                 return <TabBarComponent />;
             })}>
-            {NavigationSetting.data.pages.map((navItem, index) =>
+            {this.props.navigation.data.pages.map((navItem, index) =>
                 <ScrollView tabLabel={navItem.label} key={index} style={Styles.tabView}>
                 {(() => {
                     let ComponentView = Views[navItem.view];
@@ -51,4 +54,6 @@ class TabView extends React.Component {
     }
 }
 
-module.exports = TabView;
+module.exports = connect((state) => ({
+    navigation: state.appstate.navigation
+}))(TabView);
