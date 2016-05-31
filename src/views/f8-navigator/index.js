@@ -15,7 +15,7 @@ import Styles from './resources/styles';
 class F8Navigator extends React.Component {
 
     renderScene(route, navigator) {
-        return <Views.card />;
+        return <Views.F8TabView navigator={navigator}/>;
     }
 
     render() {

@@ -7,13 +7,15 @@ import React from 'react';
 
 import { StatusBar, View } from 'react-native';
 
+import Styles from './resources/styles';
+
 class AppView extends React.Component {
     static propTypes = {
         children: React.PropTypes.element.isRequired
     };
     render() {
         return (
-            <View>
+            <View style={Styles.container}>
                 <StatusBar
                   translucent
                   backgroundColor="rgba(0, 0, 0, 0.2)"
