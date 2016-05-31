@@ -4,7 +4,7 @@
 */
 /* eslint-disable quote-props */
 
-import { AsyncStorage } from 'react-native';
+import SimpleStore from 'react-native-simple-store';
 
 // Global Actions
 import * as Actions from '../state/actions/actions';
@@ -17,10 +17,10 @@ const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });
 
 const Navigation = {
     fetch: (config) => {
-        AsyncStorage.getItem('navigation').then((navData) => {
+        SimpleStore.get('navigation').then((navData) => {
             // Dispatch fetched action
             if (navData) {
-                Store.appStore.dispatch(Actions.navigationFetched(JSON.parse(navData)));
+                Store.appStore.dispatch(Actions.navigationFetched(navData));
                 Store.appStore.dispatch(Actions.updateNavigation());
             } else {
                 // Init the data storage, will call for non patch endpoint
@@ -36,20 +36,19 @@ const Navigation = {
                 })
                 .then((response) => response.json())
                 .then((data) => {
-                    AsyncStorage.setItem('navigation', JSON.stringify(data)).then(() => {
+                    SimpleStore.save('navigation', data).then(() => {
                         Store.appStore.dispatch(Actions.navigationFetched(navData));
                     }).catch((e) => { /* Dispatch error */ });
                 })
                 .catch((e) => { /* Dispatch error */ });
             }
-        });
+        }).catch((e) => { /* Dispatch error */ });;
     },
     update: (config) => {
         // Call endpoint for patches
         // https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1
         // Endpoint should be like: https://event.com/update/navigation/patches?appId=XXXXXX?currentVersion=XX
-        AsyncStorage.getItem('navigation').then((navData) => {
-            navData = JSON.parse(navData);
+        SimpleStore.get('navigation').then((navData) => {
             fetch('https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1', {
                 method: 'GET'
             })
@@ -62,38 +61,15 @@ const Navigation = {
             // })
             .then((response) => response.json())
             .then((patches) => {
-                debugger;
                 for (const patch of patches) {
                     navData = DiffPatcher.patch(navData, patch);
                 }
-                AsyncStorage.setItem('navigation', JSON.stringify(navData)).then(() => {
+                SimpleStore.save('navigation', navData).then(() => {
                     Store.appStore.dispatch(Actions.navigationFetched(navData));
                 }).catch((e) => { /* Dispatch error */ });
             })
             .catch((e) => { /* Dispatch error */ });
         }).catch((e) => { /* Dispatch error */ });
-        // Apply patches
-        // {
-        //     "data": {
-        //         "pages": {
-        //             "0": {
-        //                 "view": [
-        //                     "card1",
-        //                     "card"
-        //                 ]
-        //             },
-        //             "_t": "a"
-        //         }
-        //     }
-        // }
-
-        // DiffPatcher.patch(country, delta);
-
-
-        // Update store
-        // AsyncStorage.setItem('navigation', value);
-
-        // Resolve
     }
 };
 
