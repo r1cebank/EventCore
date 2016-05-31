@@ -22,3 +22,9 @@ export function navigationFetched(data) {
         data
     };
 }
+export function appError(error) {
+    return {
+        type: ActionType.APP_ERROR,
+        error
+    };
+}

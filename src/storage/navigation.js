@@ -16,7 +16,7 @@ import { Store } from '../global/global-includes';
 const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });
 
 const Navigation = {
-    fetch: (config) => {
+    fetch: () => {
         SimpleStore.get('navigation').then((navData) => {
             // Dispatch fetched action
             if (navData) {
@@ -38,13 +38,13 @@ const Navigation = {
                 .then((data) => {
                     SimpleStore.save('navigation', data).then(() => {
                         Store.appStore.dispatch(Actions.navigationFetched(navData));
-                    }).catch((e) => { /* Dispatch error */ });
+                    }).catch((e) => { Store.appStore.dispatch(Actions.appError(e)); });
                 })
-                .catch((e) => { /* Dispatch error */ });
+                .catch((e) => { Store.appStore.dispatch(Actions.appError(e)); });
             }
-        }).catch((e) => { /* Dispatch error */ });;
+        }).catch((e) => { Store.appStore.dispatch(Actions.appError(e)); });
     },
-    update: (config) => {
+    update: () => {
         // Call endpoint for patches
         // https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1
         // Endpoint should be like: https://event.com/update/navigation/patches?appId=XXXXXX?currentVersion=XX
@@ -66,10 +66,10 @@ const Navigation = {
                 }
                 SimpleStore.save('navigation', navData).then(() => {
                     Store.appStore.dispatch(Actions.navigationFetched(navData));
-                }).catch((e) => { /* Dispatch error */ });
+                }).catch((e) => { Store.appStore.dispatch(Actions.appError(e)); });
             })
-            .catch((e) => { /* Dispatch error */ });
-        }).catch((e) => { /* Dispatch error */ });
+            .catch((e) => { Store.appStore.dispatch(Actions.appError(e)); });
+        }).catch((e) => { Store.appStore.dispatch(Actions.appError(e)); });
     }
 };
 

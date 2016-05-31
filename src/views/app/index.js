@@ -5,7 +5,7 @@
 
 import React from 'react';
 
-import { View } from 'react-native';
+import { StatusBar, View } from 'react-native';
 
 class AppView extends React.Component {
     static propTypes = {
@@ -14,6 +14,11 @@ class AppView extends React.Component {
     render() {
         return (
             <View>
+                <StatusBar
+                  translucent
+                  backgroundColor="rgba(0, 0, 0, 0.2)"
+                  barStyle="light-content"
+                 />
                 {this.props.children}
             </View>
         );

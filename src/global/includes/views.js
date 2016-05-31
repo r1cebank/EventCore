@@ -8,3 +8,5 @@
 
 export const card = require('../../views/card');
 export const ScrollableTabView = require('../../views/tab-view');
+export const F8Navigator = require('../../views/f8-navigator');
+export const F8TabView = require('../../views/f8-tabview');
