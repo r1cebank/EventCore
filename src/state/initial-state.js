@@ -4,6 +4,6 @@ export const InitialAppState = {
     navigation: {}
 };
 
+// TODO: PUll this setting out
 export const InitialNavigationState = {
-    tab: 'schedule'
 };

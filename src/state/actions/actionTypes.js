@@ -6,6 +6,9 @@
 export const APP_ERROR = 'APP_ERROR';
 
 // Navigation
+export const SWITCH_NAVIGATION = 'SWITCH_NAVIGATION';
+
+// Data
 export const FETCH_NAVIGATION = 'FETCH_NAVIGATION';
 export const NAVIGATION_FETCHED = 'NAVIGATION_FETCHED';
 export const UPDATE_NAVIGATION = 'UPDATE_NAVIGATION';

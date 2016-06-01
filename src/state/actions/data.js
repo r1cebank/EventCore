@@ -1,5 +1,5 @@
 /*
-* This file include all the actions
+* This file include all the data actions
 */
 
 import * as ActionType from './actionTypes';
@@ -20,11 +20,5 @@ export function navigationFetched(data) {
     return {
         type: ActionType.NAVIGATION_FETCHED,
         data
-    };
-}
-export function appError(error) {
-    return {
-        type: ActionType.APP_ERROR,
-        error
     };
 }

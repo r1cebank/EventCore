@@ -5,7 +5,7 @@ import React from 'react';
 import { Views } from '../../global/global-includes';
 
 
-import { Navigator, Platform, View } from 'react-native';
+import { Navigator, Platform } from 'react-native';
 import { connect } from 'react-redux';
 
 
@@ -15,7 +15,8 @@ import Styles from './resources/styles';
 class F8Navigator extends React.Component {
 
     renderScene(route, navigator) {
-        return <Views.F8TabView navigator={navigator}/>;
+        // TODO: Later will add more stuff
+        return <Views.F8TabView navigator={navigator} />;
     }
 
     render() {
@@ -24,14 +25,19 @@ class F8Navigator extends React.Component {
                 ref="navigator"
                 style={Styles.container}
                 configureScene={(route) => {
-                    if (Platform.OS === 'android') {
-                        return Navigator.SceneConfigs.FloatFromBottomAndroid;
-                    }
-                    // TODO: Proper scene support
-                    if (route.shareSettings || route.friend) {
-                        return Navigator.SceneConfigs.FloatFromRight;
-                    } else {
-                        return Navigator.SceneConfigs.FloatFromBottom;
+                    switch (route.routeStack) {
+                        case 'FloatFromRight': {
+                            return Navigator.SceneConfigs.FloatFromRight;
+                        }
+                        case 'FloatFromBottom': {
+                            if (Platform.OS === 'android') {
+                                return Navigator.SceneConfigs.FloatFromBottomAndroid;
+                            }
+                            return Navigator.SceneConfigs.FloatFromBottom;
+                        }
+                        // TODO: Add more support for routeStack
+                        default:
+                            return Navigator.SceneConfigs.PushFromRight;
                     }
                 }}
                 initialRoute={{}}
@@ -43,7 +49,7 @@ class F8Navigator extends React.Component {
 
 function select(store) {
     return {
-        // tab: store.navigationstate.tab
+        tab: store.navigationstate.tab
     };
 }
 

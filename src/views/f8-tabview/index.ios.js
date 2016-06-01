@@ -1,22 +1,30 @@
 import React from 'react';
-import { StatusBar, TabBarIOS, Navigator, View } from 'react-native';
+import { TabBarIOS } from 'react-native';
 
-import { Views, Colors, Icons } from '../../global/global-includes';
+import { Views, Colors, Icons, Defaults } from '../../global/global-includes';
+
+// Global Actions
+import * as Actions from '../../state/actions/navigation';
 
 import { connect } from 'react-redux';
 
 class F8TabsView extends React.Component {
 
-    constructor(props) {
-        Icons;
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
-    componentDidMount() {
-        StatusBar && StatusBar.setBarStyle('light-content');
-    }
+    // componentDidMount() {
+    //     StatusBar.setBarStyle('light-content');
+    // }
 
-    onTabSelect(tab: Tab) {
+    static propTypes = {
+        navigation: React.PropTypes.object,
+        tab: React.PropTypes.string,
+        onTabSelect: React.PropTypes.func
+    };
+
+    onTabSelect(tab)  {
         if (this.props.tab !== tab) {
             this.props.onTabSelect(tab);
         }
@@ -27,20 +35,25 @@ class F8TabsView extends React.Component {
         const Icon = Icons.Ionicons;
         return (
             <TabBarIOS tintColor={Colors.darkText}>
-                <Icon.TabBarItemIOS
-                  selected={this.props.tab === 'schedule'}
-                  title="Schedule"
-                  iconName="ios-home-outline"
-                  selectedIconName="ios-home">
-                  <Views.card navigator={this.props.navigator} />
-                </Icon.TabBarItemIOS>
-                <Icon.TabBarItemIOS
-                  selected={this.props.tab === 'schedule2'}
-                  title="Schedule2"
-                  iconName="ios-person-outline"
-                  selectedIconName="ios-person">
-                  <Views.card navigator={this.props.navigator} />
-                </Icon.TabBarItemIOS>
+                {this.props.navigation.data.pages.map((navItem, index) =>
+                    <Icon.TabBarItemIOS
+                      selected={this.props.tab === navItem.name}
+                      title={navItem.title}
+                      key={index}
+                      onPress={() => { this.onTabSelect(navItem.name); }}
+                      iconName={navItem.icon}
+                      selectedIconName={navItem.selectedIcon}>
+                        {(() => {
+                            let ComponentView = Views[navItem.view];
+                            // If the component is missing, fallback to default with message
+                            if (!ComponentView) {
+                                const warningText = `View ${navItem.view} not found`;
+                                return <Defaults.warningView warningText={warningText} />;
+                            }
+                            return <ComponentView />;
+                        })()}
+                    </Icon.TabBarItemIOS>
+                )}
             </TabBarIOS>
         );
     }
@@ -56,7 +69,7 @@ function select(store) {
 
 function actions(dispatch) {
     return {
-        // onTabSelect: (tab) => dispatch(switchTab(tab)),
+        onTabSelect: (tab) => dispatch(Actions.switchNavigation(tab))
     };
 }
 

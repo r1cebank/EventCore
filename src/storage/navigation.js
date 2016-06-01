@@ -7,7 +7,9 @@
 import SimpleStore from 'react-native-simple-store';
 
 // Global Actions
-import * as Actions from '../state/actions/actions';
+import * as DataActions from '../state/actions/data';
+import * as UtilActions from '../state/actions/util';
+import * as NavActions from '../state/actions/navigation';
 
 // Global Includes
 import { Store } from '../global/global-includes';
@@ -20,8 +22,8 @@ const Navigation = {
         SimpleStore.get('navigation').then((navData) => {
             // Dispatch fetched action
             if (navData) {
-                Store.appStore.dispatch(Actions.navigationFetched(navData));
-                Store.appStore.dispatch(Actions.updateNavigation());
+                Store.appStore.dispatch(DataActions.navigationFetched(navData));
+                Store.appStore.dispatch(DataActions.updateNavigation());
             } else {
                 // Init the data storage, will call for non patch endpoint
                 // https://event.com/update/navigation/raw?appId=XXXXXXX
@@ -35,14 +37,15 @@ const Navigation = {
                     method: 'GET'
                 })
                 .then((response) => response.json())
-                .then((data) => {
-                    SimpleStore.save('navigation', data).then(() => {
-                        Store.appStore.dispatch(Actions.navigationFetched(navData));
-                    }).catch((e) => { Store.appStore.dispatch(Actions.appError(e)); });
+                .then((navData) => {
+                    SimpleStore.save('navigation', navData).then(() => {
+                        Store.appStore.dispatch(DataActions.navigationFetched(navData));
+                        Store.appStore.dispatch(NavActions.switchNavigation(navData.data.config.defaults.initialPage));
+                    }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
                 })
-                .catch((e) => { Store.appStore.dispatch(Actions.appError(e)); });
+                .catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
             }
-        }).catch((e) => { Store.appStore.dispatch(Actions.appError(e)); });
+        }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
     },
     update: () => {
         // Call endpoint for patches
@@ -65,11 +68,12 @@ const Navigation = {
                     navData = DiffPatcher.patch(navData, patch);
                 }
                 SimpleStore.save('navigation', navData).then(() => {
-                    Store.appStore.dispatch(Actions.navigationFetched(navData));
-                }).catch((e) => { Store.appStore.dispatch(Actions.appError(e)); });
+                    Store.appStore.dispatch(DataActions.navigationFetched(navData));
+                    Store.appStore.dispatch(NavActions.switchNavigation(navData.data.config.defaults.initialPage));
+                }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
             })
-            .catch((e) => { Store.appStore.dispatch(Actions.appError(e)); });
-        }).catch((e) => { Store.appStore.dispatch(Actions.appError(e)); });
+            .catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
+        }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
     }
 };
 
