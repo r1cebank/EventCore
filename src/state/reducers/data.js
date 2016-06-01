@@ -1,12 +1,12 @@
 /*
- * This file includes all the basic app stage reducers
+ * This file includes all the basic app state reducers
  */
 
 import { Storage } from '../../global/global-includes';
 import * as ActionType from '../actions/actionTypes';
-import initialState from '../initial-state';
+import { InitialAppState } from '../initial-state';
 
-function appState(state = initialState, action) {
+function reducer(state = InitialAppState, action) {
     switch (action.type) {
         case ActionType.FETCH_NAVIGATION: {
             // TODO: Adding real configs
@@ -33,4 +33,4 @@ function appState(state = initialState, action) {
     }
 }
 
-export default appState;
+export default reducer;

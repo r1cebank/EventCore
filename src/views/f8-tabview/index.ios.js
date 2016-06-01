@@ -1,57 +1,64 @@
 import React from 'react';
-import { StatusBarIOS, TabBarIOS, Navigator, View } from 'react-native';
+import { StatusBar, TabBarIOS, Navigator, View } from 'react-native';
+
+import { Views, Colors, Icons } from '../../global/global-includes';
 
 import { connect } from 'react-redux';
 
 class F8TabsView extends React.Component {
 
     constructor(props) {
+        Icons;
         super(props);
-        this.handleDayChange = this.handleDayChange.bind(this);
     }
 
     componentDidMount() {
-        StatusBarIOS && StatusBarIOS.setStyle('light-content');
+        StatusBar && StatusBar.setBarStyle('light-content');
+    }
+
+    onTabSelect(tab: Tab) {
+        if (this.props.tab !== tab) {
+            this.props.onTabSelect(tab);
+        }
     }
 
     render() {
-        const scheduleIcon = this.props.day === 1
-        ? require('./schedule/img/schedule-icon-1.png')
-        : require('./schedule/img/schedule-icon-2.png');
-        const scheduleIconSelected = this.props.day === 1
-        ? require('./schedule/img/schedule-icon-1-active.png')
-        : require('./schedule/img/schedule-icon-2-active.png');
+        // Later replaced with configurable icons
+        const Icon = Icons.Ionicons;
         return (
-            <TabBarIOS tintColor="#032250">
-                <TabBarIOS.Item
+            <TabBarIOS tintColor={Colors.darkText}>
+                <Icon.TabBarItemIOS
+                  selected={this.props.tab === 'schedule'}
                   title="Schedule"
-                  icon={scheduleIcon}
-                  selectedIcon={scheduleIconSelected}>
-                  <View />
-                </TabBarIOS.Item>
+                  iconName="ios-home-outline"
+                  selectedIconName="ios-home">
+                  <Views.card navigator={this.props.navigator} />
+                </Icon.TabBarItemIOS>
+                <Icon.TabBarItemIOS
+                  selected={this.props.tab === 'schedule2'}
+                  title="Schedule2"
+                  iconName="ios-person-outline"
+                  selectedIconName="ios-person">
+                  <Views.card navigator={this.props.navigator} />
+                </Icon.TabBarItemIOS>
             </TabBarIOS>
         );
     }
 
-    handleDayChange(day) {
-        this.setState({selectedDay: day});
-    }
-
 }
 
-// function select(store) {
-//     return {
-//         tab: store.navigation.tab,
-//         day: store.navigation.day,
-//         notificationsBadge: unseenNotificationsCount(store) + store.surveys.length,
-//     };
-// }
+function select(store) {
+    return {
+        navigation: store.data.navigation,
+        tab: store.navigationstate.tab
+    };
+}
 
-// function actions(dispatch) {
-//     return {
-//         onTabSelect: (tab) => dispatch(switchTab(tab)),
-//     };
-// }
+function actions(dispatch) {
+    return {
+        // onTabSelect: (tab) => dispatch(switchTab(tab)),
+    };
+}
 
-// module.exports = connect(select, actions)(F8TabsView);
-module.exports = F8TabsView;
+module.exports = connect(select, actions)(F8TabsView);
+// module.exports = F8TabsView;

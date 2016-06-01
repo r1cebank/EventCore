@@ -27,7 +27,6 @@
     "rctn-localization": "^0.1.14",
     "react": "15.0.2",
     "react-native": "^0.26.0",
-    "react-native-redux-router": "^1.0.7",
     "react-native-router-flux": "^3.22.23",
     "react-native-scrollable-tab-view": "^0.4.2",
     "react-native-simple-store": "^1.0.1",

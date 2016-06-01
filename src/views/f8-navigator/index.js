@@ -41,13 +41,10 @@ class F8Navigator extends React.Component {
     }
 }
 
-// function select(store) {
-//     return {
-//         tab: store.navigation.tab,
-//         isLoggedIn: store.user.isLoggedIn || store.user.hasSkippedLogin
-//     };
-// }
+function select(store) {
+    return {
+        // tab: store.navigationstate.tab
+    };
+}
 
-// module.exports = connect(select)(F8Navigator);
-
-module.exports = F8Navigator;
+module.exports = connect(select)(F8Navigator);

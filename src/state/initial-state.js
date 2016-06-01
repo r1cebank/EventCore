@@ -1,7 +1,9 @@
 
-const initialState = {
+export const InitialAppState = {
     loading: true,
     navigation: {}
 };
 
-export default initialState;
+export const InitialNavigationState = {
+    tab: 'schedule'
+};
