@@ -13,4 +13,4 @@ const styles = StyleSheet.create({
     }
 });
 
-exrport default styles;
+export default styles;

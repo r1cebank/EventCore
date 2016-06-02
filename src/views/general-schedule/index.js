@@ -120,4 +120,5 @@ function actions(dispatch) {
     };
 }
 
-module.exports = connect(select, actions)(GeneralScheduleView);
+module.exports = GeneralScheduleView;
+// module.exports = connect(select, actions)(GeneralScheduleView);

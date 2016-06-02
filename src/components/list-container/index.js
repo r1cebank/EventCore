@@ -1,19 +1,13 @@
 
-import { Animated, NativeModules, Dimensions, View, Platform } from 'react-native';
+import { Animated, NativeModules, Dimensions, View, Platform, ActivityIndicatorIOS, ProgressBarAndroid } from 'react-native';
 import { Views, Components, Colors, Icons, Defaults, Utils, Assets } from '../../global/global-includes';
 
-var F8SegmentedControl = require('F8SegmentedControl');
-var ParallaxBackground = require('ParallaxBackground');
+// var ParallaxBackground = require('ParallaxBackground');
 
 import React from 'react';
 
-var StyleSheet = require('F8StyleSheet');
-var { Text } = require('F8Text');
-
 const EMPTY_CELL_HEIGHT = Dimensions.get('window').height > 600 ? 200 : 150;
 
-var ActivityIndicatorIOS = require('ActivityIndicatorIOS');
-var ProgressBarAndroid = require('ProgressBarAndroid');
 const ActivityIndicator = Platform.OS === 'ios'
 ? ActivityIndicatorIOS
 : ProgressBarAndroid;
@@ -109,11 +103,11 @@ class ListContainer extends React.Component {
         if (segments.length > 1) {
             stickyHeader = (
                 <View>
-                <F8SegmentedControl
-                values={segments}
-                selectedIndex={this.state.idx}
-                selectionColor={this.props.selectedSectionColor}
-                onChange={this.handleSelectSegment}
+                <Components.SegmentedControl
+                    values={segments}
+                    selectedIndex={this.state.idx}
+                    selectionColor={this.props.selectedSectionColor}
+                    onChange={this.handleSelectSegment}
                 />
                 {stickyHeader}
                 </View>
@@ -127,7 +121,7 @@ class ListContainer extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.headerWrapper}>
-                    <ParallaxBackground
+                    <Components.ParallaxBackground
                     minHeight={this.state.stickyHeaderHeight + Components.Header.height}
                     maxHeight={EMPTY_CELL_HEIGHT + this.state.stickyHeaderHeight + Components.Header.height}
                     offset={this.state.anim}
@@ -135,7 +129,7 @@ class ListContainer extends React.Component {
                     backgroundShift={backgroundShift}
                     backgroundColor={this.props.backgroundColor}>
                     {this.renderParallaxContent()}
-                    </ParallaxBackground>
+                    </Components.ParallaxBackground>
                     <Components.Header
                     title={this.props.title}
                     leftItem={leftItem}
@@ -164,9 +158,9 @@ class ListContainer extends React.Component {
             return this.props.parallaxContent;
         }
         return (
-            <Text style={styles.parallaxText}>
+            <Components.Text style={styles.parallaxText}>
             {this.props.title}
-            </Text>
+            </Components.Text>
         );
     }
 
@@ -181,7 +175,7 @@ class ListContainer extends React.Component {
                 opacity: this.state.anim.interpolate({
                     inputRange: [distance - 20, distance],
                     outputRange: [0, 1],
-                    extrapolate: 'clamp',
+                    extrapolate: 'clamp'
                 })
             };
         }

@@ -1,4 +1,3 @@
-var F8SessionCell = require('F8SessionCell');
 // var FilterSessions = require('./filterSessions');
 
 // var groupSessions = require('./groupSessions');
@@ -53,7 +52,7 @@ class ScheduleListView extends React.Component {
 
         renderRow(session: Session, day: number) {
             return (
-                <F8SessionCell
+                <Components.SessionCell
                 onPress={() => this.openSession(session, day)}
                 session={session}
                 />

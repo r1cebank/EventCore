@@ -9,3 +9,4 @@ export const Filter = require('../assets/filter.png');
 export const ScheduleBackground = require('../assets/schedule-background.png');
 export const HamburgerUnread = require('../assets/hamburger-unread.png');
 export const Hamburger = require('../assets/hamburger.png');
+export const AddedCell = require('../assets/added-cell.png');

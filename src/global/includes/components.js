@@ -14,3 +14,7 @@ export const F8Text = require('../../components/text');
 export const SessionsSectionHeader = require('../../components/sessions-section-header');
 export const ViewPager = require('../../components/view-pager');
 export const Header = require('../../components/header');
+export const Touchable = require('../../components/touchable');
+export const SessionCell = require('../../components/session-cell');
+export const SegmentedControl = require('../../components/segmented-control');
+export const ParallaxBackground = require('../../components/parallax-background');

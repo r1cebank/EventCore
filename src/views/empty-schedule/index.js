@@ -3,8 +3,6 @@ import { View, Image } from 'react-native';
 
 import { Components } from '../../global/global-includes';
 
-const { Paragraph, Heading1 } = Components.F8Text;
-
 import Styles from './resources/styles';
 
 class EmptySchedule extends React.Component {
@@ -17,6 +15,7 @@ class EmptySchedule extends React.Component {
     };
 
     render() {
+        const { Paragraph, Heading1 } = Components.F8Text;
         const image = this.props.image &&
         <Image style={Styles.image} source={this.props.image} />;
         const title = this.props.title &&
