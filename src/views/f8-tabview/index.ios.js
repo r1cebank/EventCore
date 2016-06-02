@@ -31,8 +31,16 @@ class F8TabsView extends React.Component {
     }
 
     render() {
-        // Later replaced with configurable icons
-        const Icon = Icons.Ionicons;
+        let Icon = Icons[this.props.navigation.data.config.iconsource];
+        let isLocalIcon = false;
+        // If Icon become undefined, use default
+        if (!Icon) {
+            Icon = Icons.Ionicons;
+        }
+        if (this.props.navigation.data.config.iconsource === 'Local') {
+            isLocalIcon = true;
+            Icon.TabBarItemIOS = TabBarIOS.Item;
+        }
         return (
             <TabBarIOS tintColor={Colors.darkText}>
                 {this.props.navigation.data.pages.map((navItem, index) =>
@@ -40,6 +48,7 @@ class F8TabsView extends React.Component {
                       selected={this.props.tab === navItem.name}
                       title={navItem.title}
                       key={index}
+                      icon={isLocalIcon ? require(navItem.icon) : undefined}
                       onPress={() => { this.onTabSelect(navItem.name); }}
                       iconName={navItem.icon}
                       selectedIconName={navItem.selectedIcon}>
