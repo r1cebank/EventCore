@@ -5,6 +5,8 @@ import * as Storage from './includes/storage';
 import * as Store from './includes/store';
 import * as Colors from './includes/colors';
 import * as Icons from './includes/icons';
+import * as Utils from './includes/utils';
+import * as Assets from './includes/assets';
 
 export {
     Views,
@@ -13,5 +15,7 @@ export {
     Storage,
     Store,
     Colors,
-    Icons
+    Icons,
+    Utils,
+    Assets
 };

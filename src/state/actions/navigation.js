@@ -10,3 +10,10 @@ export function switchNavigation(tab) {
         tab
     };
 }
+
+export function switchDay(day) {
+    return {
+        type: ActionType.SWITCH_DAY,
+        day
+    };
+}

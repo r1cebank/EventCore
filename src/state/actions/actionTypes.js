@@ -7,6 +7,7 @@ export const APP_ERROR = 'APP_ERROR';
 
 // Navigation
 export const SWITCH_NAVIGATION = 'SWITCH_NAVIGATION';
+export const SWITCH_DAY = 'SWITCH_DAY';
 
 // Data
 export const FETCH_NAVIGATION = 'FETCH_NAVIGATION';

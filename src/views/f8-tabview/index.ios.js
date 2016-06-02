@@ -10,10 +10,6 @@ import { connect } from 'react-redux';
 
 class F8TabsView extends React.Component {
 
-    // constructor(props) {
-    //     super(props);
-    // }
-
     // componentDidMount() {
     //     StatusBar.setBarStyle('light-content');
     // }
@@ -24,11 +20,20 @@ class F8TabsView extends React.Component {
         onTabSelect: React.PropTypes.func
     };
 
+    // constructor(props) {
+    //     super(props);
+    //     this.onDayChange = this.onDayChange.bind(this);
+    // }
+
     onTabSelect(tab)  {
         if (this.props.tab !== tab) {
             this.props.onTabSelect(tab);
         }
     }
+
+    // onDayChange(day) {
+    //     this.props.onDayChange(day);
+    // }
 
     render() {
         let Icon = Icons[this.props.navigation.data.config.iconsource];
@@ -73,12 +78,14 @@ function select(store) {
     return {
         navigation: store.data.navigation,
         tab: store.navigationstate.tab
+        // day: store.navigationstate.day
     };
 }
 
 function actions(dispatch) {
     return {
         onTabSelect: (tab) => dispatch(Actions.switchNavigation(tab))
+        // onDayChange: (day) => dispatch(Actions.switchDay(day))
     };
 }
 

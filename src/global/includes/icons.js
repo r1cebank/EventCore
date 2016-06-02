@@ -23,4 +23,4 @@ export {
     MaterialIcons,
     Octicons,
     Zocial
-}
+};
