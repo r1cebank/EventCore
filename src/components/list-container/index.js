@@ -107,13 +107,13 @@ class ListContainer extends React.Component {
         if (segments.length > 1) {
             stickyHeader = (
                 <View>
-                <Components.SegmentedControl
-                    values={segments}
-                    selectedIndex={this.state.idx}
-                    selectionColor={this.props.selectedSectionColor}
-                    onChange={this.handleSelectSegment}
-                />
-                {stickyHeader}
+                    <Components.SegmentedControl
+                        values={segments}
+                        selectedIndex={this.state.idx}
+                        selectionColor={this.props.selectedSectionColor}
+                        onChange={this.handleSelectSegment}
+                    />
+                    {stickyHeader}
                 </View>
             );
         }
@@ -190,7 +190,6 @@ class ListContainer extends React.Component {
     }
 
     handleScroll(idx, e) {
-        debugger;
         if (idx !== this.state.idx) {
             return;
         }
@@ -275,7 +274,6 @@ class ListContainer extends React.Component {
                     const oldScrollViewTag = ReactNative.findNodeHandle(
                         this._refs[prevState.idx].getScrollResponder()
                     );
-                    debugger;
                     NativeModules.F8Scrolling.unpin(oldScrollViewTag);
                 }
 

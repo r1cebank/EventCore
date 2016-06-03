@@ -9,7 +9,6 @@ import { Views, Components, Colors, Icons, Defaults, Assets } from '../../global
 // import type {Session} from '../../reducers/sessions';
 
 class ScheduleListView extends React.Component {
-    _innerRef: ?Views.PureListView;
 
     constructor(props) {
         super(props);
@@ -36,7 +35,14 @@ class ScheduleListView extends React.Component {
 
         render() {
             return (
-                <View />
+                <Views.PureListView
+                    ref={this.storeInnerRef}
+                    data={this.state.todaySessions}
+                    renderRow={this.renderRow}
+                    renderSectionHeader={this.renderSectionHeader}
+                    {...this.props}
+                    renderEmptyList={this.renderEmptyList}
+                />
             );
         }
 

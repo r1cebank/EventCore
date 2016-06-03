@@ -67,7 +67,7 @@ class F8TabsView extends React.Component {
                                 const warningText = `View ${navItem.view} not found`;
                                 return <Defaults.warningView warningText={warningText} />;
                             }
-                            return <ComponentView title={navItem.title} />;
+                            return <ComponentView title={navItem.title} navigator={this.props.navigator} />;
                         })()}
                     </Icon.TabBarItemIOS>
                 )}

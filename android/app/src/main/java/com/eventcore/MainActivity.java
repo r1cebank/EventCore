@@ -1,4 +1,4 @@
-package com.react_native_boilerplate;
+package com.eventcore;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
@@ -15,7 +15,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "react_native_boilerplate";
+        return "EventCore";
     }
 
     /**

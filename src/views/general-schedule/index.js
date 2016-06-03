@@ -40,11 +40,11 @@ class GeneralScheduleView extends React.Component {
         // : null;
 
         const filterHeader = <Components.FilterHeader />;
-
+        // {this.props.day - 1}
         const content = (
             <Components.ListContainer
             title={this.props.title}
-            selectedSegment={this.props.day - 1}
+            selectedSegment={0}
             onSegmentChange={this.switchDay}
             backgroundImage={Assets.ScheduleBackground}
             backgroundColor="#5597B8"
