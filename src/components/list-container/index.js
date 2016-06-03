@@ -1,5 +1,5 @@
 
-import { Animated, NativeModules, Dimensions, View, Platform, ActivityIndicatorIOS, ProgressBarAndroid } from 'react-native';
+import ReactNative, { Animated, NativeModules, Dimensions, View, Platform, ActivityIndicatorIOS, ProgressBarAndroid } from 'react-native';
 import { Views, Components, Colors, Icons, Defaults, Utils, Assets } from '../../global/global-includes';
 
 const { Text } = Components.F8Text;
@@ -99,7 +99,7 @@ class ListContainer extends React.Component {
                 contentInset: {bottom: 49, top: 0},
                 automaticallyAdjustContentInsets: false,
                 renderHeader: this.renderFakeHeader,
-                scrollsToTop: idx === this.state.idx,
+                scrollsToTop: idx === this.state.idx
             })}</View>;
         });
 
@@ -141,8 +141,14 @@ class ListContainer extends React.Component {
                         extraItems={this.props.extraItems}>
                         {this.renderHeaderTitle()}
                      </Components.Header>
+                     {this.renderFixedStickyHeader(stickyHeader)}
                 </View>
-
+                <Components.ViewPager
+                    count={segments.length}
+                    selectedIndex={this.state.idx}
+                    onSelectedIndexChange={this.handleSelectSegment}>
+                    {content}
+                </Components.ViewPager>
             </View>
         );
     }
@@ -183,7 +189,8 @@ class ListContainer extends React.Component {
         );
     }
 
-    handleScroll(idx: number, e: any) {
+    handleScroll(idx, e) {
+        debugger;
         if (idx !== this.state.idx) {
             return;
         }
@@ -255,7 +262,7 @@ class ListContainer extends React.Component {
         }
     }
 
-    componentDidUpdate(prevProps: Props, prevState: State) {
+    componentDidUpdate(prevProps, prevState) {
         if (!NativeModules.F8Scrolling) {
             return;
         }
@@ -265,17 +272,18 @@ class ListContainer extends React.Component {
                 var distance = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
 
                 if (this._refs[prevState.idx] && this._refs[prevState.idx].getScrollResponder) {
-                    const oldScrollViewTag = React.findNodeHandle(
+                    const oldScrollViewTag = ReactNative.findNodeHandle(
                         this._refs[prevState.idx].getScrollResponder()
                     );
+                    debugger;
                     NativeModules.F8Scrolling.unpin(oldScrollViewTag);
                 }
 
                 if (this._refs[this.state.idx] && this._refs[this.state.idx].getScrollResponder) {
-                    const newScrollViewTag = React.findNodeHandle(
+                    const newScrollViewTag = ReactNative.findNodeHandle(
                         this._refs[this.state.idx].getScrollResponder()
                     );
-                    const pinnedViewTag = React.findNodeHandle(this._pinned);
+                    const pinnedViewTag = ReactNative.findNodeHandle(this._pinned);
                     NativeModules.F8Scrolling.pin(newScrollViewTag, pinnedViewTag, distance);
                 }
             }

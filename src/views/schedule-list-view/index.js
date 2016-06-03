@@ -3,6 +3,7 @@
 // var groupSessions = require('./groupSessions');
 
 import React from 'react';
+import { View } from 'react-native';
 import { Views, Components, Colors, Icons, Defaults, Assets } from '../../global/global-includes';
 
 // import type {Session} from '../../reducers/sessions';
@@ -12,9 +13,9 @@ class ScheduleListView extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.state = {
-        //     todaySessions: groupSessions(FilterSessions.byDay(props.sessions, props.day)),
-        // };
+        this.state = {
+            todaySessions: {},
+        };
 
         this._innerRef = null;
 
@@ -35,14 +36,7 @@ class ScheduleListView extends React.Component {
 
         render() {
             return (
-                <Components.PureListView
-                ref={this.storeInnerRef}
-                data={this.state.todaySessions}
-                renderRow={this.renderRow}
-                renderSectionHeader={this.renderSectionHeader}
-                {...this.props}
-                renderEmptyList={this.renderEmptyList}
-                />
+                <View />
             );
         }
 

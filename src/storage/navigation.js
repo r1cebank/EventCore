@@ -69,7 +69,6 @@ const Navigation = {
                 }
                 SimpleStore.save('navigation', navData).then(() => {
                     Store.appStore.dispatch(DataActions.navigationFetched(navData));
-                    Store.appStore.dispatch(NavActions.switchNavigation(navData.data.config.defaults.initialPage));
                 }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
             })
             .catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });

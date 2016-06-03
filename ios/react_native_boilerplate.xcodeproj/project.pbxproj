@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -34,6 +35,7 @@
 		A2FAC60F0B934893B66DF4D5 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8F06A5B24734F96801C1415 /* FontAwesome.ttf */; };
 		A72DD183F43144FC8C2E622C /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7DC24265473A41918FAF4585 /* EvilIcons.ttf */; };
 		CF6BC1559A9943129EE6E2B4 /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62702E9F883A49298E62D220 /* libRealmReact.a */; };
+		EC20DC9C1D014C2700E7B02F /* F8Scrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = EC20DC9B1D014C2700E7B02F /* F8Scrolling.m */; };
 		F600778A90434616B9D6D7B5 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C68BD7A19504194B17EE15D /* MaterialIcons.ttf */; };
 /* End PBXBuildFile section */
 
@@ -185,6 +187,8 @@
 		C8F06A5B24734F96801C1415 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		D9B1F29620FC425085E84BC2 /* libReactNativeLocalization.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeLocalization.a; sourceTree = "<group>"; };
 		E10DB5E4951A4C9BB10DBE26 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		EC20DC9A1D014C2700E7B02F /* F8Scrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F8Scrolling.h; sourceTree = "<group>"; };
+		EC20DC9B1D014C2700E7B02F /* F8Scrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F8Scrolling.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +316,8 @@
 		13B07FAE1A68108700A75B9A /* react_native_boilerplate */ = {
 			isa = PBXGroup;
 			children = (
+				EC20DC9A1D014C2700E7B02F /* F8Scrolling.h */,
+				EC20DC9B1D014C2700E7B02F /* F8Scrolling.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -723,6 +729,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				EC20DC9C1D014C2700E7B02F /* F8Scrolling.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
