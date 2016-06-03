@@ -34,7 +34,7 @@ class HomeView extends React.Component {
 }
 
 
-module.exports = connect((state) => ({
-    loading: state.appstate.loading,
-    navigation: state.appstate.navigation
+module.exports = connect((store) => ({
+    loading: store.data.loading,
+    navigation: store.data.navigation
 }))(HomeView);

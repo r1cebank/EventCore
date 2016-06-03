@@ -7,7 +7,9 @@
 import SimpleStore from 'react-native-simple-store';
 
 // Global Actions
-import * as Actions from '../state/actions/actions';
+import * as DataActions from '../state/actions/data';
+import * as UtilActions from '../state/actions/util';
+import * as NavActions from '../state/actions/navigation';
 
 // Global Includes
 import { Store } from '../global/global-includes';
@@ -16,12 +18,12 @@ import { Store } from '../global/global-includes';
 const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });
 
 const Navigation = {
-    fetch: (config) => {
+    fetch: () => {
         SimpleStore.get('navigation').then((navData) => {
             // Dispatch fetched action
             if (navData) {
-                Store.appStore.dispatch(Actions.navigationFetched(navData));
-                Store.appStore.dispatch(Actions.updateNavigation());
+                Store.appStore.dispatch(DataActions.navigationFetched(navData));
+                Store.appStore.dispatch(DataActions.updateNavigation());
             } else {
                 // Init the data storage, will call for non patch endpoint
                 // https://event.com/update/navigation/raw?appId=XXXXXXX
@@ -35,16 +37,17 @@ const Navigation = {
                     method: 'GET'
                 })
                 .then((response) => response.json())
-                .then((data) => {
-                    SimpleStore.save('navigation', data).then(() => {
-                        Store.appStore.dispatch(Actions.navigationFetched(navData));
-                    }).catch((e) => { /* Dispatch error */ });
+                .then((requestedNavData) => {
+                    SimpleStore.save('navigation', requestedNavData).then(() => {
+                        Store.appStore.dispatch(DataActions.navigationFetched(requestedNavData));
+                        Store.appStore.dispatch(NavActions.switchNavigation(requestedNavData.data.config.defaults.initialPage));
+                    }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
                 })
-                .catch((e) => { /* Dispatch error */ });
+                .catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
             }
-        }).catch((e) => { /* Dispatch error */ });;
+        }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
     },
-    update: (config) => {
+    update: () => {
         // Call endpoint for patches
         // https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1
         // Endpoint should be like: https://event.com/update/navigation/patches?appId=XXXXXX?currentVersion=XX
@@ -65,11 +68,11 @@ const Navigation = {
                     navData = DiffPatcher.patch(navData, patch);
                 }
                 SimpleStore.save('navigation', navData).then(() => {
-                    Store.appStore.dispatch(Actions.navigationFetched(navData));
-                }).catch((e) => { /* Dispatch error */ });
+                    Store.appStore.dispatch(DataActions.navigationFetched(navData));
+                }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
             })
-            .catch((e) => { /* Dispatch error */ });
-        }).catch((e) => { /* Dispatch error */ });
+            .catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
+        }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
     }
 };
 

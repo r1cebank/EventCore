@@ -11,4 +11,4 @@ const {
   AppRegistry
 } = React;
 
-AppRegistry.registerComponent('react_native_boilerplate', () => Root);
+AppRegistry.registerComponent('EventCore', () => Root);
