@@ -22,7 +22,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/build/intermediates/classes/debug" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/debug" />
     <exclude-output />
@@ -46,6 +46,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/debug/shaders" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
@@ -53,6 +54,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
@@ -60,6 +62,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/shaders" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
@@ -67,6 +70,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
@@ -74,6 +78,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars" />
@@ -98,8 +103,8 @@
     <orderEntry type="library" exported="" name="jackson-core-2.2.3" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.5.0" level="project" />
-    <orderEntry type="library" exported="" name="okhttp-ws-2.5.0" level="project" />
     <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />
+    <orderEntry type="library" exported="" name="okhttp-ws-2.5.0" level="project" />
     <orderEntry type="library" exported="" name="fbcore-0.8.1" level="project" />
     <orderEntry type="library" exported="" name="drawee-0.8.1" level="project" />
     <orderEntry type="library" exported="" name="android-jsc-r174650" level="project" />
