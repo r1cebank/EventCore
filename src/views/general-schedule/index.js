@@ -22,26 +22,28 @@ class GeneralScheduleView extends React.Component {
     constructor(props) {
         super(props);
 
-        this.renderEmptyList = this.renderEmptyList.bind(this);
-        this.switchDay = this.switchDay.bind(this);
-        this.openFilterScreen = this.openFilterScreen.bind(this);
-        this.renderNavigationView = this.renderNavigationView.bind(this);
+        // this.renderEmptyList = this.renderEmptyList.bind(this);
+        // this.switchDay = this.switchDay.bind(this);
+        // this.openFilterScreen = this.openFilterScreen.bind(this);
+        // this.renderNavigationView = this.renderNavigationView.bind(this);
     }
 
     render() {
         const filterItem = {
             icon: Assets.Filter,
-            title: 'Filter',
-            onPress: this.openFilterScreen
+            title: 'Filter'
+            // onPress: this.openFilterScreen
         };
+        //
+        // const filterHeader = Object.keys(this.props.filter).length > 0
+        // ? <Components.FilterHeader />
+        // : null;
 
-        const filterHeader = Object.keys(this.props.filter).length > 0
-        ? <Components.FilterHeader />
-        : null;
+        const filterHeader = <Components.FilterHeader />;
 
         const content = (
             <Components.ListContainer
-            title="Schedule"
+            title={this.props.title}
             selectedSegment={this.props.day - 1}
             onSegmentChange={this.switchDay}
             backgroundImage={Assets.ScheduleBackground}
@@ -52,13 +54,6 @@ class GeneralScheduleView extends React.Component {
                 <Views.ScheduleListView
                 title="Day 1"
                 day={1}
-                sessions={this.props.sessions}
-                renderEmptyList={this.renderEmptyList}
-                navigator={this.props.navigator}
-                />
-                <Views.ScheduleListView
-                title="Day 2"
-                day={2}
                 sessions={this.props.sessions}
                 renderEmptyList={this.renderEmptyList}
                 navigator={this.props.navigator}
@@ -80,9 +75,9 @@ class GeneralScheduleView extends React.Component {
         );
     }
 
-    renderNavigationView() {
-        return <FilterScreen onClose={() => this._drawer && this._drawer.closeDrawer()} />;
-    }
+    // renderNavigationView() {
+    //     return <FilterScreen onClose={() => this._drawer && this._drawer.closeDrawer()} />;
+    // }
 
     renderEmptyList(day: number) {
         return (
@@ -93,32 +88,32 @@ class GeneralScheduleView extends React.Component {
         );
     }
 
-    openFilterScreen() {
-        if (Platform.OS === 'ios') {
-            this.props.navigator.push({ filter: 123 });
-        } else {
-            this._drawer && this._drawer.openDrawer();
-        }
-    }
-
-    switchDay(page) {
-        this.props.switchDay(page + 1);
-    }
+    // openFilterScreen() {
+    //     if (Platform.OS === 'ios') {
+    //         this.props.navigator.push({ filter: 123 });
+    //     } else {
+    //         this._drawer && this._drawer.openDrawer();
+    //     }
+    // }
+    //
+    // switchDay(page) {
+    //     this.props.switchDay(page + 1);
+    // }
 }
-
-function select(store) {
-    return {
-        day: store.navigation.day,
-        filter: store.filter,
-        sessions: data(store),
-    };
-}
-
-function actions(dispatch) {
-    return {
-        switchDay: (day) => dispatch(switchDay(day)),
-    };
-}
+//
+// function select(store) {
+//     return {
+//         day: store.navigation.day,
+//         filter: store.filter,
+//         sessions: data(store),
+//     };
+// }
+//
+// function actions(dispatch) {
+//     return {
+//         switchDay: (day) => dispatch(switchDay(day)),
+//     };
+// }
 
 module.exports = GeneralScheduleView;
 // module.exports = connect(select, actions)(GeneralScheduleView);

@@ -4,7 +4,6 @@ import { Colors } from '../../../global/global-includes';
 
 const scale = Dimensions.get('window').width / 375;
 
-console.log(Colors);
 
 function normalize(size) {
     return Math.round(scale * size);

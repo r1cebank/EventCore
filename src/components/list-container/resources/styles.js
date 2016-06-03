@@ -1,5 +1,4 @@
-import { Utils } from '../../../global/global-includes';
-
+import { Utils, Components } from '../../../global/global-includes';
 
 const styles = Utils.F8StyleSheet.create({
     container: {
@@ -37,7 +36,7 @@ const styles = Utils.F8StyleSheet.create({
     },
     stickyHeader: {
         position: 'absolute',
-        top: F8Header.height,
+        top: Components.Header.height,
         left: 0,
         right: 0
     }

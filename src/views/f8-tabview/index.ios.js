@@ -1,7 +1,7 @@
 import React from 'react';
 import { TabBarIOS } from 'react-native';
 
-import { Views, Colors, Icons, Defaults } from '../../global/global-includes';
+import { Assets, Views, Colors, Icons, Defaults } from '../../global/global-includes';
 
 // Global Actions
 import * as Actions from '../../state/actions/navigation';
@@ -44,6 +44,8 @@ class F8TabsView extends React.Component {
         }
         if (this.props.navigation.data.config.iconsource === 'Local') {
             isLocalIcon = true;
+            // If we a using Local icons, overwrite this object to include TabBarIOS
+            Icon = { };
             Icon.TabBarItemIOS = TabBarIOS.Item;
         }
         return (
@@ -53,8 +55,9 @@ class F8TabsView extends React.Component {
                       selected={this.props.tab === navItem.name}
                       title={navItem.title}
                       key={index}
-                      icon={isLocalIcon ? require(navItem.icon) : undefined}
                       onPress={() => { this.onTabSelect(navItem.name); }}
+                      icon={isLocalIcon ? Assets[navItem.icon] : undefined}
+                      selectedIcon={isLocalIcon ? Assets[navItem.selectedIcon] : undefined}
                       iconName={navItem.icon}
                       selectedIconName={navItem.selectedIcon}>
                         {(() => {
@@ -64,7 +67,7 @@ class F8TabsView extends React.Component {
                                 const warningText = `View ${navItem.view} not found`;
                                 return <Defaults.warningView warningText={warningText} />;
                             }
-                            return <ComponentView />;
+                            return <ComponentView title={navItem.title} />;
                         })()}
                     </Icon.TabBarItemIOS>
                 )}

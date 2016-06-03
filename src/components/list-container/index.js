@@ -2,9 +2,13 @@
 import { Animated, NativeModules, Dimensions, View, Platform, ActivityIndicatorIOS, ProgressBarAndroid } from 'react-native';
 import { Views, Components, Colors, Icons, Defaults, Utils, Assets } from '../../global/global-includes';
 
+const { Text } = Components.F8Text;
+
 // var ParallaxBackground = require('ParallaxBackground');
 
 import React from 'react';
+
+import Styles from './resources/styles';
 
 const EMPTY_CELL_HEIGHT = Dimensions.get('window').height > 600 ? 200 : 150;
 
@@ -86,17 +90,17 @@ class ListContainer extends React.Component {
         const segments = [];
         const content = React.Children.map(this.props.children, (child, idx) => {
             segments.push(child.props.title);
-            return <RelayLoading>{React.cloneElement(child, {
+            return <View>{React.cloneElement(child, {
                 ref: (ref) => this._refs[idx] = ref,
                 onScroll: (e) => this.handleScroll(idx, e),
-                style: styles.listView,
+                style: Styles.listView,
                 showsVerticalScrollIndicator: false,
                 scrollEventThrottle: 16,
                 contentInset: {bottom: 49, top: 0},
                 automaticallyAdjustContentInsets: false,
                 renderHeader: this.renderFakeHeader,
                 scrollsToTop: idx === this.state.idx,
-            })}</RelayLoading>;
+            })}</View>;
         });
 
         let {stickyHeader} = this.props;
@@ -119,8 +123,8 @@ class ListContainer extends React.Component {
         : this.state.idx / (segments.length - 1);
 
         return (
-            <View style={styles.container}>
-                <View style={styles.headerWrapper}>
+            <View style={Styles.container}>
+                <View style={Styles.headerWrapper}>
                     <Components.ParallaxBackground
                     minHeight={this.state.stickyHeaderHeight + Components.Header.height}
                     maxHeight={EMPTY_CELL_HEIGHT + this.state.stickyHeaderHeight + Components.Header.height}
@@ -128,24 +132,17 @@ class ListContainer extends React.Component {
                     backgroundImage={this.props.backgroundImage}
                     backgroundShift={backgroundShift}
                     backgroundColor={this.props.backgroundColor}>
-                    {this.renderParallaxContent()}
+                        {this.renderParallaxContent()}
                     </Components.ParallaxBackground>
                     <Components.Header
-                    title={this.props.title}
-                    leftItem={leftItem}
-                    rightItem={this.props.rightItem}
-                    extraItems={this.props.extraItems}>
-                    {this.renderHeaderTitle()}
-                    </Components.Header>
-                    {this.renderFixedStickyHeader(stickyHeader)}
+                        title={this.props.title}
+                        leftItem={leftItem}
+                        rightItem={this.props.rightItem}
+                        extraItems={this.props.extraItems}>
+                        {this.renderHeaderTitle()}
+                     </Components.Header>
                 </View>
-                <Components.ViewPager
-                    count={segments.length}
-                    selectedIndex={this.state.idx}
-                    onSelectedIndexChange={this.handleSelectSegment}>
-                    {content}
-                </Components.ViewPager>
-                {this.renderFloatingStickyHeader(stickyHeader)}
+
             </View>
         );
     }
@@ -158,13 +155,13 @@ class ListContainer extends React.Component {
             return this.props.parallaxContent;
         }
         return (
-            <Components.Text style={styles.parallaxText}>
-            {this.props.title}
-            </Components.Text>
+            <Text style={Styles.parallaxText}>
+                {this.props.title}
+            </Text>
         );
     }
 
-    renderHeaderTitle(): ?ReactElement {
+    renderHeaderTitle() {
         if (Platform.OS === 'android') {
             return null;
         }
@@ -180,8 +177,8 @@ class ListContainer extends React.Component {
             };
         }
         return (
-            <Animated.Text style={[styles.headerTitle, transform]}>
-            {this.props.title}
+            <Animated.Text style={[Styles.headerTitle, transform]}>
+                {this.props.title}
             </Animated.Text>
         );
     }
@@ -241,7 +238,7 @@ class ListContainer extends React.Component {
             <Animated.View
             ref={(ref) => this._pinned = ref}
             onLayout={this.handleStickyHeaderLayout}
-            style={[styles.stickyHeader, {opacity}, {transform}]}>
+            style={[Styles.stickyHeader, {opacity}, {transform}]}>
             {stickyHeader}
             </Animated.View>
         );

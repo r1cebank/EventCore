@@ -2,8 +2,12 @@ import React from 'react';
 import { Platform, TouchableOpacity, View, Image, ToolbarAndroid } from 'react-native';
 import { Views, Components, Colors, Icons, Defaults, Utils, Assets } from '../../global/global-includes';
 
+const { Text } = Components.F8Text;
+
 import Styles from './resources/styles';
 
+const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? 20 : 25;
+const HEADER_HEIGHT = Platform.OS === 'ios' ? 44 + STATUS_BAR_HEIGHT : 56 + STATUS_BAR_HEIGHT;
 
 class F8HeaderAndroid extends React.Component {
     render() {
@@ -25,7 +29,7 @@ class F8HeaderAndroid extends React.Component {
         }
 
         const textColor = this.props.foreground === 'dark'
-        ? F8Colors.darkText
+        ? Colors.darkText
         : 'white';
 
         let content;
@@ -70,13 +74,13 @@ class F8HeaderIOS extends React.Component {
 
     render() {
         const {leftItem, title, rightItem, foreground} = this.props;
-        const titleColor = foreground === 'dark' ? F8Colors.darkText : 'white';
-        const itemsColor = foreground === 'dark' ? F8Colors.lightText : 'white';
+        const titleColor = foreground === 'dark' ? Colors.darkText : 'white';
+        const itemsColor = foreground === 'dark' ? Colors.lightText : 'white';
 
         const content = React.Children.count(this.props.children) === 0
-        ? <Components.Text style={[Styles.titleText, {color: titleColor}]}>
-        {title}
-        </Components.Text>
+        ? <Text style={[Styles.titleText, {color: titleColor}]}>
+            {title}
+        </Text>
         : this.props.children;
         return (
             <View style={[Styles.header, this.props.style]}>
@@ -111,9 +115,9 @@ class ItemWrapperIOS extends React.Component {
 
         if (layout !== 'icon' && title) {
             content = (
-                <Components.Text style={[Styles.itemText, {color}]}>
-                {title.toUpperCase()}
-                </Components.Text>
+                <Text style={[Styles.itemText, {color}]}>
+                    {title.toUpperCase()}
+                </Text>
             );
         } else if (icon) {
             content = <Image source={icon} />;

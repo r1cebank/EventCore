@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 // Include global
 import { Views } from '../../global/global-includes';
