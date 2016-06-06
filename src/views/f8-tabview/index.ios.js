@@ -80,7 +80,7 @@ class F8TabsView extends React.Component {
 function select(store) {
     return {
         navigation: store.data.navigation,
-        tab: store.navigationstate.tab
+        tab: store.navigation.tab
         // day: store.navigationstate.day
     };
 }
