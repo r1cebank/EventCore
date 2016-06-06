@@ -1,7 +1,10 @@
 
-const initialState = {
+export const InitialAppState = {
     loading: true,
     navigation: {}
 };
 
-export default initialState;
+// TODO: PUll this setting out
+export const InitialNavigationState = {
+    tab: 'schedule'
+};

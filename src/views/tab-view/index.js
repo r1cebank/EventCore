@@ -54,6 +54,6 @@ class TabView extends React.Component {
     }
 }
 
-module.exports = connect((state) => ({
-    navigation: state.appstate.navigation
+module.exports = connect((store) => ({
+    navigation: store.appstate.navigation
 }))(TabView);
