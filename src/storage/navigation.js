@@ -64,12 +64,14 @@ const Navigation = {
             // })
             .then((response) => response.json())
             .then((patches) => {
-                for (const patch of patches) {
-                    navData = DiffPatcher.patch(navData, patch);
+                if (patches.length) {
+                    for (const patch of patches) {
+                        navData = DiffPatcher.patch(navData, patch);
+                    }
+                    SimpleStore.save('navigation', navData).then(() => {
+                        Store.appStore.dispatch(DataActions.navigationFetched(navData));
+                    }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });                    
                 }
-                SimpleStore.save('navigation', navData).then(() => {
-                    Store.appStore.dispatch(DataActions.navigationFetched(navData));
-                }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
             })
             .catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
         }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });

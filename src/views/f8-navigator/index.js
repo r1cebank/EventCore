@@ -47,7 +47,7 @@ class F8Navigator extends React.Component {
 
 function select(store) {
     return {
-        tab: store.navigationstate.tab
+        tab: store.navigation.tab
     };
 }
 
