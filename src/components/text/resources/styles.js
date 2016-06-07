@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-import { Colors } from '../../../global/global-includes';
+import { Colors } from '../../../global/globalIncludes';
 
 const scale = Dimensions.get('window').width / 375;
 

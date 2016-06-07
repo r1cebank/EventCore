@@ -2,9 +2,9 @@
  * This file includes all the basic app state reducers
  */
 
-import { Storage } from '../../global/global-includes';
+import { Storage } from '../../global/globalIncludes';
 import * as ActionType from '../actions/actionTypes';
-import { InitialAppState } from '../initial-state';
+import { InitialAppState } from '../initialState';
 
 function reducer(state = InitialAppState, action) {
     switch (action.type) {

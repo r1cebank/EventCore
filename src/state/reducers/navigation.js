@@ -3,7 +3,7 @@
  */
 
 import * as ActionType from '../actions/actionTypes';
-import { InitialNavigationState } from '../initial-state';
+import { InitialNavigationState } from '../initialState';
 
 function reducer(state = InitialNavigationState, action) {
     switch (action.type) {

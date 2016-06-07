@@ -4,6 +4,6 @@
 
 /* eslint-disable global-require */
 
-export const blankView = require('../../views/defaults/blank-view');
-export const warningView = require('../../views/defaults/warning-view');
-export const loadingView = require('../../views/defaults/loading-view');
+export const blankView = require('../../views/Defaults/blankView');
+export const warningView = require('../../views/Defaults/warningView');
+export const loadingView = require('../../views/Defaults/loadingView');

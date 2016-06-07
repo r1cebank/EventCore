@@ -9,7 +9,7 @@ import SimpleStore from 'react-native-simple-store';
 import * as Actions from '../state/actions/actions';
 
 // Global Includes
-import { Store } from '../global/global-includes';
+import { Store } from '../global/globalIncludes';
 
 const Settings = {
     get: (key) => {
