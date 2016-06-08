@@ -90,7 +90,7 @@ class ListContainer extends React.Component {
         const segments = [];
         const content = React.Children.map(this.props.children, (child, idx) => {
             segments.push(child.props.title);
-            return <View>{React.cloneElement(child, {
+            return React.cloneElement(child, {
                 ref: (ref) => this._refs[idx] = ref,
                 onScroll: (e) => this.handleScroll(idx, e),
                 style: Styles.listView,
@@ -100,7 +100,7 @@ class ListContainer extends React.Component {
                 automaticallyAdjustContentInsets: false,
                 renderHeader: this.renderFakeHeader,
                 scrollsToTop: idx === this.state.idx
-            })}</View>;
+            });
         });
 
         let {stickyHeader} = this.props;

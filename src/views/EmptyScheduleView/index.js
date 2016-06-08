@@ -23,12 +23,12 @@ class EmptySchedule extends React.Component {
 
         return (
             <View style={[Styles.container, this.props.style]}>
-            {image}
-            {title}
-            <Paragraph style={Styles.text}>
-            {this.props.text}
-            </Paragraph>
-            {this.props.children}
+                {image}
+                {title}
+                <Paragraph style={Styles.text}>
+                    {this.props.text}
+                </Paragraph>
+                {this.props.children}
             </View>
         );
     }

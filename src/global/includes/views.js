@@ -6,13 +6,17 @@
 
 /* eslint-disable global-require */
 
-export const card = require('../../views/Card');
-export const ScrollableTabView = require('../../views/ScrollableTabView');
+const views = {
+    get card() { return require('../../views/Card'); },
+    get ScrollableTabView() { return require('../../views/ScrollableTabView'); },
 
-// F8
-export const NavigatorView = require('../../views/NavigatorView');
-export const TabView = require('../../views/TabView');
-export const GeneralScheduleView = require('../../views/GeneralScheduleView');
-export const EmptyScheduleView = require('../../views/EmptyScheduleView');
-export const ScheduleListView = require('../../views/ScheduleListView');
-export const PureListView = require('../../views/PureListView');
+    // F8
+    get NavigatorView() { return require('../../views/NavigatorView'); },
+    get TabView() { return require('../../views/TabView'); },
+    get GeneralScheduleView() { return require('../../views/GeneralScheduleView'); },
+    get EmptyScheduleView() { return require('../../views/EmptyScheduleView'); },
+    get ScheduleListView() { return require('../../views/ScheduleListView'); },
+    get PureListView() { return require('../../views/PureListView'); }
+};
+
+module.exports = views;

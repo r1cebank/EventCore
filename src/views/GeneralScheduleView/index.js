@@ -33,12 +33,12 @@ class GeneralScheduleView extends React.Component {
             title: 'Filter',
             onPress: this.openFilterScreen
         };
-        //
-        // const filterHeader = Object.keys(this.props.filter).length > 0
-        // ? <Components.FilterHeader />
-        // : null;
 
-        const filterHeader = <Components.FilterHeader />;
+        const filterHeader = Object.keys({}).length > 0
+        ? <Components.FilterHeader />
+        : null;
+
+        // const filterHeader = <Components.FilterHeader />;
         // {this.props.day - 1}
         const content = (
             <Components.ListContainer

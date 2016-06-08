@@ -9,10 +9,9 @@ import { StatusBar, View } from 'react-native';
 
 import Styles from './resources/styles';
 
+import Navigation from './navigation';
+
 class AppView extends React.Component {
-    static propTypes = {
-        children: React.PropTypes.element.isRequired
-    };
     render() {
         return (
             <View style={Styles.container}>
@@ -21,7 +20,7 @@ class AppView extends React.Component {
                   backgroundColor="rgba(0, 0, 0, 0.2)"
                   barStyle="light-content"
                  />
-                {this.props.children}
+                <Navigation />
             </View>
         );
     }

@@ -9,13 +9,12 @@ const { Text } = Components.Text;
 const formatTime = Utils.FormatTime;
 const formatDuration = Utils.FormatDuration;
 
-class F8SessionCell extends React.Component {
+class SessionCell extends React.Component {
     render() {
         var session = this.props.session;
         var tick;
         if (this.props.showTick) {
-            tick =
-            <Image style={Styles.added} source={Assets.AddedCell} />;
+            tick = <Image style={Styles.added} source={Assets.AddedCell} />;
         }
         var time;
         if (this.props.showStartEndTime) {
@@ -62,4 +61,4 @@ class F8SessionCell extends React.Component {
 
 // module.exports = connect(select)(F8SessionCell);
 
-module.exports = F8SessionCell;
+module.exports = SessionCell;

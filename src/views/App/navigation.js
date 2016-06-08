@@ -6,9 +6,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Views, Defaults } from './globalIncludes';
+import { Views, Defaults } from '../../global/globalIncludes';
 
-class HomeView extends React.Component {
+class NavigationShell extends React.Component {
     static propTypes = {
         loading: React.PropTypes.bool,
         navigation: React.PropTypes.object
@@ -19,13 +19,13 @@ class HomeView extends React.Component {
                 //  If loading, return loading view
                 if (this.props.loading) {
                     const loadingText = '';
-                    return <Defaults.loadingView loadingText={loadingText} />;
+                    return <Defaults.LoadingView loadingText={loadingText} />;
                 }
                 const NavigationView = Views[this.props.navigation.data.config.type];
                 //  If the component is missing, fallback to default with message
                 if (!NavigationView) {
                     const warningText = `View ${this.props.navigation.data.config.type} not found`;
-                    return <Defaults.warningView warningText={warningText} />;
+                    return <Defaults.WarningView warningText={warningText} />;
                 }
                 return <NavigationView />;
             })()
@@ -37,4 +37,4 @@ class HomeView extends React.Component {
 module.exports = connect((store) => ({
     loading: store.data.loading,
     navigation: store.data.navigation
-}))(HomeView);
+}))(NavigationShell);

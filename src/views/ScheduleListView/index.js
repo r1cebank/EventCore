@@ -53,8 +53,8 @@ class ScheduleListView extends React.Component {
         renderRow(session: Session, day: number) {
             return (
                 <Components.SessionCell
-                onPress={() => this.openSession(session, day)}
-                session={session}
+                    onPress={() => this.openSession(session, day)}
+                    session={session}
                 />
             );
         }

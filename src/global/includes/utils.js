@@ -4,7 +4,11 @@
 
 /* eslint-disable global-require */
 
-export const F8StyleSheet = require('../../utils/F8StyleSheet');
-export const FormatTime = require('../../utils/FormatTime');
-export const FormatDuration = require('../../utils/FormatDuration');
-export const GroupSessions = require('../../utils/GroupSessions');
+const utils = {
+    get F8StyleSheet() { return require('../../utils/F8StyleSheet'); },
+    get FormatTime() { return require('../../utils/FormatTime'); },
+    get FormatDuration() { return require('../../utils/FormatDuration'); },
+    get GroupSessions() { return require('../../utils/GroupSessions'); }
+};
+
+module.exports = utils;

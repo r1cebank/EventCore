@@ -4,9 +4,15 @@
 
 /* eslint-disable global-require */
 
-export const XWhite = require('../assets/x-white.png');
-export const Filter = require('../assets/filter.png');
-export const ScheduleBackground = require('../assets/schedule-background.png');
-export const HamburgerUnread = require('../assets/hamburger-unread.png');
-export const Hamburger = require('../assets/hamburger.png');
-export const AddedCell = require('../assets/added-cell.png');
+
+
+const assets = {
+    get XWhite() { return require('../assets/x-white.png'); },
+    get Filter() { return require('../assets/filter.png'); },
+    get ScheduleBackground() { return require('../assets/schedule-background.png'); },
+    get HamburgerUnread() { return require('../assets/hamburger-unread.png'); },
+    get Hamburger() { return require('../assets/hamburger.png'); },
+    get AddedCell() { return require('../assets/added-cell.png'); }
+};
+
+module.exports = assets;
