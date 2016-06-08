@@ -21,6 +21,6 @@ const components = {
     get SessionCell() { return require('../../components/SessionCell'); },
     get SegmentedControl() { return require('../../components/SegmentedControl'); },
     get ParallaxBackground() { return require('../../components/ParallaxBackground'); }
-}
+};
 
 module.exports = components;

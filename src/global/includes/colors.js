@@ -7,7 +7,7 @@
 export const darkText = '#032250';
 export const lightText = '#7F91A7';
 
-const LOCATION_COLORS = {
+const KEY_COLORS = {
     'HERBST': '#00E3AD',
     'HERBST A': '#00E3AD',
     'HERBST B': '#00E3AD',
@@ -23,7 +23,7 @@ export function colorForKey(key) {
         return 'black';
     }
 
-    var color = LOCATION_COLORS[key.toUpperCase()];
+    var color = KEY_COLORS[key.toUpperCase()];
     if (!key) {
         console.warn(`key '${key}' has no color`);
         color = 'black';

@@ -4,4 +4,9 @@
 
 /* eslint-disable global-require */
 
-export const Navigation = require('../../storage/navigation');
+const storages = {
+    get Navigation() { return require('../../storage/navigation'); },
+    get Setting() { return require('../../storage/setting'); }
+};
+
+module.exports = storages;

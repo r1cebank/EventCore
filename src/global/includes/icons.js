@@ -4,23 +4,15 @@
 
 /* eslint-disable global-require */
 
-
-import * as Entypo from 'react-native-vector-icons/Entypo';
-import * as EvilIcons from 'react-native-vector-icons/EvilIcons';
-import * as FontAwesome from 'react-native-vector-icons/FontAwesome';
-import * as Foundation from 'react-native-vector-icons/Foundation';
-import * as Ionicons from 'react-native-vector-icons/Ionicons';
-import * as MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import * as Octicons from 'react-native-vector-icons/Octicons';
-import * as Zocial from 'react-native-vector-icons/Zocial';
-
-export {
-    Entypo,
-    EvilIcons,
-    FontAwesome,
-    Foundation,
-    Ionicons,
-    MaterialIcons,
-    Octicons,
-    Zocial
+const icons = {
+    get Entypo() { return require('react-native-vector-icons/Entypo'); },
+    get EvilIcons() { return require('react-native-vector-icons/EvilIcons'); },
+    get FontAwesome() { return require('react-native-vector-icons/FontAwesome'); },
+    get Foundation() { return require('react-native-vector-icons/Foundation'); },
+    get Ionicons() { return require('react-native-vector-icons/Ionicons'); },
+    get MaterialIcons() { return require('react-native-vector-icons/MaterialIcons'); },
+    get Octicons() { return require('react-native-vector-icons/Octicons'); },
+    get Zocial() { return require('react-native-vector-icons/Zocial'); },
 };
+
+module.exports = icons;

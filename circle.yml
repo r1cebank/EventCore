@@ -1,3 +1,11 @@
 machine:
   node:
     version: 4.4.0
+test:
+  override:
+    - npm test
+    - react-native bundle --entry-file ./index.ios.js --platform ios --bundle-output ios/main.jsbundle --dev false --minify false
+dependencies:
+  override:
+    - npm install -g react-native-cli
+    - npm install
