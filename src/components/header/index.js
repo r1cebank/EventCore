@@ -1,8 +1,8 @@
 import React from 'react';
 import { Platform, TouchableOpacity, View, Image, ToolbarAndroid } from 'react-native';
-import { Views, Components, Colors, Icons, Defaults, Utils, Assets } from '../../global/global-includes';
+import { Views, Components, Colors, Icons, Defaults, Utils, Assets } from '../../global/globalIncludes';
 
-const { Text } = Components.F8Text;
+const { Text } = Components.Text;
 
 import Styles from './resources/styles';
 

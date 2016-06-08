@@ -7,20 +7,20 @@
 
 
 const components = {
-    get FacebookTabBar() { return require('../../components/facebook-tabbar'); },
+    get FacebookTabBar() { return require('../../components/FacebookTabBar'); },
 
     // F8
-    get FilterHeader() { return require('../../components/filter-header'); },
-    get ListContainer() { return require('../../components/list-container'); },
-    get DrawerLayout() { return require('../../components/drawer-layout'); },
-    get F8Text() { return require('../../components/text'); },
-    get SessionsSectionHeader() { return require('../../components/sessions-section-header'); },
-    get ViewPager() { return require('../../components/view-pager'); },
-    get Header() { return require('../../components/header'); },
-    get Touchable() { return require('../../components/touchable'); },
-    get SessionCell() { return require('../../components/session-cell'); },
-    get SegmentedControl() { return require('../../components/segmented-control'); },
-    get ParallaxBackground() { return require('../../components/parallax-background'); }
+    get FilterHeader() { return require('../../components/FilterHeader'); },
+    get ListContainer() { return require('../../components/ListContainer'); },
+    get DrawerLayout() { return require('../../components/DrawerLayout'); },
+    get Text() { return require('../../components/Text'); },
+    get SessionSectionHeader() { return require('../../components/SessionSectionHeader'); },
+    get ViewPager() { return require('../../components/ViewPager'); },
+    get Header() { return require('../../components/Header'); },
+    get Touchable() { return require('../../components/Touchable'); },
+    get SessionCell() { return require('../../components/SessionCell'); },
+    get SegmentedControl() { return require('../../components/SegmentedControl'); },
+    get ParallaxBackground() { return require('../../components/ParallaxBackground'); }
 }
 
 module.exports = components;
