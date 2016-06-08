@@ -1,6 +1,6 @@
 /* @flow */
 
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import devTools from 'remote-redux-devtools';
 
 import thunkMiddleware from 'redux-thunk';
@@ -25,7 +25,7 @@ const rootReducer = combineReducers({
 });
 
 const configureStore = function (initialState) {
-    const enhancer = autoRehydrate(devTools());
+    const enhancer = compose(autoRehydrate(), devTools());
     const store = createStoreWithMiddleware(rootReducer, initialState, enhancer);
     persistStore(store, { storage: AsyncStorage, blacklist: ['data'] });
     return store;

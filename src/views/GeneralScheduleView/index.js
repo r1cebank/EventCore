@@ -52,11 +52,11 @@ class GeneralScheduleView extends React.Component {
             stickyHeader={filterHeader}
             rightItem={filterItem}>
                 <Views.ScheduleListView
-                title="Day 1"
-                day={1}
-                sessions={this.props.sessions}
-                renderEmptyList={this.renderEmptyList}
-                navigator={this.props.navigator}
+                    title="Day 1"
+                    day={1}
+                    sessions={this.props.sessions}
+                    renderEmptyList={this.renderEmptyList}
+                    navigator={this.props.navigator}
                 />
             </Components.ListContainer>
         );
@@ -82,8 +82,8 @@ class GeneralScheduleView extends React.Component {
     renderEmptyList(day: number) {
         return (
             <Views.EmptySchedule
-            title={`No sessions on day ${day} match the filter`}
-            text="Check the schedule for the other day or remove the filter."
+                title={`No sessions on day ${day} match the filter`}
+                text="Check the schedule for the other day or remove the filter."
             />
         );
     }
