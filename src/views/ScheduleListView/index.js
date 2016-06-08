@@ -13,7 +13,7 @@ class ScheduleListView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            todaySessions: Utils.GroupSessions([{title: 'Make a better event app', location: 'Herbst', startTime: 1465341707058, endTime: 1465341909058 }]),
+            todaySessions: Utils.GroupSessions(props.sessions)
         };
 
         this._innerRef = null;

@@ -149,6 +149,7 @@ class ListContainer extends React.Component {
                     onSelectedIndexChange={this.handleSelectSegment}>
                     {content}
                 </Components.ViewPager>
+                {this.renderFloatingStickyHeader(stickyHeader)}
             </View>
         );
     }
