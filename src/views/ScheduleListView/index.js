@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { Views, Components, Colors, Icons, Defaults, Assets } from '../../global/globalIncludes';
+import { Views, Components, Colors, Icons, Defaults, Assets, Utils } from '../../global/globalIncludes';
 
 // import type {Session} from '../../reducers/sessions';
 
@@ -13,7 +13,7 @@ class ScheduleListView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            todaySessions: [{title: 'Test'}],
+            todaySessions: Utils.GroupSessions([{title: 'Make a better event app', location: 'Herbst', startTime: 1465341707058, endTime: 1465341909058 }]),
         };
 
         this._innerRef = null;
