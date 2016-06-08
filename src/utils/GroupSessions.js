@@ -1,14 +1,8 @@
-import type {Session} from '../../reducers/sessions';
+import { Utils } from '../global/globalIncludes';
 
-const formatTime = require('./formatTime');
+const formatTime = Utils.FormatTime;
 
-export type SessionsListData = {
-    [time: string]: {
-        [sessionID: string]: Session;
-    };
-};
-
-function groupSessions(sessions: Array<Session>): SessionsListData {
+function groupSessions(sessions) {
     var data = {};
     sessions.forEach((session) => {
         var timeSectionKey = session.allDay ? 'All Day' : formatTime(session.startTime);

@@ -12,7 +12,7 @@ import * as UtilActions from '../state/actions/util';
 import * as NavActions from '../state/actions/navigation';
 
 // Global Includes
-import { Store } from '../global/global-includes';
+import { Store } from '../global/globalIncludes';
 
 
 const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });

@@ -6,7 +6,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Views, Defaults } from './global-includes';
+import { Views, Defaults } from './globalIncludes';
 
 class HomeView extends React.Component {
     static propTypes = {
