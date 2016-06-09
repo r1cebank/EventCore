@@ -102,6 +102,7 @@ class SessionsCarusel extends React.Component {
         return (
             <Components.SessionDetails
                 style={Styles.card}
+                key={index}
                 navigator={this.props.navigator}
                 session={this.state.flatSessionsList[index]}
                 onShare={this.shareCurrentSession}
