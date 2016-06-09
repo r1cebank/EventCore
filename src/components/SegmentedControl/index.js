@@ -4,6 +4,8 @@ import { View, Platform, TouchableOpacity } from 'react-native';
 import Styles from './resources/styles';
 import { Components } from '../../global/globalIncludes';
 
+const { Text } = Components.Text;
+
 class F8SegmentedControl extends React.Component {
     render() {
         var segments = this.props.values.map(
@@ -49,9 +51,9 @@ class Segment extends React.Component {
             activeOpacity={0.8}
             onPress={this.props.onPress}
             style={[Styles.button, selectedButtonStyle]}>
-                <Components.Text style={[Styles.label, deselectedLabelStyle]}>
+                <Text style={[Styles.label, deselectedLabelStyle]}>
                     {title}
-                </Components.Text>
+                </Text>
             </TouchableOpacity>
         );
     }
