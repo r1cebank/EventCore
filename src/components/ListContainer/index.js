@@ -96,7 +96,7 @@ class ListContainer extends React.Component {
                 style: Styles.listView,
                 showsVerticalScrollIndicator: false,
                 scrollEventThrottle: 16,
-                contentInset: {bottom: 49, top: 0},
+                contentInset: {bottom: -10, top: 0}, // Why inset of 69 will fix bounce issue??
                 automaticallyAdjustContentInsets: false,
                 renderHeader: this.renderFakeHeader,
                 scrollsToTop: idx === this.state.idx
@@ -104,7 +104,7 @@ class ListContainer extends React.Component {
         });
 
         let {stickyHeader} = this.props;
-        if (segments.length > 1) {
+        if (segments.length >= 1) {
             stickyHeader = (
                 <View>
                     <Components.SegmentedControl
@@ -243,10 +243,10 @@ class ListContainer extends React.Component {
 
         return (
             <Animated.View
-            ref={(ref) => this._pinned = ref}
-            onLayout={this.handleStickyHeaderLayout}
-            style={[Styles.stickyHeader, {opacity}, {transform}]}>
-            {stickyHeader}
+                ref={(ref) => this._pinned = ref}
+                onLayout={this.handleStickyHeaderLayout}
+                style={[Styles.stickyHeader, {opacity}, {transform}]}>
+                {stickyHeader}
             </Animated.View>
         );
     }
