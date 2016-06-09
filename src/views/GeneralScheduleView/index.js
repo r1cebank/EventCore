@@ -53,7 +53,7 @@ class GeneralScheduleView extends React.Component {
                 <Views.ScheduleListView
                     title="Day 1"
                     day={1}
-                    sessions={[{title: 'Make a better event app', location: 'Herbst', startTime: 1465341707058, endTime: 1465341909058 }]}
+                    sessions={[{id: 'rJ2FMIDV', title: 'Make a better event app', location: 'Herbst', startTime: 1465341707058, endTime: 1465341909058 }]}
                     renderEmptyList={this.renderEmptyList}
                     navigator={this.props.navigator}
                 />
