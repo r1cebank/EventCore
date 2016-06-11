@@ -9,7 +9,9 @@ function naivePlural(text: string, count: number): string {
     return text;
 }
 
-function formatDuration(startMs: number, endMs: number): string {
+function formatDuration(startTime, endTime): string {
+    const startMs = new Date(startTime).getTime();
+    const endMs = new Date(endTime).getTime();
     let ms = endMs - startMs;
     let minutes = ms / 1000 / 60;
     let hours = Math.floor(minutes / 60);
@@ -27,6 +29,7 @@ function formatDuration(startMs: number, endMs: number): string {
     if (minutes > 0) {
         durationText = `${durationText}${Math.ceil(minutes)} min`;
     }
+    debugger;
 
     return durationText.trim();
 }
