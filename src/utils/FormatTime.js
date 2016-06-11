@@ -1,4 +1,5 @@
 function formatTime(unix: number): string {
+    debugger;
     var date = new Date(unix);
     var hours = date.getUTCHours();
     var minutes = date.getUTCMinutes();

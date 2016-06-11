@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "jsondiffpatch": "^0.1.43",
-    "lodash": "^4.12.0",
+    "lodash": "^4.13.1",
     "rctn-localization": "^0.1.14",
     "react": "15.0.2",
     "react-native": "^0.26.0",

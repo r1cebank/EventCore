@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabBarIOS } from 'react-native';
+import { TabBarIOS, Navigator, StatusBar } from 'react-native';
 
 import { Assets, Views, Colors, Icons, Defaults } from '../../global/globalIncludes';
 
@@ -10,19 +10,19 @@ import { connect } from 'react-redux';
 
 class TabView extends React.Component {
 
-    // componentDidMount() {
-    //     StatusBar.setBarStyle('light-content');
-    // }
+    componentDidMount() {
+        StatusBar.setBarStyle('light-content');
+    }
 
     static propTypes = {
         navigation: React.PropTypes.object,
         tab: React.PropTypes.string,
-        onTabSelect: React.PropTypes.func
+        onTabSelect: React.PropTypes.func,
+        navigator: React.PropTypes.instanceOf(Navigator)
     };
 
     // constructor(props) {
     //     super(props);
-    //     this.onDayChange = this.onDayChange.bind(this);
     // }
 
     onTabSelect(tab)  {
@@ -31,18 +31,14 @@ class TabView extends React.Component {
         }
     }
 
-    // onDayChange(day) {
-    //     this.props.onDayChange(day);
-    // }
-
     render() {
-        let Icon = Icons[this.props.navigation.data.config.iconsource];
+        let Icon = Icons[this.props.navigation.config.iconsource];
         let isLocalIcon = false;
         // If Icon become undefined, use default
         if (!Icon) {
             Icon = Icons.Ionicons;
         }
-        if (this.props.navigation.data.config.iconsource === 'Local') {
+        if (this.props.navigation.config.iconsource === 'Local') {
             isLocalIcon = true;
             // If we a using Local icons, overwrite this object to include TabBarIOS
             Icon = { };
@@ -50,7 +46,7 @@ class TabView extends React.Component {
         }
         return (
             <TabBarIOS tintColor={Colors.darkText}>
-                {this.props.navigation.data.pages.map((navItem, index) =>
+                {this.props.navigation.pages.map((navItem, index) =>
                     <Icon.TabBarItemIOS
                       selected={this.props.tab === navItem.name}
                       title={navItem.title}
@@ -67,7 +63,11 @@ class TabView extends React.Component {
                                 const warningText = `View ${navItem.view} not found`;
                                 return <Defaults.warningView warningText={warningText} />;
                             }
-                            return <ComponentView title={navItem.title} navigator={this.props.navigator} />;
+                            return (
+                                <ComponentView
+                                    title={navItem.title}
+                                    navigator={this.props.navigator} />
+                            );
                         })()}
                     </Icon.TabBarItemIOS>
                 )}
@@ -79,18 +79,15 @@ class TabView extends React.Component {
 
 function select(store) {
     return {
-        navigation: store.data.navigation,
+        navigation: store.data.navigation.data,
         tab: store.navigation.tab
-        // day: store.navigationstate.day
     };
 }
 
 function actions(dispatch) {
     return {
         onTabSelect: (tab) => dispatch(Actions.switchNavigation(tab))
-        // onDayChange: (day) => dispatch(Actions.switchDay(day))
     };
 }
 
 module.exports = connect(select, actions)(TabView);
-// module.exports = F8TabsView;

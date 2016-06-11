@@ -22,3 +22,21 @@ export function navigationFetched(data) {
         data
     };
 }
+export function fetchAgenda() {
+    return {
+        type: ActionType.FETCH_AGENDA
+    };
+}
+
+export function updateAgenda() {
+    return {
+        type: ActionType.UPDATE_AGENDA
+    };
+}
+
+export function agendaFetched(data) {
+    return {
+        type: ActionType.AGENDA_FETCHED,
+        data
+    };
+}
