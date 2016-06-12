@@ -1,14 +1,15 @@
-// var FilterSessions = require('./filterSessions');
-
-// var groupSessions = require('./groupSessions');
-
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { View } from 'react-native';
-import { Views, Components, Colors, Icons, Defaults, Assets, Utils } from '../../global/globalIncludes';
-
-// import type {Session} from '../../reducers/sessions';
+import { Navigator } from 'react-native';
+import { Views, Components, Utils } from '../../global/globalIncludes';
 
 class ScheduleListView extends React.Component {
+    static propTypes = {
+        sessions: React.PropTypes.array,
+        day: React.PropTypes.number,
+        renderEmptyList: React.PropTypes.func,
+        navigator: React.PropTypes.instanceOf(Navigator)
+    };
 
     constructor(props) {
         super(props);
@@ -24,65 +25,58 @@ class ScheduleListView extends React.Component {
         this.storeInnerRef = this.storeInnerRef.bind(this);
     }
 
-    // componentWillReceiveProps(nextProps: Props) {
-    //     if (nextProps.sessions !== this.props.sessions ||
-    //         nextProps.day !== this.props.day) {
-    //             this.setState({
-    //                 todaySessions: groupSessions(FilterSessions.byDay(nextProps.sessions, nextProps.day)),
-    //             });
-    //         }
-    //     }
+    render() {
+        return (
+            <Views.PureListView
+                ref={this.storeInnerRef}
+                data={this.state.todaySessions}
+                renderRow={this.renderRow}
+                renderSectionHeader={this.renderSectionHeader}
+                {...this.props}
+                renderEmptyList={this.renderEmptyList}
+            />
+        );
+    }
 
-        render() {
-            return (
-                <Views.PureListView
-                    ref={this.storeInnerRef}
-                    data={this.state.todaySessions}
-                    renderRow={this.renderRow}
-                    renderSectionHeader={this.renderSectionHeader}
-                    {...this.props}
-                    renderEmptyList={this.renderEmptyList}
-                />
-            );
-        }
+    renderSectionHeader(sectionData, sectionID) {
+        return <Components.SessionSectionHeader title={sectionID} />;
+    }
 
-        renderSectionHeader(sectionData: any, sectionID: string) {
-            return <Components.SessionSectionHeader title={sectionID} />;
-        }
+    renderRow(session, day) {
+        return (
+            <Components.SessionCell
+                onPress={() => this.openSession(session, day)}
+                session={session}
+            />
+        );
+    }
 
-        renderRow(session: Session, day: number) {
-            return (
-                <Components.SessionCell
-                    onPress={() => this.openSession(session, day)}
-                    session={session}
-                />
-            );
-        }
+    renderEmptyList() {
+        const { renderEmptyList } = this.props;
+        return renderEmptyList && renderEmptyList(this.props.day);
+    }
 
-        renderEmptyList(): ?ReactElement {
-            const {renderEmptyList} = this.props;
-            return renderEmptyList && renderEmptyList(this.props.day);
-        }
+    openSession(session, day) {
+        this.props.navigator.push({
+            day,
+            session,
+            allSessions: this.state.todaySessions
+        });
+    }
 
-        openSession(session: Session, day: number) {
-            this.props.navigator.push({
-                day,
-                session,
-                allSessions: this.state.todaySessions,
-            });
-        }
+    storeInnerRef(ref) {
+        this._innerRef = ref;
+    }
 
-        storeInnerRef(ref) {
-            this._innerRef = ref;
-        }
-
-        scrollTo(...args: Array<any>) {
-            this._innerRef && this._innerRef.scrollTo(...args);
-        }
-
-        getScrollResponder(): any {
-            return this._innerRef && this._innerRef.getScrollResponder();
+    scrollTo(...args) {
+        if (this._innerRef) {
+            this._innerRef.scrollTo(...args);
         }
     }
 
-    module.exports = ScheduleListView;
+    getScrollResponder() {
+        return this._innerRef && this._innerRef.getScrollResponder();
+    }
+}
+
+module.exports = ScheduleListView;
