@@ -10,16 +10,16 @@ import { connect } from 'react-redux';
 
 class TabView extends React.Component {
 
-    componentDidMount() {
-        StatusBar.setBarStyle('light-content');
-    }
-
     static propTypes = {
         navigation: React.PropTypes.object,
         tab: React.PropTypes.string,
         onTabSelect: React.PropTypes.func,
         navigator: React.PropTypes.instanceOf(Navigator)
     };
+
+    componentDidMount() {
+        StatusBar.setBarStyle('light-content');
+    }
 
     // constructor(props) {
     //     super(props);

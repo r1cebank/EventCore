@@ -29,7 +29,6 @@ function formatDuration(startTime, endTime): string {
     if (minutes > 0) {
         durationText = `${durationText}${Math.ceil(minutes)} min`;
     }
-    debugger;
 
     return durationText.trim();
 }

@@ -13,6 +13,12 @@ function reducer(state = InitialNavigationState, action) {
                 tab: action.tab
             };
         }
+        case ActionType.SWITCH_DAY: {
+            return {
+                ...state,
+                day: action.day
+            };
+        }
         default:
             return state;
     }

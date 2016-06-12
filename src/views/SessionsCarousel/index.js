@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
+import Moment from 'moment';
 
 import Styles from './resources/styles';
 import { Views, Components, Colors, Icons, Defaults, Assets, Utils } from '../../global/globalIncludes';
@@ -43,11 +44,11 @@ class SessionsCarusel extends React.Component {
         }
 
         this.state = {
-            day: this.props.session.day,
+            day: Moment(new Date(this.props.session.startTime)).format('MMMM Do'),
             count: flatSessionsList.length,
             selectedIndex,
             flatSessionsList,
-            contexts,
+            contexts
         };
         (this: any).dismiss = this.dismiss.bind(this);
         (this: any).handleIndexChange = this.handleIndexChange.bind(this);
@@ -62,7 +63,7 @@ class SessionsCarusel extends React.Component {
             rightItem = {
                 title: 'Share',
                 icon: Assets.Share,
-                onPress: this.shareCurrentSession,
+                onPress: this.shareCurrentSession
             };
         }
         return (
@@ -72,13 +73,13 @@ class SessionsCarusel extends React.Component {
                     leftItem={{
                         layout: 'icon',
                         title: 'Close',
-                        icon: Assets.BackWhite,
-                        onPress: this.dismiss,
+                        icon: (Platform.OS === 'ios') ? Assets.XWhite : Assets.BackWhite,
+                        onPress: this.dismiss
                     }}
                     rightItem={rightItem}>
                     <View style={Styles.headerContent}>
                         <Text style={Styles.title}>
-                            <Text style={Styles.day}>DAY {this.state.day}</Text>
+                            <Text style={Styles.day}>{this.state.day}</Text>
                                 {'\n'}
                             <Text style={Styles.time}>{sectionTitle}</Text>
                         </Text>

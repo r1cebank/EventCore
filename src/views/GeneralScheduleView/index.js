@@ -1,10 +1,18 @@
 import React from 'react';
+import { Navigator } from 'react-native';
 import { connect } from 'react-redux';
 
 import * as Actions from '../../state/actions/navigation';
 import { Views, Components, Assets } from '../../global/globalIncludes';
 
 class GeneralScheduleView extends React.Component {
+
+    static propTypes = {
+        title: React.PropTypes.string,
+        agenda: React.PropTypes.array,
+        navigator: React.PropTypes.instanceOf(Navigator),
+        switchDay: React.PropTypes.func
+    };
 
     constructor(props) {
         super(props);
