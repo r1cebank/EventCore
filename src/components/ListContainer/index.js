@@ -16,6 +16,21 @@ const { Text } = Components.Text;
 const EMPTY_CELL_HEIGHT = Dimensions.get('window').height > 600 ? 200 : 150;
 
 class ListContainer extends React.Component {
+
+    static propTypes = {
+        selectedSegment: React.PropTypes.number,
+        leftItem: React.PropTypes.object,
+        children: React.PropTypes.element,
+        stickyHeader: React.PropTypes.element,
+        selectedSectionColor: React.PropTypes.string,
+        backgroundImage: React.PropTypes.number,
+        backgroundColor: React.PropTypes.string,
+        rightItem: React.PropTypes.object,
+        extraItems: React.PropTypes.object,
+        title: React.PropTypes.string,
+        parallaxContent: React.PropTypes.element,
+        onSegmentChange: React.PropTypes.func
+    };
     constructor(props) {
         super(props);
 
