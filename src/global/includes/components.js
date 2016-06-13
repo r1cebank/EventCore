@@ -4,8 +4,6 @@
 
 /* eslint-disable global-require */
 
-
-
 const components = {
     get FacebookTabBar() { return require('../../components/FacebookTabBar'); },
 

@@ -5,6 +5,7 @@
  */
 
 /* eslint-disable global-require */
+/* eslint-disable import/no-unresolved */
 
 const views = {
     get card() { return require('../../views/Card'); },

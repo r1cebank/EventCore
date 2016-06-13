@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable no-return-assign */
 import React from 'react';
 import ReactNative, {
     Animated,
@@ -20,7 +21,7 @@ class ListContainer extends React.Component {
     static propTypes = {
         selectedSegment: React.PropTypes.number,
         leftItem: React.PropTypes.object,
-        children: React.PropTypes.element,
+        children: React.PropTypes.array,
         stickyHeader: React.PropTypes.element,
         selectedSectionColor: React.PropTypes.string,
         backgroundImage: React.PropTypes.number,
@@ -63,7 +64,7 @@ class ListContainer extends React.Component {
         const content = React.Children.map(this.props.children, (child, idx) => {
             segments.push(child.props.title);
             return React.cloneElement(child, {
-                ref: (ref) => this._refs[idx] === ref,
+                ref: (ref) => this._refs[idx] = ref,
                 onScroll: (e) => this.handleScroll(idx, e),
                 style: Styles.listView,
                 showsVerticalScrollIndicator: false,
@@ -204,7 +205,7 @@ class ListContainer extends React.Component {
         const opacity = this.state.stickyHeaderHeight === 0 ? 0 : 1;
         let transform;
         if (!stickyHeader || Platform.OS !== 'ios') {
-            return undefined;
+            return null;
         }
 
         // If native pinning is not available, fallback to Animated
@@ -221,7 +222,7 @@ class ListContainer extends React.Component {
 
         return (
             <Animated.View
-                ref={(ref) => this._pinned === ref}
+                ref={(ref) => this._pinned = ref}
                 onLayout={this.handleStickyHeaderLayout}
                 style={[Styles.stickyHeader, { opacity }, { transform }]}>
                 {stickyHeader}

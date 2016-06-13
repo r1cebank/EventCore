@@ -48,6 +48,13 @@ class GeneralScheduleView extends React.Component {
                     renderEmptyList={this.renderEmptyList}
                     navigator={this.props.navigator}
                 />
+                <Views.ScheduleListView
+                    title="Day 2"
+                    day={2}
+                    sessions={this.props.agenda}
+                    renderEmptyList={this.renderEmptyList}
+                    navigator={this.props.navigator}
+                />
             </Components.ListContainer>
         );
 

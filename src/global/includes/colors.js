@@ -15,7 +15,7 @@ const KEY_COLORS = {
     'HACKER Y': '#CF72B1',
     'COWELL': '#6A6AD5',
     'COWELL C': '#6A6AD5',
-    'FOOD TENT': '#FFCD3B',
+    'FOOD TENT': '#FFCD3B'
 };
 
 export function colorForKey(key) {
@@ -29,4 +29,4 @@ export function colorForKey(key) {
         color = 'black';
     }
     return color;
-};
+}
