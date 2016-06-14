@@ -1,47 +1,48 @@
 import React from 'react';
-import { Text, View, Platform } from 'react-native';
-import { connect } from 'react-redux';
+import { Text, View, Platform, Navigator } from 'react-native';
 import Moment from 'moment';
 
 import Styles from './resources/styles';
-import { Views, Components, Colors, Icons, Defaults, Assets, Utils } from '../../global/globalIncludes';
+import { Components, Assets, Utils } from '../../global/globalIncludes';
 
 class SessionsCarusel extends React.Component {
 
-    constructor(props: Props) {
+    static propTypes = {
+        allSessions: React.PropTypes.object,
+        session: React.PropTypes.object,
+        navigator: React.PropTypes.instanceOf(Navigator)
+    };
+
+    constructor(props) {
         super(props);
 
-        var flatSessionsList = [];
-        var contexts: Array<Context> = [];
-        var allSessions = this.props.allSessions;
+        const flatSessionsList = [];
+        const contexts = [];
+        let allSessions = this.props.allSessions;
         if (!allSessions) {
-            const {session} = this.props;
+            const { session } = this.props;
             allSessions = {
-                [Utils.FormatTime(session.startTime)]: {[session.id]: session}
+                [Utils.FormatTime(session.startTime)]: { [session.id]: session }
             };
         }
 
         // TODO: Add test
-        for (let sectionID in allSessions) {
+        for (const sectionID in allSessions) {
             const sectionLength = Object.keys(allSessions[sectionID]).length;
             let rowIndex = 0;
-            for (let sessionID in allSessions[sectionID]) {
+            for (const sessionID in allSessions[sectionID]) {
                 const session = allSessions[sectionID][sessionID];
                 flatSessionsList.push(session);
                 contexts.push({
                     rowIndex,
                     sectionLength,
-                    sectionTitle: sectionID,
+                    sectionTitle: sectionID
                 });
                 rowIndex++;
             }
         }
 
         const selectedIndex = flatSessionsList.findIndex((s) => s.id === this.props.session.id);
-        if (selectedIndex === -1) {
-            console.log(this.props.session);
-            console.log(flatSessionsList);
-        }
 
         this.state = {
             day: Moment(new Date(this.props.session.startTime)).format('MMMM Do'),
@@ -50,15 +51,19 @@ class SessionsCarusel extends React.Component {
             flatSessionsList,
             contexts
         };
-        (this: any).dismiss = this.dismiss.bind(this);
-        (this: any).handleIndexChange = this.handleIndexChange.bind(this);
-        (this: any).renderCard = this.renderCard.bind(this);
-        (this: any).shareCurrentSession = this.shareCurrentSession.bind(this);
+        this.dismiss = this.dismiss.bind(this);
+        this.handleIndexChange = this.handleIndexChange.bind(this);
+        this.renderCard = this.renderCard.bind(this);
+        this.shareCurrentSession = this.shareCurrentSession.bind(this);
     }
 
     render() {
-        var {rowIndex, sectionLength, sectionTitle} = this.state.contexts[this.state.selectedIndex];
-        var rightItem;
+        const {
+            rowIndex,
+            sectionLength,
+            sectionTitle
+        } = this.state.contexts[this.state.selectedIndex];
+        let rightItem;
         if (Platform.OS === 'android') {
             rightItem = {
                 title: 'Share',
@@ -99,7 +104,7 @@ class SessionsCarusel extends React.Component {
         );
     }
 
-    renderCard(index: number): ReactElement {
+    renderCard(index) {
         return (
             <Components.SessionDetails
                 style={Styles.card}
@@ -112,8 +117,8 @@ class SessionsCarusel extends React.Component {
     }
 
     shareCurrentSession() {
-        const session = this.state.flatSessionsList[this.state.selectedIndex];
-        this.props.dispatch(shareSession(session));
+        // const session = this.state.flatSessionsList[this.state.selectedIndex];
+        // this.props.dispatch(shareSession(session));
     }
 
     componentDidMount() {
@@ -125,16 +130,12 @@ class SessionsCarusel extends React.Component {
         this.props.navigator.pop();
     }
 
-    handleIndexChange(selectedIndex: number) {
+    handleIndexChange(selectedIndex) {
+        selectedIndex = selectedIndex + 0;
         // this.track(selectedIndex);
         // this.setState({ selectedIndex });
     }
 
-    // track(index: number) {
-    //     const {id} = this.state.flatSessionsList[index];
-    //     Parse.Analytics.track('view', {id});
-    //     AppEventsLogger.logEvent('View Session', 1, {id});
-    // }
-};
+}
 
 module.exports = SessionsCarusel;

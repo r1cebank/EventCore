@@ -7,6 +7,10 @@ import Styles from './resources/styles';
 
 class ViewPager extends React.Component {
 
+    static propTypes = {
+        selectedIndex: React.PropTypes.number
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -23,9 +27,8 @@ class ViewPager extends React.Component {
     render() {
         if (Platform.OS === 'ios') {
             return this.renderIOS();
-        } else {
-            return this.renderAndroid();
         }
+        return this.renderAndroid();
     }
 
     renderIOS() {
@@ -42,7 +45,7 @@ class ViewPager extends React.Component {
                 bounces={!!this.props.bounces}
                 scrollsToTop={false}
                 onScroll={this.handleHorizontalScroll}
-                scrollEventThrottle={100}
+                scrollEventThrottle={10}
                 removeClippedSubviews={true}
                 automaticallyAdjustContentInsets={false}
                 directionalLockEnabled={true}
@@ -98,7 +101,7 @@ class ViewPager extends React.Component {
         ));
     }
 
-    handleHorizontalScroll(e: any) {
+    handleHorizontalScroll(e) {
         var selectedIndex = e.nativeEvent.position;
         if (selectedIndex === undefined) {
             selectedIndex = Math.round(
@@ -112,7 +115,7 @@ class ViewPager extends React.Component {
             return;
         }
         if (this.props.selectedIndex !== selectedIndex || this.state.scrollingTo !== null) {
-            this.setState({selectedIndex, scrollingTo: null});
+            this.setState({ selectedIndex, scrollingTo: null });
             const {onSelectedIndexChange} = this.props;
             onSelectedIndexChange && onSelectedIndexChange(selectedIndex);
         }

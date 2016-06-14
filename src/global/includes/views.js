@@ -9,7 +9,6 @@
 
 const views = {
     get card() { return require('../../views/Card'); },
-    get ScrollableTabView() { return require('../../views/ScrollableTabView'); },
 
     // F8
     get NavigatorView() { return require('../../views/NavigatorView'); },

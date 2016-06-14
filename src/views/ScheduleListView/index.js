@@ -29,7 +29,7 @@ class ScheduleListView extends React.Component {
         return (
             <Views.PureListView
                 ref={this.storeInnerRef}
-                data={this.state.todaySessions}
+                data={Utils.GroupSessions(this.props.sessions)}
                 renderRow={this.renderRow}
                 renderSectionHeader={this.renderSectionHeader}
                 {...this.props}
