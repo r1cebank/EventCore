@@ -13,6 +13,7 @@ const components = {
     get DrawerLayout() { return require('../../components/DrawerLayout'); },
     get Text() { return require('../../components/Text'); },
     get SessionSectionHeader() { return require('../../components/SessionSectionHeader'); },
+    get Section() { return require('../../components/Section'); },
     get ViewPager() { return require('../../components/ViewPager'); },
     get Circle() { return require('../../components/Circle'); },
     get Header() { return require('../../components/Header'); },
