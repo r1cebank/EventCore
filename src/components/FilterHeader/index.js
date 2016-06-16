@@ -9,6 +9,10 @@ import Styles from './resources/styles';
 // const {clearFilter} = require('../../actions');
 
 class FilterHeader extends React.Component {
+    static propTypes = {
+        filter: React.PropTypes.array,
+        onClearFilter: React.PropTypes.func
+    };
     render() {
         const topics = Object.keys(this.props.filter);
         if (topics.length === 0) {

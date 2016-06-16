@@ -1,3 +1,5 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { DrawerLayoutAndroid } from 'react-native';
 
@@ -15,8 +17,8 @@ class F8DrawerLayout extends React.Component {
     }
 
     render() {
-        const {drawerPosition, ...props} = this.props;
-        const {Right, Left} = DrawerLayoutAndroid.positions;
+        const { drawerPosition, ...props } = this.props;
+        const { Right, Left } = DrawerLayoutAndroid.positions;
         return (
             <DrawerLayoutAndroid
             ref={(drawer) => this._drawer = drawer}
@@ -40,20 +42,28 @@ class F8DrawerLayout extends React.Component {
 
     onDrawerOpen() {
         this.context.addBackButtonListener(this.handleBackButton);
-        this.props.onDrawerOpen && this.props.onDrawerOpen();
+        if (this.props.onDrawerOpen) {
+            this.props.onDrawerOpen();
+        }
     }
 
     onDrawerClose() {
         this.context.removeBackButtonListener(this.handleBackButton);
-        this.props.onDrawerClose && this.props.onDrawerClose();
+        if (this.props.onDrawerClose) {
+            this.props.onDrawerClose();
+        }
     }
 
     closeDrawer() {
-        this._drawer && this._drawer.closeDrawer();
+        if (this._drawer) {
+            this._drawer.closeDrawer();
+        }
     }
 
     openDrawer() {
-        this._drawer && this._drawer.openDrawer();
+        if (this._drawer) {
+            this._drawer.openDrawer();
+        }
     }
 }
 

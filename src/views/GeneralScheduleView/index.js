@@ -1,31 +1,24 @@
-import { Views, Components, Assets } from '../../global/globalIncludes';
-
-// var FilterSessions = require('./filterSessions');
-
-import { Platform } from 'react-native';
 import React from 'react';
+import { Navigator } from 'react-native';
+import { connect } from 'react-redux';
 
-// var FilterScreen = require('../../filter/FilterScreen');
-
-import { createSelector } from 'reselect';
-
-const data = createSelector(
-    (store) => store.sessions,
-    (store) => store.filter
-    // (sessions, filter) => FilterSessions.byTopics(sessions, filter),
-);
-
+import * as Actions from '../../state/actions/navigation';
+import { Views, Components, Assets } from '../../global/globalIncludes';
 
 class GeneralScheduleView extends React.Component {
 
-    // constructor(props) {
-    //     super(props);
-    //
-    //     // this.renderEmptyList = this.renderEmptyList.bind(this);
-    //     // this.switchDay = this.switchDay.bind(this);
-    //     // this.openFilterScreen = this.openFilterScreen.bind(this);
-    //     // this.renderNavigationView = this.renderNavigationView.bind(this);
-    // }
+    static propTypes = {
+        title: React.PropTypes.string,
+        agenda: React.PropTypes.array,
+        navigator: React.PropTypes.instanceOf(Navigator),
+        switchDay: React.PropTypes.func
+    };
+
+    constructor(props) {
+        super(props);
+        this.renderEmptyList = this.renderEmptyList.bind(this);
+        this.switchDay = this.switchDay.bind(this);
+    }
 
     render() {
         const filterItem = {
@@ -38,8 +31,6 @@ class GeneralScheduleView extends React.Component {
         ? <Components.FilterHeader />
         : null;
 
-        // const filterHeader = <Components.FilterHeader />;
-        // {this.props.day - 1}
         const content = (
             <Components.ListContainer
                 title={this.props.title}
@@ -53,66 +44,48 @@ class GeneralScheduleView extends React.Component {
                 <Views.ScheduleListView
                     title="Day 1"
                     day={1}
-                    sessions={[{id: 'rJ2FMIDV', title: 'Make a better event app', location: 'Herbst', startTime: 1465341707058, endTime: 1465341909058 }]}
+                    sessions={this.props.agenda}
+                    renderEmptyList={this.renderEmptyList}
+                    navigator={this.props.navigator}
+                />
+                <Views.ScheduleListView
+                    title="Day 2"
+                    day={2}
+                    sessions={this.props.agenda}
                     renderEmptyList={this.renderEmptyList}
                     navigator={this.props.navigator}
                 />
             </Components.ListContainer>
         );
 
-        if (Platform.OS === 'ios') {
-            return content;
-        }
-        return (
-            <Components.DrawerLayout
-            ref={(drawer) => this._drawer = drawer}
-            drawerWidth={300}
-            drawerPosition="right"
-            renderNavigationView={this.renderNavigationView}>
-            {content}
-            </Components.DrawerLayout>
-        );
+        return content;
     }
-
-    // renderNavigationView() {
-    //     return <FilterScreen onClose={() => this._drawer && this._drawer.closeDrawer()} />;
-    // }
 
     renderEmptyList(day: number) {
         return (
-            <Views.EmptySchedule
+            <Views.EmptyScheduleView
                 title={`No sessions on day ${day} match the filter`}
                 text="Check the schedule for the other day or remove the filter."
             />
         );
     }
 
-    // openFilterScreen() {
-    //     if (Platform.OS === 'ios') {
-    //         this.props.navigator.push({ filter: 123 });
-    //     } else {
-    //         this._drawer && this._drawer.openDrawer();
-    //     }
-    // }
-    //
-    // switchDay(page) {
-    //     this.props.switchDay(page + 1);
-    // }
+    switchDay(page) {
+        this.props.switchDay(page + 1);
+    }
 }
-//
-// function select(store) {
-//     return {
-//         day: store.navigation.day,
-//         filter: store.filter,
-//         sessions: data(store),
-//     };
-// }
-//
-// function actions(dispatch) {
-//     return {
-//         switchDay: (day) => dispatch(switchDay(day)),
-//     };
-// }
 
-module.exports = GeneralScheduleView;
-// module.exports = connect(select, actions)(GeneralScheduleView);
+function select(store) {
+    return {
+        day: store.navigation.day,
+        agenda: store.data.agenda.data.agenda
+    };
+}
+
+function actions(dispatch) {
+    return {
+        switchDay: (day) => dispatch(Actions.switchDay(day))
+    };
+}
+
+module.exports = connect(select, actions)(GeneralScheduleView);

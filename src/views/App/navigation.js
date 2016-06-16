@@ -21,10 +21,10 @@ class NavigationShell extends React.Component {
                     const loadingText = '';
                     return <Defaults.LoadingView loadingText={loadingText} />;
                 }
-                const NavigationView = Views[this.props.navigation.data.config.type];
+                const NavigationView = Views[this.props.navigation.config.type];
                 //  If the component is missing, fallback to default with message
                 if (!NavigationView) {
-                    const warningText = `View ${this.props.navigation.data.config.type} not found`;
+                    const warningText = `View ${this.props.navigation.config.type} not found`;
                     return <Defaults.WarningView warningText={warningText} />;
                 }
                 return <NavigationView />;
@@ -36,5 +36,5 @@ class NavigationShell extends React.Component {
 
 module.exports = connect((store) => ({
     loading: store.data.loading,
-    navigation: store.data.navigation
+    navigation: store.data.navigation.data
 }))(NavigationShell);

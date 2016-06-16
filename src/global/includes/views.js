@@ -5,10 +5,10 @@
  */
 
 /* eslint-disable global-require */
+/* eslint-disable import/no-unresolved */
 
 const views = {
     get card() { return require('../../views/Card'); },
-    get ScrollableTabView() { return require('../../views/ScrollableTabView'); },
 
     // F8
     get NavigatorView() { return require('../../views/NavigatorView'); },

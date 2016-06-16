@@ -4,8 +4,6 @@
 
 /* eslint-disable global-require */
 
-
-
 const components = {
     get FacebookTabBar() { return require('../../components/FacebookTabBar'); },
 
@@ -15,11 +13,14 @@ const components = {
     get DrawerLayout() { return require('../../components/DrawerLayout'); },
     get Text() { return require('../../components/Text'); },
     get SessionSectionHeader() { return require('../../components/SessionSectionHeader'); },
+    get Section() { return require('../../components/Section'); },
     get ViewPager() { return require('../../components/ViewPager'); },
+    get Circle() { return require('../../components/Circle'); },
     get Header() { return require('../../components/Header'); },
     get Touchable() { return require('../../components/Touchable'); },
     get SessionCell() { return require('../../components/SessionCell'); },
     get SegmentedControl() { return require('../../components/SegmentedControl'); },
+    get Segment() { return require('../../components/Segment'); },
     get ParallaxBackground() { return require('../../components/ParallaxBackground'); },
     get Carousel() { return require('../../components/Carousel'); },
     get SessionDetails() { return require('../../components/SessionDetails'); },

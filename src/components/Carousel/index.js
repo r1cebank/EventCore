@@ -1,12 +1,18 @@
 import React from 'react';
 
-import { Views, Components, Colors, Icons, Defaults, Utils, Assets } from '../../global/globalIncludes';
+import { Components } from '../../global/globalIncludes';
 import Styles from './resources/styles';
 
 class Carousel extends React.Component {
+    static propTypes = {
+        count: React.PropTypes.number,
+        selectedIndex: React.PropTypes.number,
+        renderCard: React.PropTypes.func
+    };
+
     render() {
         let cards = [];
-        const {count, selectedIndex, renderCard} = this.props;
+        const { count, selectedIndex, renderCard } = this.props;
 
         for (let i = 0; i < count; i++) {
             let content = null;
@@ -16,7 +22,7 @@ class Carousel extends React.Component {
             cards.push(content);
         }
         return (
-            <Components.ViewPager style={Styles.carousel} {...this.props} bounces={true}>
+            <Components.ViewPager style={Styles.carousel} {...this.props} >
                 {cards}
             </Components.ViewPager>
         );

@@ -1,72 +1,45 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-return-assign */
+import React from 'react';
+import ReactNative, {
+    Animated,
+    NativeModules,
+    Dimensions,
+    View,
+    Platform
+} from 'react-native';
 
-import ReactNative, { Animated, NativeModules, Dimensions, View, Platform, ActivityIndicatorIOS, ProgressBarAndroid } from 'react-native';
-import { Views, Components, Colors, Icons, Defaults, Utils, Assets } from '../../global/globalIncludes';
+import { Components, Assets } from '../../global/globalIncludes';
+import Styles from './resources/styles';
 
 const { Text } = Components.Text;
 
-// var ParallaxBackground = require('ParallaxBackground');
-
-import React from 'react';
-
-import Styles from './resources/styles';
-
 const EMPTY_CELL_HEIGHT = Dimensions.get('window').height > 600 ? 200 : 150;
 
-const ActivityIndicator = Platform.OS === 'ios'
-? ActivityIndicatorIOS
-: ProgressBarAndroid;
-
-// var Relay = require('react-relay');
-// var RelayRenderer = require('react-relay/lib/RelayRenderer.js');
-
-// class MainRoute extends Relay.Route {}
-// MainRoute.queries = { viewer: () => Relay.QL`query { viewer }` };
-// MainRoute.routeName = 'MainRoute';
-
-// class RelayLoading extends React.Component {
-//     render() {
-//         const child = React.Children.only(this.props.children);
-//         if (!child.type.getFragmentNames) {
-//             return child;
-//         }
-//         return (
-//             <RelayRenderer
-//             Container={child.type}
-//             queryConfig={new MainRoute()}
-//             environment={Relay.Store}
-//             render={({props}) => this.renderChild(child, props)}
-//             />
-//         );
-//     }
-//
-//     renderChild(child, props) {
-//         if (!props) {
-//             return (
-//                 <View style={{height: 400}}>
-//                 {child.props.renderHeader && child.props.renderHeader()}
-//                 <View style={{flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center'}}>
-//                 <ActivityIndicator />
-//                 </View>
-//                 </View>
-//             );
-//         }
-//         return React.cloneElement(child, {...this.props, ...props});
-//     }
-// }
-
 class ListContainer extends React.Component {
-    props: Props;
-    _refs: Array<any>;
-    _pinned: any;
 
-    constructor(props: Props) {
+    static propTypes = {
+        selectedSegment: React.PropTypes.number,
+        leftItem: React.PropTypes.object,
+        children: React.PropTypes.array,
+        stickyHeader: React.PropTypes.element,
+        selectedSectionColor: React.PropTypes.string,
+        backgroundImage: React.PropTypes.number,
+        backgroundColor: React.PropTypes.string,
+        rightItem: React.PropTypes.object,
+        extraItems: React.PropTypes.object,
+        title: React.PropTypes.string,
+        parallaxContent: React.PropTypes.element,
+        onSegmentChange: React.PropTypes.func
+    };
+    constructor(props) {
         super(props);
 
         this.state = ({
             idx: this.props.selectedSegment || 0,
             anim: new Animated.Value(0),
-            stickyHeaderHeight: 0,
-        }: State);
+            stickyHeaderHeight: 0
+        });
 
         this.renderFakeHeader = this.renderFakeHeader.bind(this);
         this.handleStickyHeaderLayout = this.handleStickyHeaderLayout.bind(this);
@@ -76,7 +49,7 @@ class ListContainer extends React.Component {
     }
 
     render() {
-        var leftItem = this.props.leftItem;
+        let leftItem = this.props.leftItem;
         if (!leftItem && Platform.OS === 'android') {
             leftItem = {
                 title: 'Menu',
@@ -96,14 +69,14 @@ class ListContainer extends React.Component {
                 style: Styles.listView,
                 showsVerticalScrollIndicator: false,
                 scrollEventThrottle: 16,
-                contentInset: {bottom: 69, top: 0}, // TODO: auto calculate this
+                contentInset: { bottom: 69, top: 0 }, // TODO: auto calculate this
                 automaticallyAdjustContentInsets: false,
                 renderHeader: this.renderFakeHeader,
                 scrollsToTop: idx === this.state.idx
             });
         });
 
-        let {stickyHeader} = this.props;
+        let { stickyHeader } = this.props;
         if (segments.length > 1) {
             stickyHeader = (
                 <View>
@@ -127,7 +100,9 @@ class ListContainer extends React.Component {
                 <View style={Styles.headerWrapper}>
                     <Components.ParallaxBackground
                     minHeight={this.state.stickyHeaderHeight + Components.Header.height}
-                    maxHeight={EMPTY_CELL_HEIGHT + this.state.stickyHeaderHeight + Components.Header.height}
+                    maxHeight={
+                        EMPTY_CELL_HEIGHT + this.state.stickyHeaderHeight + Components.Header.height
+                    }
                     offset={this.state.anim}
                     backgroundImage={this.props.backgroundImage}
                     backgroundShift={backgroundShift}
@@ -172,9 +147,9 @@ class ListContainer extends React.Component {
         if (Platform.OS === 'android') {
             return null;
         }
-        var transform;
+        let transform;
         if (!this.props.parallaxContent) {
-            var distance = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
+            const distance = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
             transform = {
                 opacity: this.state.anim.interpolate({
                     inputRange: [distance - 20, distance],
@@ -202,7 +177,9 @@ class ListContainer extends React.Component {
         }
         this._refs.forEach((ref, ii) => {
             if (ii !== idx && ref) {
-                ref.scrollTo && ref.scrollTo({y, animated: false});
+                if (ref.scrollTo) {
+                    ref.scrollTo({ y, animated: false });
+                }
             }
         });
 
@@ -212,101 +189,102 @@ class ListContainer extends React.Component {
         if (Platform.OS === 'ios') {
             const height = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
             return (
-                <View style={{height}} />
+                <View style={{ height }} />
             );
         }
+        return undefined;
     }
 
-    renderFixedStickyHeader(stickyHeader: ?ReactElement) {
+    renderFixedStickyHeader(stickyHeader) {
         return Platform.OS === 'ios'
-        ? <View style={{height: this.state.stickyHeaderHeight}} />
+        ? <View style={{ height: this.state.stickyHeaderHeight }} />
         : stickyHeader;
     }
 
-    renderFloatingStickyHeader(stickyHeader: ?ReactElement) {
+    renderFloatingStickyHeader(stickyHeader) {
+        const opacity = this.state.stickyHeaderHeight === 0 ? 0 : 1;
+        let transform;
         if (!stickyHeader || Platform.OS !== 'ios') {
-            return;
+            return null;
         }
-        var opacity = this.state.stickyHeaderHeight === 0 ? 0 : 1;
-        var transform;
 
         // If native pinning is not available, fallback to Animated
         if (!NativeModules.F8Scrolling) {
-            var distance = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
-            var translateY = 0; this.state.anim.interpolate({
+            const distance = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
+            const translateY = 0;
+            this.state.anim.interpolate({
                 inputRange: [0, distance],
                 outputRange: [distance, 0],
-                extrapolateRight: 'clamp',
+                extrapolateRight: 'clamp'
             });
-            transform = [{translateY}];
+            transform = [{ translateY }];
         }
 
         return (
             <Animated.View
                 ref={(ref) => this._pinned = ref}
                 onLayout={this.handleStickyHeaderLayout}
-                style={[Styles.stickyHeader, {opacity}, {transform}]}>
+                style={[Styles.stickyHeader, { opacity }, { transform }]}>
                 {stickyHeader}
             </Animated.View>
         );
     }
 
-    handleStickyHeaderLayout({nativeEvent: { layout, target }}: any) {
-        this.setState({stickyHeaderHeight: layout.height});
+    handleStickyHeaderLayout({ nativeEvent: { layout } }) {
+        this.setState({ stickyHeaderHeight: layout.height });
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps) {
         if (typeof nextProps.selectedSegment === 'number' &&
         nextProps.selectedSegment !== this.state.idx) {
-            this.setState({idx: nextProps.selectedSegment});
+            this.setState({ idx: nextProps.selectedSegment });
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
+        const distance = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
         if (!NativeModules.F8Scrolling) {
             return;
         }
 
         if (this.state.idx !== prevState.idx ||
             this.state.stickyHeaderHeight !== prevState.stickyHeaderHeight) {
-                var distance = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
-
-                if (this._refs[prevState.idx] && this._refs[prevState.idx].getScrollResponder) {
-                    const oldScrollViewTag = ReactNative.findNodeHandle(
-                        this._refs[prevState.idx].getScrollResponder()
-                    );
-                    NativeModules.F8Scrolling.unpin(oldScrollViewTag);
-                }
-
-                if (this._refs[this.state.idx] && this._refs[this.state.idx].getScrollResponder) {
-                    const newScrollViewTag = ReactNative.findNodeHandle(
-                        this._refs[this.state.idx].getScrollResponder()
-                    );
-                    const pinnedViewTag = ReactNative.findNodeHandle(this._pinned);
-                    NativeModules.F8Scrolling.pin(newScrollViewTag, pinnedViewTag, distance);
-                }
+            if (this._refs[prevState.idx] && this._refs[prevState.idx].getScrollResponder) {
+                const oldScrollViewTag = ReactNative.findNodeHandle(
+                    this._refs[prevState.idx].getScrollResponder()
+                );
+                NativeModules.F8Scrolling.unpin(oldScrollViewTag);
             }
-        }
 
-        handleSelectSegment(idx: number) {
-            if (this.state.idx !== idx) {
-                const {onSegmentChange} = this.props;
-                this.setState({idx}, () => onSegmentChange && onSegmentChange(idx));
+            if (this._refs[this.state.idx] && this._refs[this.state.idx].getScrollResponder) {
+                const newScrollViewTag = ReactNative.findNodeHandle(
+                    this._refs[this.state.idx].getScrollResponder()
+                );
+                const pinnedViewTag = ReactNative.findNodeHandle(this._pinned);
+                NativeModules.F8Scrolling.pin(newScrollViewTag, pinnedViewTag, distance);
             }
-        }
-
-        handleShowMenu() {
-            this.context.openDrawer();
         }
     }
 
-    ListContainer.defaultProps = {
-        selectedSectionColor: 'white',
-    };
+    handleSelectSegment(idx: number) {
+        if (this.state.idx !== idx) {
+            const { onSegmentChange } = this.props;
+            this.setState({ idx }, () => onSegmentChange && onSegmentChange(idx));
+        }
+    }
 
-    ListContainer.contextTypes = {
-        openDrawer: React.PropTypes.func,
-        hasUnreadNotifications: React.PropTypes.number,
-    };
+    handleShowMenu() {
+        this.context.openDrawer();
+    }
+}
 
-    module.exports = ListContainer;
+ListContainer.defaultProps = {
+    selectedSectionColor: 'white'
+};
+
+ListContainer.contextTypes = {
+    openDrawer: React.PropTypes.func,
+    hasUnreadNotifications: React.PropTypes.number
+};
+
+module.exports = ListContainer;

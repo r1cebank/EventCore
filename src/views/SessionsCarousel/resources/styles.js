@@ -1,53 +1,53 @@
-import { Utils, Components } from '../../../global/globalIncludes';
+import { Utils } from '../../../global/globalIncludes';
 
 const styles = Utils.F8StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1
     },
     header: {
         android: {
-            backgroundColor: '#5597B8',
-        },
+            backgroundColor: '#5597B8'
+        }
     },
     headerContent: {
         android: {
             flex: 1,
             alignItems: 'flex-start',
-            justifyContent: 'center',
+            justifyContent: 'center'
         },
         ios: {
             height: 65,
             alignItems: 'center',
-            justifyContent: 'center',
-        },
+            justifyContent: 'center'
+        }
     },
     title: {
         color: 'white',
         fontSize: 12,
         ios: {
-            textAlign: 'center',
-        },
+            textAlign: 'center'
+        }
     },
     day: {
         ios: {
-            fontWeight: 'bold',
+            fontWeight: 'bold'
         },
         android: {
-            fontSize: 9,
-        },
+            fontSize: 9
+        }
     },
     time: {
         android: {
             fontWeight: 'bold',
-            fontSize: 17,
+            fontSize: 17
         }
     },
     card: {
         ios: {
             borderRadius: 2,
-            marginHorizontal: 3,
-        },
-    },
+            marginHorizontal: 3
+        }
+    }
 });
 
 export default styles;

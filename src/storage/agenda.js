@@ -1,5 +1,5 @@
 /*
-*  This file handles the storage of navigation settings, it also include a way to
+*  This file handles the storage of agendas, it also include a way to
 *  trigger update
 */
 /* eslint-disable quote-props */
@@ -9,7 +9,6 @@ import SimpleStore from 'react-native-simple-store';
 // Global Actions
 import * as DataActions from '../state/actions/data';
 import * as UtilActions from '../state/actions/util';
-import * as NavActions from '../state/actions/navigation';
 
 // Global Includes
 import { Store } from '../global/globalIncludes';
@@ -20,13 +19,13 @@ import { Store } from '../global/globalIncludes';
 
 const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });
 
-const Navigation = {
+const Agenda = {
     fetch: () => {
-        SimpleStore.get('navigation').then((navData) => {
+        SimpleStore.get('agenda').then((agendaData) => {
             // Dispatch fetched action
-            if (navData) {
-                Store.appStore.dispatch(DataActions.navigationFetched(navData));
-                Store.appStore.dispatch(DataActions.updateNavigation());
+            if (agendaData) {
+                Store.appStore.dispatch(DataActions.agendaFetched(agendaData));
+                Store.appStore.dispatch(DataActions.updateAgenda());
             } else {
                 // Init the data storage, will call for non patch endpoint
                 // https://event.com/update/navigation/raw?appId=XXXXXXX
@@ -36,17 +35,13 @@ const Navigation = {
                 //         appId: Env.appId
                 //     }
                 // })
-                fetch('https://www.dropbox.com/s/k7y933t3wr1jyu0/navigation.json?raw=1', {
+                fetch('https://www.dropbox.com/s/0m9mx6yvp4zz1f4/agenda.json?raw=1', {
                     method: 'GET'
                 })
                 .then((response) => response.json())
-                .then((requestedNavData) => {
-                    SimpleStore.save('navigation', requestedNavData).then(() => {
-                        Store.appStore.dispatch(
-                            NavActions.switchNavigation(
-                                requestedNavData.data.config.defaults.initialPage)
-                        );
-                        Store.appStore.dispatch(DataActions.navigationFetched(requestedNavData));
+                .then((requestedAgendaData) => {
+                    SimpleStore.save('agenda', requestedAgendaData).then(() => {
+                        Store.appStore.dispatch(DataActions.agendaFetched(requestedAgendaData));
                     }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
                 })
                 .catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
@@ -57,7 +52,7 @@ const Navigation = {
         // Call endpoint for patches
         // https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1
         // Endpoint should be like: https://event.com/update/navigation/patches?appId=XXXXXX?currentVersion=XX
-        SimpleStore.get('navigation').then((navData) => {
+        SimpleStore.get('agenda').then((agendaData) => {
             fetch('https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1', {
                 method: 'GET'
             })
@@ -72,10 +67,10 @@ const Navigation = {
             .then((patches) => {
                 if (patches.length) {
                     for (const patch of patches) {
-                        navData = DiffPatcher.patch(navData, patch);
+                        agendaData = DiffPatcher.patch(agendaData, patch);
                     }
-                    SimpleStore.save('navigation', navData).then(() => {
-                        Store.appStore.dispatch(DataActions.navigationFetched(navData));
+                    SimpleStore.save('agenda', agendaData).then(() => {
+                        Store.appStore.dispatch(DataActions.agendaFetched(agendaData));
                     }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
                 }
             })
@@ -84,4 +79,4 @@ const Navigation = {
     }
 };
 
-module.exports = Navigation;
+module.exports = Agenda;
