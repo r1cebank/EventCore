@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 
 import {
@@ -57,14 +58,17 @@ class FacebookTabBar extends React.Component {
                 <View>
                 <View style={[Styles.tabs, this.props.style]}>
                 {this.props.tabs.map((tab, i) =>
-                        <TouchableOpacity key={tab} onPress={() => this.props.goToPage(i)} style={Styles.tab}>
-                            <Icon
-                              name={tab}
-                              size={30}
-                              color={this.props.activeTab === i ? 'rgb(59,89,152)' : 'rgb(204,204,204)'}
-                              ref={(icon) => { this.tabIcons[i] = icon; }}
-                            />
-                        </TouchableOpacity>
+                    <TouchableOpacity
+                    key={tab}
+                    onPress={() => this.props.goToPage(i)}
+                    style={Styles.tab}>
+                        <Icon
+                          name={tab}
+                          size={30}
+                          color={this.props.activeTab === i ? 'rgb(59,89,152)' : 'rgb(204,204,204)'}
+                          ref={(icon) => { this.tabIcons[i] = icon; }}
+                        />
+                    </TouchableOpacity>
                 )}
                 </View>
                 <Animated.View style={[Styles.tabUnderlineStyle, { width: tabWidth }, { left }]} />
