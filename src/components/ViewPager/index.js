@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 import React from 'react';
 
 import { View, ScrollView, ViewPagerAndroid, Platform } from 'react-native';
@@ -6,6 +7,15 @@ import Styles from './resources/styles';
 
 
 class ViewPager extends React.Component {
+
+    static propTypes = {
+        selectedIndex: React.PropTypes.number,
+        bounces: React.PropTypes.bool,
+        style: View.propTypes.style,
+        children: React.PropTypes.arrayOf(React.PropTypes.element),
+        count: React.PropTypes.number,
+        onSelectedIndexChange: React.PropTypes.func
+    };
 
     constructor(props) {
         super(props);
@@ -23,9 +33,8 @@ class ViewPager extends React.Component {
     render() {
         if (Platform.OS === 'ios') {
             return this.renderIOS();
-        } else {
-            return this.renderAndroid();
         }
+        return this.renderAndroid();
     }
 
     renderIOS() {
@@ -34,7 +43,7 @@ class ViewPager extends React.Component {
                 ref="scrollview"
                 contentOffset={{
                     x: this.state.width * this.state.initialSelectedIndex,
-                    y: 0,
+                    y: 0
                 }}
                 style={[Styles.scrollview, this.props.style]}
                 horizontal={true}
@@ -42,7 +51,7 @@ class ViewPager extends React.Component {
                 bounces={!!this.props.bounces}
                 scrollsToTop={false}
                 onScroll={this.handleHorizontalScroll}
-                scrollEventThrottle={100}
+                scrollEventThrottle={10}
                 removeClippedSubviews={true}
                 automaticallyAdjustContentInsets={false}
                 directionalLockEnabled={true}
@@ -69,37 +78,37 @@ class ViewPager extends React.Component {
     adjustCardSize(e: any) {
         this.setState({
             width: e.nativeEvent.layout.width,
-            height: e.nativeEvent.layout.height,
+            height: e.nativeEvent.layout.height
         });
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.selectedIndex !== this.state.selectedIndex) {
             if (Platform.OS === 'ios') {
                 this.refs.scrollview.scrollTo({
                     x: nextProps.selectedIndex * this.state.width,
-                    animated: true,
+                    animated: true
                 });
-                this.setState({scrollingTo: nextProps.selectedIndex});
+                this.setState({ scrollingTo: nextProps.selectedIndex });
             } else {
                 this.refs.scrollview.setPage(nextProps.selectedIndex);
-                this.setState({selectedIndex: nextProps.selectedIndex});
+                this.setState({ selectedIndex: nextProps.selectedIndex });
             }
         }
     }
 
-    renderContent(): Array<ReactElement> {
-        var {width, height} = this.state;
-        var style = Platform.OS === 'ios' && Styles.card;
+    renderContent() {
+        const { width, height } = this.state;
+        const style = Platform.OS === 'ios' && Styles.card;
         return React.Children.map(this.props.children, (child, i) => (
-            <View style={[style, {width, height}]} key={'r_' + i}>
+            <View style={[style, { width, height }]} key={`r_${i}`}>
             {child}
             </View>
         ));
     }
 
-    handleHorizontalScroll(e: any) {
-        var selectedIndex = e.nativeEvent.position;
+    handleHorizontalScroll(e) {
+        let selectedIndex = e.nativeEvent.position;
         if (selectedIndex === undefined) {
             selectedIndex = Math.round(
                 e.nativeEvent.contentOffset.x / this.state.width,
@@ -112,9 +121,11 @@ class ViewPager extends React.Component {
             return;
         }
         if (this.props.selectedIndex !== selectedIndex || this.state.scrollingTo !== null) {
-            this.setState({selectedIndex, scrollingTo: null});
-            const {onSelectedIndexChange} = this.props;
-            onSelectedIndexChange && onSelectedIndexChange(selectedIndex);
+            this.setState({ selectedIndex, scrollingTo: null });
+            const { onSelectedIndexChange } = this.props;
+            if (onSelectedIndexChange) {
+                onSelectedIndexChange(selectedIndex);
+            }
         }
     }
 }

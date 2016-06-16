@@ -14,6 +14,14 @@ class NavigatorView extends React.Component {
 
     renderScene(route, navigator) {
         // TODO: Later will add more stuff
+        if (route.allSessions) {
+            return (
+                <Views.SessionsCarousel
+                    {...route}
+                    navigator={navigator}
+                />
+            );
+        }
         return <Views.TabView navigator={navigator} />;
     }
 
@@ -35,7 +43,7 @@ class NavigatorView extends React.Component {
                         }
                         // TODO: Add more support for routeStack
                         default:
-                            return Navigator.SceneConfigs.PushFromRight;
+                            return Navigator.SceneConfigs.FloatFromBottom;
                     }
                 }}
                 initialRoute={{}}

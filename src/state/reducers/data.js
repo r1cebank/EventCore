@@ -28,6 +28,26 @@ function reducer(state = InitialAppState, action) {
                 ...state
             };
         }
+        case ActionType.FETCH_AGENDA: {
+            // TODO: Adding real configs
+            Storage.Agenda.fetch();
+            return {
+                ...state
+            };
+        }
+        case ActionType.AGENDA_FETCHED: {
+            return {
+                ...state,
+                loading: false,
+                agenda: action.data
+            };
+        }
+        case ActionType.UPDATE_AGENDA: {
+            Storage.Agenda.update();
+            return {
+                ...state
+            };
+        }
         default:
             return state;
     }

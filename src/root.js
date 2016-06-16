@@ -23,6 +23,7 @@ class Root extends React.Component {
         // 1) Populate settings
         // 2) Populate navigation
         Store.appStore.dispatch(Actions.fetchNavigation());
+        Store.appStore.dispatch(Actions.fetchAgenda());
     }
     render() {
         return (

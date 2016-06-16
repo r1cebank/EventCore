@@ -5,10 +5,10 @@
  */
 
 /* eslint-disable global-require */
+/* eslint-disable import/no-unresolved */
 
 const views = {
     get card() { return require('../../views/Card'); },
-    get ScrollableTabView() { return require('../../views/ScrollableTabView'); },
 
     // F8
     get NavigatorView() { return require('../../views/NavigatorView'); },
@@ -16,7 +16,8 @@ const views = {
     get GeneralScheduleView() { return require('../../views/GeneralScheduleView'); },
     get EmptyScheduleView() { return require('../../views/EmptyScheduleView'); },
     get ScheduleListView() { return require('../../views/ScheduleListView'); },
-    get PureListView() { return require('../../views/PureListView'); }
+    get PureListView() { return require('../../views/PureListView'); },
+    get SessionsCarousel() { return require('../../views/SessionsCarousel'); }
 };
 
 module.exports = views;

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import { StyleSheet, Platform } from 'react-native';
 
 export function create(styles: Object): {[name: string]: number} {
