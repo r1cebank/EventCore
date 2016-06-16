@@ -17,7 +17,7 @@ class FacebookTabBar extends React.Component {
         activeTab: React.PropTypes.number,
         tabs: React.PropTypes.array,
         scrollValue: React.PropTypes.object,
-        style: React.PropTypes.object,
+        style: View.propTypes.style,
         containerWidth: React.PropTypes.number
     };
 

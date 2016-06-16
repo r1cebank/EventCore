@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 import Styles from './resources/styles';
 import { Components, Assets, Utils, Colors } from '../../global/globalIncludes';
@@ -10,21 +10,29 @@ const formatTime = Utils.FormatTime;
 const formatDuration = Utils.FormatDuration;
 
 class SessionCell extends React.Component {
+    static propTypes = {
+        showTick: React.PropTypes.bool,
+        session: React.PropTypes.object,
+        showStartEndTime: React.PropTypes.bool,
+        style: View.propTypes.style,
+        onPress: React.PropTypes.func
+    };
+
     render() {
-        var session = this.props.session;
-        var tick;
+        const session = this.props.session;
+        let tick;
         if (this.props.showTick) {
             tick = <Image style={Styles.added} source={Assets.AddedCell} />;
         }
-        var time;
+        let time;
         if (this.props.showStartEndTime) {
-            time = formatTime(session.startTime) + ' - ' + formatTime(session.endTime);
+            time = `${formatTime(session.startTime)} - ${formatTime(session.endTime)}`;
         } else {
             time = formatDuration(session.startTime, session.endTime);
         }
-        var location = session.location && session.location.toUpperCase();
-        var locationColor = Colors.colorForKey(location);
-        var cell = (
+        const location = session.location && session.location.toUpperCase();
+        const locationColor = Colors.colorForKey(location);
+        let cell = (
             <View style={[Styles.cell, this.props.style]}>
                 <View style={Styles.titleSection}>
                     <Text numberOfLines={2} style={Styles.titleText}>
@@ -32,7 +40,7 @@ class SessionCell extends React.Component {
                     </Text>
                 </View>
                 <Text numberOfLines={1} style={Styles.duration}>
-                    <Text style={[Styles.locationText, {color: locationColor}]}>
+                    <Text style={[Styles.locationText, { color: locationColor }]}>
                         {location}
                     </Text>
                     {location && ' - '}
@@ -43,10 +51,11 @@ class SessionCell extends React.Component {
         );
 
         if (this.props.onPress) {
-            cell =
-            <Components.Touchable onPress={this.props.onPress}>
-            {cell}
-            </Components.Touchable>;
+            cell = (
+                <Components.Touchable onPress={this.props.onPress}>
+                {cell}
+                </Components.Touchable>
+            );
         }
 
         return cell;

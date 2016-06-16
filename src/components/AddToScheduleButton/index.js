@@ -14,7 +14,7 @@ class AddToScheduleButton extends React.Component {
     static propTypes = {
         isAdded: React.PropTypes.bool,
         onPress: React.PropTypes.func,
-        style: React.PropTypes.number,
+        style: View.propTypes.style,
         addedImageSource: React.PropTypes.any
     };
     constructor(props) {

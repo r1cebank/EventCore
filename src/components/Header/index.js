@@ -20,7 +20,7 @@ class F8HeaderAndroid extends React.Component {
         layout: React.PropTypes.string,
         foreground: React.PropTypes.string,
         children: React.PropTypes.element,
-        style: React.PropTypes.number
+        style: View.propTypes.style
     };
 
     render() {
@@ -89,7 +89,7 @@ class F8HeaderIOS extends React.Component {
         leftItem: React.PropTypes.object,
         rightItem: React.PropTypes.object,
         title: React.PropTypes.string,
-        style: React.PropTypes.number,
+        style: View.propTypes.style,
         foreground: React.PropTypes.string,
         children: React.PropTypes.element
     };
