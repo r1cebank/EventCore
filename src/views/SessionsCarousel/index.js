@@ -27,10 +27,10 @@ class SessionsCarusel extends React.Component {
         }
 
         // TODO: Add test
-        for (const sectionID in allSessions) {
+        for (const sectionID of Object.keys(allSessions)) {
             const sectionLength = Object.keys(allSessions[sectionID]).length;
             let rowIndex = 0;
-            for (const sessionID in allSessions[sectionID]) {
+            for (const sessionID of Object.keys(allSessions[sectionID])) {
                 const session = allSessions[sectionID][sessionID];
                 flatSessionsList.push(session);
                 contexts.push({
@@ -131,9 +131,8 @@ class SessionsCarusel extends React.Component {
     }
 
     handleIndexChange(selectedIndex) {
-        selectedIndex = selectedIndex + 0;
         // this.track(selectedIndex);
-        // this.setState({ selectedIndex });
+        this.setState({ selectedIndex });
     }
 
 }
