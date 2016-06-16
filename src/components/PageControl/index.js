@@ -1,6 +1,7 @@
-/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import { View } from 'react-native';
+
+import { Components } from '../../global/globalIncludes';
 
 import Styles from './resources/styles';
 
@@ -15,26 +16,15 @@ class F8PageControl extends React.Component {
         const images = [];
         for (let i = 0; i < this.props.count; i++) {
             let isSelected = this.props.selectedIndex === i;
-            images.push(<Circle key={i} isSelected={isSelected} />);
+            images.push(<Components.Circle key={i} isSelected={isSelected} />);
         }
         return (
             <View style={[Styles.container, this.props.style]}>
-            <View style={Styles.innerContainer}>
-            {images}
-            </View>
+                <View style={Styles.innerContainer}>
+                    {images}
+                </View>
             </View>
         );
-    }
-}
-
-class Circle extends React.Component {
-    static propTypes = {
-        isSelected: React.PropTypes.bool
-    };
-
-    render() {
-        const extraStyle = this.props.isSelected ? Styles.full : Styles.empty;
-        return <View style={[Styles.circle, extraStyle]} />;
     }
 }
 
