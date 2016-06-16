@@ -3,13 +3,13 @@ import { Navigator } from 'react-native';
 import { connect } from 'react-redux';
 
 import * as Actions from '../../state/actions/navigation';
-import { Views, Components, Assets } from '../../global/globalIncludes';
+import { Views, Components, Assets, Utils } from '../../global/globalIncludes';
 
 class GeneralScheduleView extends React.Component {
 
     static propTypes = {
         title: React.PropTypes.string,
-        agenda: React.PropTypes.array,
+        agenda: React.PropTypes.object,
         navigator: React.PropTypes.instanceOf(Navigator),
         switchDay: React.PropTypes.func
     };
@@ -41,20 +41,16 @@ class GeneralScheduleView extends React.Component {
                 selectedSectionColor="#51CDDA"
                 stickyHeader={filterHeader}
                 rightItem={filterItem}>
-                <Views.ScheduleListView
-                    title="Day 1"
-                    day={1}
-                    sessions={this.props.agenda}
-                    renderEmptyList={this.renderEmptyList}
-                    navigator={this.props.navigator}
-                />
-                <Views.ScheduleListView
-                    title="Day 2"
-                    day={2}
-                    sessions={this.props.agenda}
-                    renderEmptyList={this.renderEmptyList}
-                    navigator={this.props.navigator}
-                />
+                {this.props.agenda.days.map((day, index) =>
+                    <Views.ScheduleListView
+                        title={day.label}
+                        day={1}
+                        key={index}
+                        sessions={Utils.FilterSessions(this.props.agenda.agenda, day.query)}
+                        renderEmptyList={this.renderEmptyList}
+                        navigator={this.props.navigator}
+                    />
+                )}
             </Components.ListContainer>
         );
 
@@ -78,7 +74,7 @@ class GeneralScheduleView extends React.Component {
 function select(store) {
     return {
         day: store.navigation.day,
-        agenda: store.data.agenda.data.agenda
+        agenda: store.data.agenda.data
     };
 }
 
