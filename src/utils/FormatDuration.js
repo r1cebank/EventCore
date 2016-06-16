@@ -4,7 +4,7 @@ const formatTime = Utils.FormatTime;
 
 function naivePlural(text: string, count: number): string {
     if (count > 1) {
-        return text + 's';
+        return `${text}s`;
     }
     return text;
 }
@@ -12,12 +12,12 @@ function naivePlural(text: string, count: number): string {
 function formatDuration(startTime, endTime): string {
     const startMs = new Date(startTime).getTime();
     const endMs = new Date(endTime).getTime();
-    let ms = endMs - startMs;
+    const ms = endMs - startMs;
     let minutes = ms / 1000 / 60;
-    let hours = Math.floor(minutes / 60);
+    const hours = Math.floor(minutes / 60);
 
     if (hours > 2) {
-        return 'Until ' + formatTime(endMs).toLowerCase();
+        return `Until ${formatTime(endMs).toLowerCase()}`;
     }
 
     let durationText = '';

@@ -15,7 +15,7 @@ import * as NavActions from '../state/actions/navigation';
 import { Store } from '../global/globalIncludes';
 
 // Envrionment Vars
-import Env from '../env/env';
+// import Env from '../env/env';
 
 
 const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });
@@ -42,7 +42,10 @@ const Navigation = {
                 .then((response) => response.json())
                 .then((requestedNavData) => {
                     SimpleStore.save('navigation', requestedNavData).then(() => {
-                        Store.appStore.dispatch(NavActions.switchNavigation(requestedNavData.data.config.defaults.initialPage));
+                        Store.appStore.dispatch(
+                            NavActions.switchNavigation(
+                                requestedNavData.data.config.defaults.initialPage)
+                        );
                         Store.appStore.dispatch(DataActions.navigationFetched(requestedNavData));
                     }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
                 })
