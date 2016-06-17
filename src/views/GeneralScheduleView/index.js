@@ -3,8 +3,7 @@ import { Navigator, Platform } from 'react-native';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 
-import * as Actions from '../../state/actions/navigation';
-import { Views, Components, Assets, Utils } from '../../global/globalIncludes';
+import { Views, Components, Assets, Utils, Actions } from '../../global/globalIncludes';
 
 const data = createSelector(
     (store) => store.data.agenda.data,
@@ -36,7 +35,9 @@ class GeneralScheduleView extends React.Component {
         };
 
         const filterHeader = Object.keys(this.props.selectedFilters).length > 0
-        ? <Components.FilterHeader selectedFilters={this.props.selectedFilters} />
+        ? <Components.FilterHeader
+            selectedFilters={this.props.selectedFilters}
+            onClearFilter={this.props.clearFilters} />
         : null;
 
         const content = (
@@ -97,7 +98,8 @@ function select(store) {
 
 function actions(dispatch) {
     return {
-        switchDay: (day) => dispatch(Actions.switchDay(day))
+        switchDay: (day) => dispatch(Actions.Navigation.switchDay(day)),
+        clearFilters: () => dispatch(Actions.Filter.clearFilters())
     };
 }
 

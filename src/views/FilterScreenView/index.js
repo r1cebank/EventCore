@@ -2,10 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Animated, View, ScrollView } from 'react-native';
 
-import { Components, Colors, Assets } from '../../global/globalIncludes';
-
-// Global Actions
-import * as Actions from '../../state/actions/filter';
+import { Components, Colors, Assets, Actions } from '../../global/globalIncludes';
 
 import Styles from './resources/styles';
 
@@ -113,7 +110,7 @@ class FilterScreen extends React.Component {
     }
 
     applyFilter() {
-        this.props.dispatch(Actions.applyFilters(this.state.selectedFilters));
+        this.props.dispatch(Actions.Filter.applyFilters(this.state.selectedFilters));
         this.close();
     }
 

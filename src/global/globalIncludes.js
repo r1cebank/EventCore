@@ -11,7 +11,8 @@ const globalIncludes = {
     get Colors() { return require('./includes/colors'); },
     get Icons() { return require('./includes/icons'); },
     get Utils() { return require('./includes/utils'); },
-    get Assets() { return require('./includes/assets'); }
+    get Assets() { return require('./includes/assets'); },
+    get Actions() { return require('./includes/actions'); }
 };
 
 module.exports = globalIncludes;

@@ -19,3 +19,4 @@ export const UPDATE_AGENDA = 'UPDATE_AGENDA';
 
 // Filter
 export const APPLY_FILTERS = 'APPLY_FILTERS';
+export const CLEAR_FILTERS = 'CLEAR_FILTERS';

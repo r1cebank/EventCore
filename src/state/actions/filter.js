@@ -10,3 +10,9 @@ export function applyFilters(selectedFilters, filters) {
         selectedFilters
     };
 }
+
+export function clearFilters() {
+    return {
+        type: ActionType.CLEAR_FILTERS
+    };
+}

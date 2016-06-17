@@ -10,6 +10,9 @@ function reducer(state = InitialFilterState, action) {
         case ActionType.APPLY_FILTERS: {
             return action.selectedFilters;
         }
+        case ActionType.CLEAR_FILTERS: {
+            return {};
+        }
         default:
             return state;
     }
