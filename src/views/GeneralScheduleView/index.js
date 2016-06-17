@@ -7,8 +7,20 @@ import { Views, Components, Assets, Utils, Actions } from '../../global/globalIn
 
 const data = createSelector(
     (store) => store.data.agenda.data,
-    // (store) => store.filter,
-    (sessions) => sessions,
+    (store) => store.filters,
+    (sessions, selected) => {
+        let filters = sessions.filters.filter(function(filter) {
+            return selected[filter.label];
+        });
+        let agenda = sessions.agenda;
+        for (const filter of filters) {
+            agenda = Utils.FilterSessions(agenda, filter.query);
+        }
+        return {
+            ...sessions,
+            agenda
+        };
+    }
 );
 
 class GeneralScheduleView extends React.Component {
@@ -53,7 +65,7 @@ class GeneralScheduleView extends React.Component {
                 {this.props.agenda.days.map((day, index) =>
                     <Views.ScheduleListView
                         title={day.label}
-                        day={1}
+                        day={day.label}
                         key={index}
                         sessions={Utils.FilterSessions(this.props.agenda.agenda, day.query)}
                         renderEmptyList={this.renderEmptyList}
@@ -66,10 +78,10 @@ class GeneralScheduleView extends React.Component {
         return content;
     }
 
-    renderEmptyList(day: number) {
+    renderEmptyList(day) {
         return (
             <Views.EmptyScheduleView
-                title={`No sessions on day ${day} match the filter`}
+                title={`No sessions on ${day} match the filter`}
                 text="Check the schedule for the other day or remove the filter."
             />
         );
