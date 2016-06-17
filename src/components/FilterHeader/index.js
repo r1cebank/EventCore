@@ -4,18 +4,14 @@ import { Assets } from '../../global/globalIncludes';
 
 import Styles from './resources/styles';
 
-// TODO: Pull redux connection up
-// const {connect} = require('react-redux');
-// const {clearFilter} = require('../../actions');
-
 class FilterHeader extends React.Component {
     static propTypes = {
-        filter: React.PropTypes.array,
+        selectedFilters: React.PropTypes.object,
         onClearFilter: React.PropTypes.func
     };
     render() {
-        const topics = Object.keys(this.props.filter);
-        if (topics.length === 0) {
+        const filters = Object.keys(this.props.selectedFilters);
+        if (filters.length === 0) {
             return null;
         }
 
@@ -24,7 +20,7 @@ class FilterHeader extends React.Component {
                 <Text style={Styles.text} numberOfLines={1}>
                     {'Filters: '}
                     <Text style={Styles.filters}>
-                        {topics.join(', ')}
+                        {filters.join(', ')}
                     </Text>
                 </Text>
                 <TouchableOpacity
@@ -39,17 +35,4 @@ class FilterHeader extends React.Component {
     }
 }
 
-// function select(store) {
-//     return {
-//         filter: store.filter
-//     };
-// }
-//
-// function actions(dispatch) {
-//     return {
-//         onClearFilter: () => dispatch(clearFilter())
-//     };
-// }
-
 module.exports = FilterHeader;
-// module.exports = connect(select, actions)(FilterHeader);

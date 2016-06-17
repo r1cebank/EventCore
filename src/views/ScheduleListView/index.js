@@ -6,7 +6,7 @@ import { Views, Components, Utils } from '../../global/globalIncludes';
 class ScheduleListView extends React.Component {
     static propTypes = {
         sessions: React.PropTypes.array,
-        day: React.PropTypes.number,
+        day: React.PropTypes.string,
         renderEmptyList: React.PropTypes.func,
         navigator: React.PropTypes.instanceOf(Navigator)
     };

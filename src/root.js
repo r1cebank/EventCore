@@ -11,10 +11,7 @@ import { Provider } from 'react-redux';
 // The root view is definatly the navigation component which define a default view
 import App from './views/App';
 
-import { Store } from './global/globalIncludes';
-
-// Global Actions
-import * as Actions from './state/actions/data';
+import { Store, Actions } from './global/globalIncludes';
 
 // Construct the root element
 class Root extends React.Component {
@@ -22,8 +19,8 @@ class Root extends React.Component {
         // Navigation startup code
         // 1) Populate settings
         // 2) Populate navigation
-        Store.appStore.dispatch(Actions.fetchNavigation());
-        Store.appStore.dispatch(Actions.fetchAgenda());
+        Store.appStore.dispatch(Actions.Data.fetchNavigation());
+        Store.appStore.dispatch(Actions.Data.fetchAgenda());
     }
     render() {
         return (

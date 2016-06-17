@@ -69,7 +69,7 @@ class ListContainer extends React.Component {
                 style: Styles.listView,
                 showsVerticalScrollIndicator: false,
                 scrollEventThrottle: 16,
-                contentInset: { bottom: 69, top: 0 }, // TODO: auto calculate this
+                contentInset: { bottom: 49, top: 0 }, // TODO: auto calculate this
                 automaticallyAdjustContentInsets: false,
                 renderHeader: this.renderFakeHeader,
                 scrollsToTop: idx === this.state.idx

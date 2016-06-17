@@ -1,9 +1,27 @@
 import React from 'react';
-import { Navigator } from 'react-native';
+import { Navigator, Platform } from 'react-native';
+import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 
-import * as Actions from '../../state/actions/navigation';
-import { Views, Components, Assets, Utils } from '../../global/globalIncludes';
+import { Views, Components, Assets, Utils, Actions } from '../../global/globalIncludes';
+
+const data = createSelector(
+    (store) => store.data.agenda.data,
+    (store) => store.filters,
+    (sessions, selected) => {
+        let filters = sessions.filters.filter(function(filter) {
+            return selected[filter.label];
+        });
+        let agenda = sessions.agenda;
+        for (const filter of filters) {
+            agenda = Utils.FilterSessions(agenda, filter.query);
+        }
+        return {
+            ...sessions,
+            agenda
+        };
+    }
+);
 
 class GeneralScheduleView extends React.Component {
 
@@ -17,6 +35,7 @@ class GeneralScheduleView extends React.Component {
     constructor(props) {
         super(props);
         this.renderEmptyList = this.renderEmptyList.bind(this);
+        this.openFilterScreen = this.openFilterScreen.bind(this);
         this.switchDay = this.switchDay.bind(this);
     }
 
@@ -27,8 +46,10 @@ class GeneralScheduleView extends React.Component {
             onPress: this.openFilterScreen
         };
 
-        const filterHeader = Object.keys({}).length > 0
-        ? <Components.FilterHeader />
+        const filterHeader = Object.keys(this.props.selectedFilters).length > 0
+        ? <Components.FilterHeader
+            selectedFilters={this.props.selectedFilters}
+            onClearFilter={this.props.clearFilters} />
         : null;
 
         const content = (
@@ -44,7 +65,7 @@ class GeneralScheduleView extends React.Component {
                 {this.props.agenda.days.map((day, index) =>
                     <Views.ScheduleListView
                         title={day.label}
-                        day={1}
+                        day={day.label}
                         key={index}
                         sessions={Utils.FilterSessions(this.props.agenda.agenda, day.query)}
                         renderEmptyList={this.renderEmptyList}
@@ -57,13 +78,21 @@ class GeneralScheduleView extends React.Component {
         return content;
     }
 
-    renderEmptyList(day: number) {
+    renderEmptyList(day) {
         return (
             <Views.EmptyScheduleView
-                title={`No sessions on day ${day} match the filter`}
+                title={`No sessions on ${day} match the filter`}
                 text="Check the schedule for the other day or remove the filter."
             />
         );
+    }
+
+    openFilterScreen() {
+        if (Platform.OS === 'ios') {
+            this.props.navigator.push({ filter: 123 });
+        } else {
+            // this._drawer && this._drawer.openDrawer();
+        }
     }
 
     switchDay(page) {
@@ -74,13 +103,15 @@ class GeneralScheduleView extends React.Component {
 function select(store) {
     return {
         day: store.navigation.day,
-        agenda: store.data.agenda.data
+        agenda: data(store),
+        selectedFilters: store.filters
     };
 }
 
 function actions(dispatch) {
     return {
-        switchDay: (day) => dispatch(Actions.switchDay(day))
+        switchDay: (day) => dispatch(Actions.Navigation.switchDay(day)),
+        clearFilters: () => dispatch(Actions.Filter.clearFilters())
     };
 }
 

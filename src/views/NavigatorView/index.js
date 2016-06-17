@@ -16,10 +16,15 @@ class NavigatorView extends React.Component {
         // TODO: Later will add more stuff
         if (route.allSessions) {
             return (
-                <Views.SessionsCarousel
+                <Views.SessionsCarouselView
                     {...route}
                     navigator={navigator}
                 />
+            );
+        }
+        if (route.filter) {
+            return (
+                <Views.FilterScreenView navigator={navigator} />
             );
         }
         return <Views.TabView navigator={navigator} />;

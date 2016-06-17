@@ -1,10 +1,7 @@
 import React from 'react';
 import { TabBarIOS, Navigator, StatusBar } from 'react-native';
 
-import { Assets, Views, Colors, Icons, Defaults } from '../../global/globalIncludes';
-
-// Global Actions
-import * as Actions from '../../state/actions/navigation';
+import { Assets, Views, Colors, Icons, Defaults, Actions } from '../../global/globalIncludes';
 
 import { connect } from 'react-redux';
 
@@ -86,7 +83,7 @@ function select(store) {
 
 function actions(dispatch) {
     return {
-        onTabSelect: (tab) => dispatch(Actions.switchNavigation(tab))
+        onTabSelect: (tab) => dispatch(Actions.Navigation.switchNavigation(tab))
     };
 }
 

@@ -50,12 +50,12 @@ const SessionDetails = React.createClass({
         //   )
         // );
 
-        let topics = null;
-        const { tags } = this.props.session;
-        if (tags && tags.length > 0) {
-            topics = (
+        let topicsSubtitle = null;
+        const { topics } = this.props.session;
+        if (topics && topics.length > 0) {
+            topicsSubtitle = (
                 <Text style={Styles.topics}>
-                TOPICS: {tags.join(', ')}
+                TOPICS: {topics.join(', ')}
                 </Text>
             );
         }
@@ -91,7 +91,6 @@ const SessionDetails = React.createClass({
         );
 
         const title = this.props.session.title || '';
-        const isReactTalk = title.indexOf('React') > -1;
 
         return (
             <View style={[Styles.container, this.props.style]}>
@@ -112,7 +111,7 @@ const SessionDetails = React.createClass({
                         {this.props.session.description}
                     </Text>
                     <Components.Section>
-                        {topics}
+                        {topicsSubtitle}
                     </Components.Section>
                     {/* <Section>
                         {speakersProfiles}
@@ -131,7 +130,7 @@ const SessionDetails = React.createClass({
                 </ScrollView>
                 <View style={Styles.actions}>
                     <Components.AddToScheduleButton
-                    addedImageSource={isReactTalk && Assets.React}
+                    addedImageSource={Assets.React}
                     isAdded={this.props.isAddedToSchedule}
                     onPress={this.toggleAdded}
                     />
