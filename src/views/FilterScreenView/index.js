@@ -4,12 +4,10 @@ import { Animated, View, ScrollView } from 'react-native';
 
 import { Components, Colors, Assets } from '../../global/globalIncludes';
 
+// Global Actions
+import * as Actions from '../../state/actions/filter';
+
 import Styles from './resources/styles';
-
-// const {
-//     applyfiltersFilter,
-// } = require('../actions');
-
 
 class FilterScreen extends React.Component {
     props: {
@@ -61,7 +59,7 @@ class FilterScreen extends React.Component {
                 filter={filter.label}
                 color={Colors.colorForfilter(this.props.filters.length, index)}
                 isChecked={this.state.selectedFilters[filter.label]}
-                onToggle={() => {this.toggleFilter(filter.label)}}
+                onToggle={() => { this.toggleFilter(filter.label); }}
             />
         ));
         const selectedAnyfilters = this.props.filters.some(
@@ -115,7 +113,7 @@ class FilterScreen extends React.Component {
     }
 
     applyFilter() {
-        // this.props.dispatch(applyfiltersFilter(this.state.selectedFilters));
+        this.props.dispatch(Actions.applyFilters(this.state.selectedFilters));
         this.close();
     }
 
@@ -134,15 +132,10 @@ class FilterScreen extends React.Component {
     }
 }
 
-FilterScreen.defaultProps = {
-    filters: []
-};
-
-
 function select(store) {
     return {
         filters: store.data.agenda.data.filters,
-        selectedFilter: store.filter
+        selectedFilters: store.filters
     };
 }
 

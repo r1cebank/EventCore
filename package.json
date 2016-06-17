@@ -11,7 +11,8 @@
   "scripts": {
     "test": "mocha --require react-native-mock/mock.js --compilers js:babel-core/register --recursive test/*.js",
     "lint": "eslint src -f node_modules/eslint-html-reporter/reporter.js -o report.html",
-    "start": "./node_modules/react-native/packager/packager.sh"
+    "start": "./node_modules/react-native/packager/packager.sh",
+    "prerelease": "react-native bundle --entry-file ./index.ios.js --platform ios --bundle-output ios/main.jsbundle --dev false --minify true"
   },
   "repository": {
     "type": "git",

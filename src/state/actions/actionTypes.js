@@ -16,3 +16,6 @@ export const UPDATE_NAVIGATION = 'UPDATE_NAVIGATION';
 export const FETCH_AGENDA = 'FETCH_AGENDA';
 export const AGENDA_FETCHED = 'AGENDA_FETCHED';
 export const UPDATE_AGENDA = 'UPDATE_AGENDA';
+
+// Filter
+export const APPLY_FILTERS = 'APPLY_FILTERS';

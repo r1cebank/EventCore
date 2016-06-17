@@ -1,9 +1,16 @@
 import React from 'react';
 import { Navigator, Platform } from 'react-native';
+import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 
 import * as Actions from '../../state/actions/navigation';
 import { Views, Components, Assets, Utils } from '../../global/globalIncludes';
+
+const data = createSelector(
+    (store) => store.data.agenda.data,
+    // (store) => store.filter,
+    (sessions) => sessions,
+);
 
 class GeneralScheduleView extends React.Component {
 
@@ -28,8 +35,8 @@ class GeneralScheduleView extends React.Component {
             onPress: this.openFilterScreen
         };
 
-        const filterHeader = Object.keys({}).length > 0
-        ? <Components.FilterHeader />
+        const filterHeader = Object.keys(this.props.selectedFilters).length > 0
+        ? <Components.FilterHeader selectedFilters={this.props.selectedFilters} />
         : null;
 
         const content = (
@@ -83,7 +90,8 @@ class GeneralScheduleView extends React.Component {
 function select(store) {
     return {
         day: store.navigation.day,
-        agenda: store.data.agenda.data
+        agenda: data(store),
+        selectedFilters: store.filters
     };
 }
 
