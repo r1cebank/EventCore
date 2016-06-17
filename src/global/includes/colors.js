@@ -18,6 +18,11 @@ const KEY_COLORS = {
     'FOOD TENT': '#FFCD3B'
 };
 
+export function colorForfilter(count, index) {
+    const hue = Math.round(360 * index / (count + 1));
+    return `hsl(${hue}, 74%, 65%)`;
+}
+
 export function colorForKey(key) {
     if (!key) {
         return 'black';

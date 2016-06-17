@@ -114,14 +114,7 @@ class ViewPager extends React.Component {
                 e.nativeEvent.contentOffset.x / this.state.width,
             );
         }
-        if (selectedIndex < 0 || selectedIndex >= this.props.count) {
-            return;
-        }
-        if (this.state.scrollingTo !== null && this.state.scrollingTo !== selectedIndex) {
-            return;
-        }
-        if (this.props.selectedIndex !== selectedIndex || this.state.scrollingTo !== null) {
-            this.setState({ selectedIndex, scrollingTo: null });
+        if (this.props.selectedIndex !== selectedIndex) {
             const { onSelectedIndexChange } = this.props;
             if (onSelectedIndexChange) {
                 onSelectedIndexChange(selectedIndex);

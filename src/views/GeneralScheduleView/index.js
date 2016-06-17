@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigator } from 'react-native';
+import { Navigator, Platform } from 'react-native';
 import { connect } from 'react-redux';
 
 import * as Actions from '../../state/actions/navigation';
@@ -17,6 +17,7 @@ class GeneralScheduleView extends React.Component {
     constructor(props) {
         super(props);
         this.renderEmptyList = this.renderEmptyList.bind(this);
+        this.openFilterScreen = this.openFilterScreen.bind(this);
         this.switchDay = this.switchDay.bind(this);
     }
 
@@ -64,6 +65,14 @@ class GeneralScheduleView extends React.Component {
                 text="Check the schedule for the other day or remove the filter."
             />
         );
+    }
+
+    openFilterScreen() {
+        if (Platform.OS === 'ios') {
+            this.props.navigator.push({ filter: 123 });
+        } else {
+            // this._drawer && this._drawer.openDrawer();
+        }
     }
 
     switchDay(page) {

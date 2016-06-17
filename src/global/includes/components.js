@@ -25,7 +25,10 @@ const components = {
     get Carousel() { return require('../../components/Carousel'); },
     get SessionDetails() { return require('../../components/SessionDetails'); },
     get AddToScheduleButton() { return require('../../components/AddToScheduleButton'); },
-    get PageControl() { return require('../../components/PageControl'); }
+    get PageControl() { return require('../../components/PageControl'); },
+    get FilterItem() { return require('../../components/FilterItem'); },
+    get ItemsWithSeparator() { return require('../../components/ItemsWithSeparator'); },
+    get Button() { return require('../../components/Button'); }
 };
 
 module.exports = components;
