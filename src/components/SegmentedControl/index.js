@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 import Styles from './resources/styles';
 import { Components } from '../../global/globalIncludes';
@@ -26,7 +26,19 @@ class F8SegmentedControl extends React.Component {
         );
         return (
             <View style={[Styles.container, this.props.style]}>
-                {segments}
+                <ScrollView
+                    style={Styles.scrollview}
+                    ref="scrollview"
+                    horizontal={true}
+                    pagingEnabled={true}
+                    scrollsToTop={false}
+                    scrollEventThrottle={10}
+                    automaticallyAdjustContentInsets={false}
+                    directionalLockEnabled={true}
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}>
+                    {segments}
+                </ScrollView>
             </View>
         );
     }
