@@ -2,10 +2,11 @@
 export const InitialAppState = {
     loading: true,
     navigation: {},
-    agenda: { data: [] }
+    agenda: { data: [] },
+    maps: []
 };
 
-// TODO: PUll this setting out
+// TODO: Pull this setting out
 export const InitialNavigationState = {
     day: 0
 };

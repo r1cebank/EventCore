@@ -57,7 +57,7 @@ class GeneralScheduleView extends React.Component {
         const content = (
             <Components.ListContainer
                 title={this.props.title}
-                selectedSegment={this.props.day - 1}
+                selectedSegment={this.props.day}
                 onSegmentChange={this.switchDay}
                 backgroundImage={Assets.ScheduleBackground}
                 backgroundColor="#5597B8"
@@ -98,7 +98,7 @@ class GeneralScheduleView extends React.Component {
     }
 
     switchDay(page) {
-        this.props.switchDay(page + 1);
+        this.props.switchDay(page);
     }
 }
 
