@@ -3,7 +3,10 @@
 import React from 'react';
 import { Animated, Image, View, ScrollView, TouchableOpacity, Navigator } from 'react-native';
 import Subscribable from 'Subscribable';
-import { Components, Assets, Utils, Colors } from '../../global/globalIncludes';
+// import jsonQuery from 'json-query';
+const jsonQuery = require('json-query');
+
+import { Components, Assets, Utils, Colors, Views } from '../../global/globalIncludes';
 
 const { Text } = Components.Text;
 
@@ -31,7 +34,8 @@ const SessionDetails = React.createClass({
         isLoggedIn: React.PropTypes.bool,
         navigator: React.PropTypes.instanceOf(Navigator),
         addToSchedule: React.PropTypes.func,
-        sharedSchedule: React.PropTypes.any
+        sharedSchedule: React.PropTypes.any,
+        maps: React.PropTypes.array
     },
 
     getInitialState() {
@@ -60,20 +64,12 @@ const SessionDetails = React.createClass({
             );
         }
 
-        // var friendsGoing = this.props.friendsGoing.map(
-        //   (friend) => (
-        //     <F8FriendGoing
-        //       key={friend.id}
-        //       friend={friend}
-        //       onPress={() => this.props.navigator.push({friend})}
-        //     />
-        //   )
-        // );
-
         let inlineMap;
-        // if (this.props.map) {
-        //   inlineMap = <MapView map={this.props.map} />;
-        // }
+        const map = jsonQuery(`[name=${this.props.session.location}]`,
+            { data: this.props.maps }).value;
+        if (map) {
+            inlineMap = <Views.MapView map={map} />;
+        }
 
         const locationColor = Colors.colorForKey(this.props.session.location);
         let locationTitle = '';
@@ -113,13 +109,7 @@ const SessionDetails = React.createClass({
                     <Components.Section>
                         {topicsSubtitle}
                     </Components.Section>
-                    {/* <Section>
-                        {speakersProfiles}
-                        </Section>
-                        <Section title="Friends Going">
-                        {friendsGoing}
-                        </Section> */}
-                        {inlineMap}
+                    {inlineMap}
                     <TouchableOpacity
                     accessibilityLabel="Share this session"
                     accessibilityTraits="button"
@@ -177,30 +167,4 @@ const SessionDetails = React.createClass({
     }
 });
 
-// function select(store, props) {
-//   const sessionID = props.session.id;
-//   const friendsGoing = store.friendsSchedules.filter((friend) => friend.schedule[sessionID]);
-//   const map = store.maps.find(({name}) => name === props.session.location);
-//
-//   return {
-//     isAddedToSchedule: !!store.schedule[props.session.id],
-//     isLoggedIn: store.user.isLoggedIn,
-//     sharedSchedule: store.user.sharedSchedule,
-//     sessionURLTemplate: store.config.sessionURLTemplate,
-//     topics: store.topics,
-//     friendsGoing,
-//     map,
-//   };
-// }
-//
-// function actions(dispatch, props) {
-//   let id = props.session.id;
-//   return {
-//     addToSchedule: () => dispatch(addToSchedule(id)),
-//     removeFromScheduleWithPrompt:
-//       () => dispatch(removeFromScheduleWithPrompt(props.session)),
-//   };
-// }
-
 module.exports = SessionDetails;
-// module.exports = connect(select, actions)(F8SessionDetails);

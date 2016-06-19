@@ -48,6 +48,26 @@ function reducer(state = InitialAppState, action) {
                 ...state
             };
         }
+        case ActionType.FETCH_MAPS: {
+            // TODO: Adding real configs
+            Storage.Maps.fetch();
+            return {
+                ...state
+            };
+        }
+        case ActionType.MAPS_FETCHED: {
+            return {
+                ...state,
+                loading: false,
+                maps: action.data
+            };
+        }
+        case ActionType.UPDATE_MAPS: {
+            Storage.Maps.update();
+            return {
+                ...state
+            };
+        }
         default:
             return state;
     }

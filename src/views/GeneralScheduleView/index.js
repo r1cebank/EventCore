@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { Views, Components, Assets, Utils, Actions } from '../../global/globalIncludes';
 
+// TODO: Pull filters out
 const data = createSelector(
     (store) => store.data.agenda.data,
     (store) => store.filters,
