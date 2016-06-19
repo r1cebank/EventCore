@@ -40,3 +40,21 @@ export function agendaFetched(data) {
         data
     };
 }
+export function fetchMaps() {
+    return {
+        type: ActionType.FETCH_MAPS
+    };
+}
+
+export function updateMaps() {
+    return {
+        type: ActionType.UPDATE_MAPS
+    };
+}
+
+export function mapsFetched(data) {
+    return {
+        type: ActionType.MAPS_FETCHED,
+        data
+    };
+}

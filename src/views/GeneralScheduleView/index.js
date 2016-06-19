@@ -5,13 +5,12 @@ import { connect } from 'react-redux';
 
 import { Views, Components, Assets, Utils, Actions } from '../../global/globalIncludes';
 
+// TODO: Pull filters out
 const data = createSelector(
     (store) => store.data.agenda.data,
     (store) => store.filters,
     (sessions, selected) => {
-        let filters = sessions.filters.filter(function(filter) {
-            return selected[filter.label];
-        });
+        const filters = sessions.filters.filter((filter) => selected[filter.label]);
         let agenda = sessions.agenda;
         for (const filter of filters) {
             agenda = Utils.FilterSessions(agenda, filter.query);
@@ -28,8 +27,11 @@ class GeneralScheduleView extends React.Component {
     static propTypes = {
         title: React.PropTypes.string,
         agenda: React.PropTypes.object,
+        day: React.PropTypes.number,
         navigator: React.PropTypes.instanceOf(Navigator),
-        switchDay: React.PropTypes.func
+        switchDay: React.PropTypes.func,
+        selectedFilters: React.PropTypes.object,
+        clearFilters: React.PropTypes.func
     };
 
     constructor(props) {
@@ -55,7 +57,7 @@ class GeneralScheduleView extends React.Component {
         const content = (
             <Components.ListContainer
                 title={this.props.title}
-                selectedSegment={0}
+                selectedSegment={this.props.day - 1}
                 onSegmentChange={this.switchDay}
                 backgroundImage={Assets.ScheduleBackground}
                 backgroundColor="#5597B8"

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, Platform, Navigator } from 'react-native';
+import { connect } from 'react-redux';
 import Moment from 'moment';
 
 import Styles from './resources/styles';
@@ -10,7 +11,8 @@ class SessionsCarusel extends React.Component {
     static propTypes = {
         allSessions: React.PropTypes.object,
         session: React.PropTypes.object,
-        navigator: React.PropTypes.instanceOf(Navigator)
+        navigator: React.PropTypes.instanceOf(Navigator),
+        maps: React.PropTypes.array
     };
 
     constructor(props) {
@@ -111,6 +113,7 @@ class SessionsCarusel extends React.Component {
                 key={index}
                 navigator={this.props.navigator}
                 session={this.state.flatSessionsList[index]}
+                maps={this.props.maps}
                 onShare={this.shareCurrentSession}
             />
         );
@@ -137,4 +140,10 @@ class SessionsCarusel extends React.Component {
 
 }
 
-module.exports = SessionsCarusel;
+function select(store) {
+    return {
+        maps: store.data.maps.data.maps
+    };
+}
+
+module.exports = connect(select)(SessionsCarusel);

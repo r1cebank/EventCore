@@ -21,6 +21,7 @@ class Root extends React.Component {
         // 2) Populate navigation
         Store.appStore.dispatch(Actions.Data.fetchNavigation());
         Store.appStore.dispatch(Actions.Data.fetchAgenda());
+        Store.appStore.dispatch(Actions.Data.fetchMaps());
     }
     render() {
         return (
