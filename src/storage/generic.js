@@ -5,6 +5,7 @@
 /* eslint-disable quote-props */
 
 import SimpleStore from 'react-native-simple-store';
+import _ from 'lodash';
 
 // Global Actions
 import * as DataActions from '../state/actions/data';
@@ -19,13 +20,17 @@ import { Store } from '../global/globalIncludes';
 
 const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });
 
-const Agenda = {
-    fetch: () => {
-        SimpleStore.get('agenda').then((agendaData) => {
+const Generic = {
+    fetch: (config) => {
+        SimpleStore.get(config.storageKey).then((data) => {
             // Dispatch fetched action
-            if (agendaData) {
-                Store.appStore.dispatch(DataActions.agendaFetched(agendaData));
-                Store.appStore.dispatch(DataActions.updateAgenda());
+            if (data) {
+                if (_.isFunction(config.afterFetch)) {
+                    // Run callbacks
+                    config.afterFetch(data);
+                }
+                Store.appStore.dispatch(DataActions[config.fetched](config, data));
+                Store.appStore.dispatch(DataActions[config.update](config));
             } else {
                 // Init the data storage, will call for non patch endpoint
                 // https://event.com/update/navigation/raw?appId=XXXXXXX
@@ -35,27 +40,31 @@ const Agenda = {
                 //         appId: Env.appId
                 //     }
                 // })
-                fetch('https://www.dropbox.com/s/0m9mx6yvp4zz1f4/agenda.json?raw=1', {
-                    method: 'GET'
-                })
+                fetch(config.rawURL, config.rawURLParams)
                 .then((response) => response.json())
-                .then((requestedAgendaData) => {
-                    SimpleStore.save('agenda', requestedAgendaData).then(() => {
-                        Store.appStore.dispatch(DataActions.agendaFetched(requestedAgendaData));
+                .then((requestedData) => {
+                    if (_.isFunction(config.afterGet)) {
+                        // Run callbacks
+                        config.afterGet(requestedData);
+                    }
+                    Store.appStore.dispatch(DataActions[config.fetched](requestedData));
+                    SimpleStore.save(config.storageKey, requestedData).then(() => {
+                        if (_.isFunction(config.afterSave)) {
+                            // Run callbacks
+                            config.afterSave();
+                        }
                     }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
                 })
                 .catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
             }
         }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
     },
-    update: () => {
+    update: (config) => {
         // Call endpoint for patches
         // https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1
         // Endpoint should be like: https://event.com/update/navigation/patches?appId=XXXXXX?currentVersion=XX
-        SimpleStore.get('agenda').then((agendaData) => {
-            fetch('https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1', {
-                method: 'GET'
-            })
+        SimpleStore.get(config.storageKey).then((data) => {
+            fetch(config.updateURL, config.updateURLParams)
             // fetch(`${Env.api}/update/navigation/patch`, {
             //     method: 'GET',
             //     body: {
@@ -65,12 +74,20 @@ const Agenda = {
             // })
             .then((response) => response.json())
             .then((patches) => {
+                if (_.isFunction(config.beforePatch)) {
+                    // Run callbacks
+                    config.beforePatch(patches, data);
+                }
                 if (patches.length) {
                     for (const patch of patches) {
-                        agendaData = DiffPatcher.patch(agendaData, patch);
+                        data = DiffPatcher.patch(data, patch);
                     }
-                    SimpleStore.save('agenda', agendaData).then(() => {
-                        Store.appStore.dispatch(DataActions.agendaFetched(agendaData));
+                    SimpleStore.save(config.storageKey, data).then(() => {
+                        if (_.isFunction(config.afterPatch)) {
+                            // Run callbacks
+                            config.afterPatch(patches, data);
+                        }
+                        Store.appStore.dispatch(DataActions[config.fetched](config, data));
                     }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
                 }
             })
@@ -79,4 +96,4 @@ const Agenda = {
     }
 };
 
-module.exports = Agenda;
+module.exports = Generic;

@@ -4,75 +4,24 @@
 
 import * as ActionType from './actionTypes';
 
-export function fetchNavigation() {
+export function fetchData(config) {
     return {
-        type: ActionType.FETCH_NAVIGATION
+        type: ActionType.FETCH_DATA,
+        config
     };
 }
 
-export function updateNavigation() {
+export function updateData(config) {
     return {
-        type: ActionType.UPDATE_NAVIGATION
+        type: ActionType.UPDATE_DATA,
+        config
     };
 }
 
-export function navigationFetched(data) {
+export function dataFetched(config, data) {
     return {
-        type: ActionType.NAVIGATION_FETCHED,
-        data
-    };
-}
-export function fetchAgenda() {
-    return {
-        type: ActionType.FETCH_AGENDA
-    };
-}
-
-export function updateAgenda() {
-    return {
-        type: ActionType.UPDATE_AGENDA
-    };
-}
-
-export function agendaFetched(data) {
-    return {
-        type: ActionType.AGENDA_FETCHED,
-        data
-    };
-}
-export function fetchMaps() {
-    return {
-        type: ActionType.FETCH_MAPS
-    };
-}
-
-export function updateMaps() {
-    return {
-        type: ActionType.UPDATE_MAPS
-    };
-}
-
-export function mapsFetched(data) {
-    return {
-        type: ActionType.MAPS_FETCHED,
-        data
-    };
-}
-export function fetchSpeakers() {
-    return {
-        type: ActionType.FETCH_SPEAKERS
-    };
-}
-
-export function updateSpeakers() {
-    return {
-        type: ActionType.UPDATE_SPEAKERS
-    };
-}
-
-export function speakersFetched(data) {
-    return {
-        type: ActionType.SPEAKERS_FETCHED,
+        type: ActionType.DATA_FETCHED,
+        config,
         data
     };
 }
