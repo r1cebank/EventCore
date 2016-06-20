@@ -4,6 +4,7 @@
  */
 
 /* @flow */
+/* eslint-disable no-console */
 /* global __DEV__ */
 
 import React from 'react';
@@ -11,6 +12,8 @@ import { Provider } from 'react-redux';
 
 // The root view is definatly the navigation component which define a default view
 import App from './views/App';
+
+import Env from './env';
 
 import { Store, Actions } from './global/globalIncludes';
 
@@ -30,10 +33,10 @@ function setup() {
             // 3) Populate agenda
             // 4) Populate maps
             // 5) Populate speakers
-            Store.appStore.dispatch(Actions.Data.fetchNavigation());
-            Store.appStore.dispatch(Actions.Data.fetchAgenda());
-            Store.appStore.dispatch(Actions.Data.fetchMaps());
-            Store.appStore.dispatch(Actions.Data.fetchSpeakers());
+            Store.appStore.dispatch(Actions.Data.fetchData(Env.config.navigation));
+            Store.appStore.dispatch(Actions.Data.fetchData(Env.config.agenda));
+            Store.appStore.dispatch(Actions.Data.fetchData(Env.config.maps));
+            Store.appStore.dispatch(Actions.Data.fetchData(Env.config.speakers));
         }
         render() {
             return (
