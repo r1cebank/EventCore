@@ -18,7 +18,7 @@ class NavigationShell extends React.Component {
             (() => {
                 //  If loading, return loading view
                 if (this.props.loading) {
-                    const loadingText = '';
+                    const loadingText = 'Loading...';
                     return <Defaults.LoadingView loadingText={loadingText} />;
                 }
                 const NavigationView = Views[this.props.navigation.config.type];

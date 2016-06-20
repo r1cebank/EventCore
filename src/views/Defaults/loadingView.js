@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import React from 'react';
 import Spinner from 'react-native-spinkit';
 
@@ -8,6 +8,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#d35400'
+    },
+    spinner: {
+        marginBottom: 50
+    },
+    text: {
+        color: 'white'
     }
 });
 
@@ -18,7 +24,8 @@ class LoadingView extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Spinner color="#FFFFFF" />
+                <Spinner color="#FFFFFF" style={styles.spinner} type="Bounce" />
+                <Text style={styles.text}>{this.props.loadingText}</Text>
             </View>
         );
     }
