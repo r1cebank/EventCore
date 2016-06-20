@@ -1,4 +1,5 @@
 /* @flow */
+/* global __DEV__ */
 
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import devTools from 'remote-redux-devtools';
@@ -14,9 +15,11 @@ import filterReducer from './reducers/filter';
 
 const loggerMiddleware = createLogger();
 
-const createStoreWithMiddleware = applyMiddleware(
+const createStoreWithMiddleware = __DEV__ ? applyMiddleware(
     thunkMiddleware,
     loggerMiddleware
+)(createStore) : applyMiddleware(
+    thunkMiddleware
 )(createStore);
 
 const rootReducer = combineReducers({
@@ -27,7 +30,12 @@ const rootReducer = combineReducers({
 });
 
 const configureStore = function (initialState) {
-    const enhancer = compose(autoRehydrate(), devTools());
+    let enhancer = undefined;
+    if (__DEV__) {
+        enhancer = compose(autoRehydrate(), devTools());
+    } else {
+        enhancer = compose(autoRehydrate());
+    }
     const store = createStoreWithMiddleware(rootReducer, initialState, enhancer);
     persistStore(store, { storage: AsyncStorage, blacklist: ['data'] });
     return store;

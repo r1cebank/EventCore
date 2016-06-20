@@ -4,6 +4,7 @@
  */
 
 /* @flow */
+/* global __DEV__ */
 
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -16,11 +17,19 @@ import { Store, Actions } from './global/globalIncludes';
 // Construct the root element
 function setup() {
     // Initialize global variable here
+    if (__DEV__) {
+        // Dev initialization
+    } else {
+        console.disableYellowBox = true;
+    }
     class Root extends React.Component {
         componentWillMount() {
             // Navigation startup code
             // 1) Populate settings
             // 2) Populate navigation
+            // 3) Populate agenda
+            // 4) Populate maps
+            // 5) Populate speakers
             Store.appStore.dispatch(Actions.Data.fetchNavigation());
             Store.appStore.dispatch(Actions.Data.fetchAgenda());
             Store.appStore.dispatch(Actions.Data.fetchMaps());
