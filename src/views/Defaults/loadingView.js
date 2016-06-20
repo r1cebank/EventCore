@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         marginBottom: 50
     },
     text: {
-        color: "white"
+        color: 'white'
     }
 });
 
@@ -24,7 +24,7 @@ class LoadingView extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Spinner color="#FFFFFF" style={styles.spinner} type="Bounce"/>
+                <Spinner color="#FFFFFF" style={styles.spinner} type="Bounce" />
                 <Text style={styles.text}>{this.props.loadingText}</Text>
             </View>
         );

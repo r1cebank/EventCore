@@ -21,7 +21,7 @@ function reducer(state = InitialAppState, action) {
             };
         }
         case ActionType.DATA_FETCHED: {
-            let newState = {
+            const newState = {
                 ...state,
                 loading: false
             };

@@ -4,6 +4,7 @@
  */
 
 /* @flow */
+/* eslint-disable no-console */
 /* global __DEV__ */
 
 import React from 'react';

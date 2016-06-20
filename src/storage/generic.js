@@ -14,10 +14,6 @@ import * as UtilActions from '../state/actions/util';
 // Global Includes
 import { Store } from '../global/globalIncludes';
 
-// Envrionment Vars
-// import Env from '../env/env';
-
-
 const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });
 
 const Generic = {
