@@ -14,22 +14,27 @@ import App from './views/App';
 import { Store, Actions } from './global/globalIncludes';
 
 // Construct the root element
-class Root extends React.Component {
-    componentWillMount() {
-        // Navigation startup code
-        // 1) Populate settings
-        // 2) Populate navigation
-        Store.appStore.dispatch(Actions.Data.fetchNavigation());
-        Store.appStore.dispatch(Actions.Data.fetchAgenda());
-        Store.appStore.dispatch(Actions.Data.fetchMaps());
+function setup() {
+    // Initialize global variable here
+    class Root extends React.Component {
+        componentWillMount() {
+            // Navigation startup code
+            // 1) Populate settings
+            // 2) Populate navigation
+            Store.appStore.dispatch(Actions.Data.fetchNavigation());
+            Store.appStore.dispatch(Actions.Data.fetchAgenda());
+            Store.appStore.dispatch(Actions.Data.fetchMaps());
+            Store.appStore.dispatch(Actions.Data.fetchSpeakers());
+        }
+        render() {
+            return (
+                <Provider store={Store.appStore}>
+                    <App />
+                </Provider>
+            );
+        }
     }
-    render() {
-        return (
-            <Provider store={Store.appStore}>
-                <App />
-            </Provider>
-        );
-    }
+    return Root;
 }
 
-export default Root;
+export default setup;

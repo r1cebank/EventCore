@@ -19,6 +19,9 @@ export const UPDATE_AGENDA = 'UPDATE_AGENDA';
 export const FETCH_MAPS = 'FETCH_MAPS';
 export const MAPS_FETCHED = 'MAPS_FETCHED';
 export const UPDATE_MAPS = 'UPDATE_MAPS';
+export const FETCH_SPEAKERS = 'FETCH_SPEAKERS';
+export const SPEAKERS_FETCHED = 'SPEAKERS_FETCHED';
+export const UPDATE_SPEAKERS = 'UPDATE_SPEAKERS';
 
 // Filter
 export const APPLY_FILTERS = 'APPLY_FILTERS';

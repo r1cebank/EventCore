@@ -12,6 +12,8 @@ const styles = Utils.F8StyleSheet.create({
         android: {
             paddingLeft: 60
         }
+    },
+    scrollview: {
     }
 });
 

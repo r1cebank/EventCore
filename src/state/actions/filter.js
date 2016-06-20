@@ -4,7 +4,7 @@
 
 import * as ActionType from './actionTypes';
 
-export function applyFilters(selectedFilters, filters) {
+export function applyFilters(selectedFilters) {
     return {
         type: ActionType.APPLY_FILTERS,
         selectedFilters

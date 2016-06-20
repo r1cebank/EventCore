@@ -28,7 +28,8 @@ const components = {
     get PageControl() { return require('../../components/PageControl'); },
     get FilterItem() { return require('../../components/FilterItem'); },
     get ItemsWithSeparator() { return require('../../components/ItemsWithSeparator'); },
-    get Button() { return require('../../components/Button'); }
+    get Button() { return require('../../components/Button'); },
+    get SpeakerProfile() { return require('../../components/SpeakerProfile'); }
 };
 
 module.exports = components;
