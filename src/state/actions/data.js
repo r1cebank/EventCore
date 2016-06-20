@@ -58,3 +58,21 @@ export function mapsFetched(data) {
         data
     };
 }
+export function fetchSpeakers() {
+    return {
+        type: ActionType.FETCH_SPEAKERS
+    };
+}
+
+export function updateSpeakers() {
+    return {
+        type: ActionType.UPDATE_SPEAKERS
+    };
+}
+
+export function speakersFetched(data) {
+    return {
+        type: ActionType.SPEAKERS_FETCHED,
+        data
+    };
+}

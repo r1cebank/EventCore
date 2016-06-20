@@ -35,7 +35,8 @@ const SessionDetails = React.createClass({
         navigator: React.PropTypes.instanceOf(Navigator),
         addToSchedule: React.PropTypes.func,
         sharedSchedule: React.PropTypes.any,
-        maps: React.PropTypes.array
+        maps: React.PropTypes.object,
+        speakers: React.PropTypes.object
     },
 
     getInitialState() {
@@ -45,15 +46,6 @@ const SessionDetails = React.createClass({
     },
 
     render() {
-        // var speakersProfiles = this.props.session.speakers.map(
-        //   (speaker) => (
-        //     <F8SpeakerProfile
-        //       key={speaker.name}
-        //       speaker={speaker}
-        //     />
-        //   )
-        // );
-
         let topicsSubtitle = null;
         const { topics } = this.props.session;
         if (topics && topics.length > 0) {
@@ -66,10 +58,20 @@ const SessionDetails = React.createClass({
 
         let inlineMap;
         const map = jsonQuery(`[name=${this.props.session.location}]`,
-            { data: this.props.maps }).value;
+            { data: this.props.maps.data.maps }).value;
         if (map) {
             inlineMap = <Views.MapView map={map} />;
         }
+
+        let speakersProfiles = this.props.session.speakers.map(
+          (speaker) => (
+            <Components.SpeakerProfile
+              key={speaker}
+              speaker={jsonQuery(`[id=${speaker}]`,
+                  { data: this.props.speakers.data.speakers }).value}
+            />
+          )
+        );
 
         const locationColor = Colors.colorForKey(this.props.session.location);
         let locationTitle = '';
@@ -108,6 +110,9 @@ const SessionDetails = React.createClass({
                     </Text>
                     <Components.Section>
                         {topicsSubtitle}
+                    </Components.Section>
+                    <Components.Section>
+                        {speakersProfiles}
                     </Components.Section>
                     {inlineMap}
                     <TouchableOpacity

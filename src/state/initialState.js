@@ -3,7 +3,8 @@ export const InitialAppState = {
     loading: true,
     navigation: {},
     agenda: { data: [] },
-    maps: []
+    maps: [],
+    speakers: []
 };
 
 // TODO: Pull this setting out

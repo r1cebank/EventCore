@@ -68,6 +68,26 @@ function reducer(state = InitialAppState, action) {
                 ...state
             };
         }
+        case ActionType.FETCH_SPEAKERS: {
+            // TODO: Adding real configs
+            Storage.Speakers.fetch();
+            return {
+                ...state
+            };
+        }
+        case ActionType.SPEAKERS_FETCHED: {
+            return {
+                ...state,
+                loading: false,
+                speakers: action.data
+            };
+        }
+        case ActionType.UPDATE_SPEAKERS: {
+            Storage.Speakers.update();
+            return {
+                ...state
+            };
+        }
         default:
             return state;
     }

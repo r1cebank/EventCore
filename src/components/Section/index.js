@@ -8,7 +8,7 @@ import Styles from './resources/styles';
 class Section extends React.Component {
     static propTypes = {
         title: React.PropTypes.string,
-        children: React.PropTypes.element
+        children: React.PropTypes.any
     };
 
     render() {

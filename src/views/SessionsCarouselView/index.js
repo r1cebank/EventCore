@@ -12,7 +12,8 @@ class SessionsCarusel extends React.Component {
         allSessions: React.PropTypes.object,
         session: React.PropTypes.object,
         navigator: React.PropTypes.instanceOf(Navigator),
-        maps: React.PropTypes.array
+        maps: React.PropTypes.object,
+        speakers: React.PropTypes.object
     };
 
     constructor(props) {
@@ -114,6 +115,7 @@ class SessionsCarusel extends React.Component {
                 navigator={this.props.navigator}
                 session={this.state.flatSessionsList[index]}
                 maps={this.props.maps}
+                speakers={this.props.speakers}
                 onShare={this.shareCurrentSession}
             />
         );
@@ -142,7 +144,8 @@ class SessionsCarusel extends React.Component {
 
 function select(store) {
     return {
-        maps: store.data.maps.data.maps
+        maps: store.data.maps,
+        speakers: store.data.speakers
     };
 }
 

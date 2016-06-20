@@ -11,4 +11,4 @@ const {
   AppRegistry
 } = React;
 
-AppRegistry.registerComponent('EventCore', () => Root);
+AppRegistry.registerComponent('EventCore', Root);
