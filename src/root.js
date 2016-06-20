@@ -13,6 +13,8 @@ import { Provider } from 'react-redux';
 // The root view is definatly the navigation component which define a default view
 import App from './views/App';
 
+import Env from './env';
+
 import { Store, Actions } from './global/globalIncludes';
 
 // Construct the root element
@@ -31,58 +33,10 @@ function setup() {
             // 3) Populate agenda
             // 4) Populate maps
             // 5) Populate speakers
-            Store.appStore.dispatch(Actions.Data.fetchData({
-                storageKey: 'navigation',
-                fetched: 'dataFetched',
-                update: 'updateData',
-                rawURL: 'https://www.dropbox.com/s/k7y933t3wr1jyu0/navigation.json?raw=1',
-                rawURLParams : {
-                    method: 'GET'
-                },
-                updateURL: 'https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1',
-                updateURLParams: {
-                    method: 'GET'
-                }
-            }));
-            Store.appStore.dispatch(Actions.Data.fetchData({
-                storageKey: 'agenda',
-                fetched: 'dataFetched',
-                update: 'updateData',
-                rawURL: 'https://www.dropbox.com/s/0m9mx6yvp4zz1f4/agenda.json?raw=1',
-                rawURLParams : {
-                    method: 'GET'
-                },
-                updateURL: 'https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1',
-                updateURLParams: {
-                    method: 'GET'
-                }
-            }));
-            Store.appStore.dispatch(Actions.Data.fetchData({
-                storageKey: 'maps',
-                fetched: 'dataFetched',
-                update: 'updateData',
-                rawURL: 'https://www.dropbox.com/s/vq2rxyqn7lxfw8y/maps.json?raw=1',
-                rawURLParams : {
-                    method: 'GET'
-                },
-                updateURL: 'https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1',
-                updateURLParams: {
-                    method: 'GET'
-                }
-            }));
-            Store.appStore.dispatch(Actions.Data.fetchData({
-                storageKey: 'speakers',
-                fetched: 'dataFetched',
-                update: 'updateData',
-                rawURL: 'https://www.dropbox.com/s/45ye8gs616rzkgs/speakers.json?raw=1',
-                rawURLParams : {
-                    method: 'GET'
-                },
-                updateURL: 'https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1',
-                updateURLParams: {
-                    method: 'GET'
-                }
-            }));
+            Store.appStore.dispatch(Actions.Data.fetchData(Env.config.navigation));
+            Store.appStore.dispatch(Actions.Data.fetchData(Env.config.agenda));
+            Store.appStore.dispatch(Actions.Data.fetchData(Env.config.maps));
+            Store.appStore.dispatch(Actions.Data.fetchData(Env.config.speakers));
         }
         render() {
             return (
