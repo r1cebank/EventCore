@@ -3,8 +3,7 @@
 import React from 'react';
 import { Animated, Image, View, ScrollView, TouchableOpacity, Navigator } from 'react-native';
 import Subscribable from 'Subscribable';
-// import jsonQuery from 'json-query';
-const jsonQuery = require('json-query');
+import jsonQuery from 'json-query';
 
 import { Components, Assets, Utils, Colors, Views } from '../../global/globalIncludes';
 

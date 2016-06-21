@@ -9,13 +9,13 @@ import { InitialAppState } from '../initialState';
 function reducer(state = InitialAppState, action) {
     switch (action.type) {
         case ActionType.FETCH_DATA: {
-            Storage.Generic.fetch(action.config);
+            Storage.Generic().fetch(action.config);
             return {
                 ...state
             };
         }
         case ActionType.UPDATE_DATA: {
-            Storage.Generic.update(action.config);
+            Storage.Generic().update(action.config);
             return {
                 ...state
             };
