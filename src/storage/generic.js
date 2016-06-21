@@ -11,12 +11,12 @@ import * as DataActions from '../state/actions/data';
 import * as UtilActions from '../state/actions/util';
 
 // Global Includes
-import { Store } from '../global/globalIncludes';
+import { Store as GlobalStore } from '../global/globalIncludes';
 
 const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });
 
 
-function Generic(Storage = SimpleStore) {
+function Generic(Store = GlobalStore, Storage = SimpleStore) {
     return {
         fetch: (config) => {
             Storage.get(config.storageKey).then((data) => {
