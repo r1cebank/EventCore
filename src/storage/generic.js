@@ -6,12 +6,8 @@
 import SimpleStore from 'react-native-simple-store';
 import _ from 'lodash';
 
-// Global Actions
-import * as DataActions from '../state/actions/data';
-import * as UtilActions from '../state/actions/util';
-
 // Global Includes
-import { Store as GlobalStore } from '../global/globalIncludes';
+import { Store as GlobalStore, Actions } from '../global/globalIncludes';
 
 const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });
 
@@ -26,8 +22,8 @@ function Generic(Store = GlobalStore, Storage = SimpleStore, fetchLib = fetch) {
                         // Run callbacks
                         config.afterFetch(data);
                     }
-                    Store.appStore.dispatch(DataActions[config.fetched](config, data));
-                    Store.appStore.dispatch(DataActions[config.update](config));
+                    Store.appStore.dispatch(Actions.Data[config.fetched](config, data));
+                    Store.appStore.dispatch(Actions.Data[config.update](config));
                     if (_.isFunction(config.afterDispatch)) {
                         // Run callbacks
                         config.afterDispatch();
@@ -48,7 +44,7 @@ function Generic(Store = GlobalStore, Storage = SimpleStore, fetchLib = fetch) {
                             // Run callbacks
                             config.afterGet(requestedData);
                         }
-                        Store.appStore.dispatch(DataActions[config.fetched](config, requestedData));
+                        Store.appStore.dispatch(Actions.Data[config.fetched](config, requestedData));
                         if (_.isFunction(config.afterDispatch)) {
                             // Run callbacks
                             config.afterDispatch();
@@ -58,11 +54,11 @@ function Generic(Store = GlobalStore, Storage = SimpleStore, fetchLib = fetch) {
                                 // Run callbacks
                                 config.afterSave();
                             }
-                        }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
+                        }).catch((e) => { Store.appStore.dispatch(Actions.Utils.appError(e)); });
                     })
-                    .catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
+                    .catch((e) => { Store.appStore.dispatch(Actions.Utils.appError(e)); });
                 }
-            }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
+            }).catch((e) => { Store.appStore.dispatch(Actions.Utils.appError(e)); });
         },
         update: (config) => {
             // Call endpoint for patches
@@ -91,7 +87,7 @@ function Generic(Store = GlobalStore, Storage = SimpleStore, fetchLib = fetch) {
                             // Run callbacks
                             config.afterPatch(patches, data);
                         }
-                        Store.appStore.dispatch(DataActions[config.fetched](config, data));
+                        Store.appStore.dispatch(Actions.Data[config.fetched](config, data));
                         if (_.isFunction(config.afterDispatch)) {
                             // Run callbacks
                             config.afterDispatch();
@@ -101,11 +97,11 @@ function Generic(Store = GlobalStore, Storage = SimpleStore, fetchLib = fetch) {
                                 // Run callbacks
                                 config.afterSave();
                             }
-                        }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
+                        }).catch((e) => { Store.appStore.dispatch(Actions.Utils.appError(e)); });
                     }
                 })
-                .catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
-            }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
+                .catch((e) => { Store.appStore.dispatch(Actions.Utils.appError(e)); });
+            }).catch((e) => { Store.appStore.dispatch(Actions.Utils.appError(e)); });
         }
     };
 }
