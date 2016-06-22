@@ -16,7 +16,7 @@ import { Store as GlobalStore } from '../global/globalIncludes';
 const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });
 
 
-function Generic(Store = GlobalStore, Storage = SimpleStore, fetch = fetch) {
+function Generic(Store = GlobalStore, Storage = SimpleStore, fetchLib = fetch) {
     return {
         fetch: (config) => {
             Storage.get(config.storageKey).then((data) => {
@@ -41,7 +41,7 @@ function Generic(Store = GlobalStore, Storage = SimpleStore, fetch = fetch) {
                     //         appId: Env.appId
                     //     }
                     // })
-                    fetch(config.rawURL, config.rawURLParams)
+                    fetchLib(config.rawURL, config.rawURLParams)
                     .then((response) => response.json())
                     .then((requestedData) => {
                         if (_.isFunction(config.afterGet)) {
@@ -69,7 +69,7 @@ function Generic(Store = GlobalStore, Storage = SimpleStore, fetch = fetch) {
             // https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1
             // Endpoint should be like: https://event.com/update/navigation/patches?appId=XXXXXX?currentVersion=XX
             Storage.get(config.storageKey).then((data) => {
-                fetch(config.updateURL, config.updateURLParams)
+                fetchLib(config.updateURL, config.updateURLParams)
                 // fetch(`${Env.api}/update/navigation/patch`, {
                 //     method: 'GET',
                 //     body: {
@@ -87,15 +87,19 @@ function Generic(Store = GlobalStore, Storage = SimpleStore, fetch = fetch) {
                         for (const patch of patches) {
                             data = DiffPatcher.patch(data, patch);
                         }
+                        if (_.isFunction(config.afterPatch)) {
+                            // Run callbacks
+                            config.afterPatch(patches, data);
+                        }
+                        Store.appStore.dispatch(DataActions[config.fetched](config, data));
+                        if (_.isFunction(config.afterDispatch)) {
+                            // Run callbacks
+                            config.afterDispatch();
+                        }
                         Storage.save(config.storageKey, data).then(() => {
-                            if (_.isFunction(config.afterPatch)) {
+                            if (_.isFunction(config.afterSave)) {
                                 // Run callbacks
-                                config.afterPatch(patches, data);
-                            }
-                            Store.appStore.dispatch(DataActions[config.fetched](config, data));
-                            if (_.isFunction(config.afterDispatch)) {
-                                // Run callbacks
-                                config.afterDispatch();
+                                config.afterSave();
                             }
                         }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
                     }
@@ -104,6 +108,6 @@ function Generic(Store = GlobalStore, Storage = SimpleStore, fetch = fetch) {
             }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
         }
     };
-};
+}
 
 module.exports = Generic;
