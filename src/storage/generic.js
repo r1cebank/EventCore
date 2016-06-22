@@ -16,7 +16,7 @@ import { Store as GlobalStore } from '../global/globalIncludes';
 const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });
 
 
-function Generic(Store = GlobalStore, Storage = SimpleStore) {
+function Generic(Store = GlobalStore, Storage = SimpleStore, fetchLib = fetch) {
     return {
         fetch: (config) => {
             Storage.get(config.storageKey).then((data) => {
@@ -28,6 +28,10 @@ function Generic(Store = GlobalStore, Storage = SimpleStore) {
                     }
                     Store.appStore.dispatch(DataActions[config.fetched](config, data));
                     Store.appStore.dispatch(DataActions[config.update](config));
+                    if (_.isFunction(config.afterDispatch)) {
+                        // Run callbacks
+                        config.afterDispatch();
+                    }
                 } else {
                     // Init the data storage, will call for non patch endpoint
                     // https://event.com/update/navigation/raw?appId=XXXXXXX
@@ -37,14 +41,18 @@ function Generic(Store = GlobalStore, Storage = SimpleStore) {
                     //         appId: Env.appId
                     //     }
                     // })
-                    fetch(config.rawURL, config.rawURLParams)
+                    fetchLib(config.rawURL, config.rawURLParams)
                     .then((response) => response.json())
                     .then((requestedData) => {
                         if (_.isFunction(config.afterGet)) {
                             // Run callbacks
                             config.afterGet(requestedData);
                         }
-                        Store.appStore.dispatch(DataActions[config.fetched](requestedData));
+                        Store.appStore.dispatch(DataActions[config.fetched](config, requestedData));
+                        if (_.isFunction(config.afterDispatch)) {
+                            // Run callbacks
+                            config.afterDispatch();
+                        }
                         Storage.save(config.storageKey, requestedData).then(() => {
                             if (_.isFunction(config.afterSave)) {
                                 // Run callbacks
@@ -61,7 +69,7 @@ function Generic(Store = GlobalStore, Storage = SimpleStore) {
             // https://www.dropbox.com/s/76pksj4t3czy71f/patch?raw=1
             // Endpoint should be like: https://event.com/update/navigation/patches?appId=XXXXXX?currentVersion=XX
             Storage.get(config.storageKey).then((data) => {
-                fetch(config.updateURL, config.updateURLParams)
+                fetchLib(config.updateURL, config.updateURLParams)
                 // fetch(`${Env.api}/update/navigation/patch`, {
                 //     method: 'GET',
                 //     body: {
@@ -79,12 +87,20 @@ function Generic(Store = GlobalStore, Storage = SimpleStore) {
                         for (const patch of patches) {
                             data = DiffPatcher.patch(data, patch);
                         }
+                        if (_.isFunction(config.afterPatch)) {
+                            // Run callbacks
+                            config.afterPatch(patches, data);
+                        }
+                        Store.appStore.dispatch(DataActions[config.fetched](config, data));
+                        if (_.isFunction(config.afterDispatch)) {
+                            // Run callbacks
+                            config.afterDispatch();
+                        }
                         Storage.save(config.storageKey, data).then(() => {
-                            if (_.isFunction(config.afterPatch)) {
+                            if (_.isFunction(config.afterSave)) {
                                 // Run callbacks
-                                config.afterPatch(patches, data);
+                                config.afterSave();
                             }
-                            Store.appStore.dispatch(DataActions[config.fetched](config, data));
                         }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
                     }
                 })
@@ -92,6 +108,6 @@ function Generic(Store = GlobalStore, Storage = SimpleStore) {
             }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
         }
     };
-};
+}
 
 module.exports = Generic;
