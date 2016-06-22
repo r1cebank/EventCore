@@ -82,7 +82,7 @@ const SessionDetails = React.createClass({
                 {locationTitle}
                 <Text style={Styles.time}>
                     {locationTitle && ' - '}
-                    {Utils.FormatDuration(this.props.session.startTime, this.props.session.endTime)}
+                    {Utils.formatDuration(this.props.session.startTime, this.props.session.endTime)}
                 </Text>
             </Text>
         );
