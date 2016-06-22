@@ -1,7 +1,6 @@
 /* global it */
 /* global describe */
-import chai from 'chai';
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
@@ -14,7 +13,7 @@ import MockFetch from '../helpers/mockFetch';
 // File to test
 import { Storage } from '../../src/global/globalIncludes';
 
-let fetchConfig = {
+const fetchConfig = {
     storageKey: 'navigation',
     fetched: 'dataFetched',
     update: 'updateData'
@@ -43,8 +42,14 @@ describe('Generic', () => {
 
         store.appStore.subscribe(() => {
             const actions = store.appStore.getActions();
-            expect('a').to.equal('a');
-            done();
+            try {
+                expect(actions).to.have.deep.property('[0].type', 'DATA_FETCHED');
+                expect(get).to.have.been.calledWith(fetchConfig.storageKey);
+                expect(save).to.have.been.callCount(0);
+                done();
+            } catch (e) {
+                done(e);
+            }
         });
 
         Storage.Generic(store, storage, fetch, done).fetch(fetchConfig);

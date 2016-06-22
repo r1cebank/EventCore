@@ -24,7 +24,6 @@
     "npm": ">=2 <4"
   },
   "dependencies": {
-    "bluebird": "^3.4.1",
     "json-query": "^2.1.0",
     "jsondiffpatch": "^0.1.43",
     "lodash": "^4.13.1",

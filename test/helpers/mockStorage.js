@@ -1,12 +1,10 @@
 // Mocking the interal storage for react native
-import Promise from 'bluebird';
-
 
 function mockStorage(config) {
     return {
         get(key) {
             return new Promise((resolve, reject) => {
-                if(config.getFail) {
+                if (config.getFail) {
                     reject(config.getError);
                 }
                 resolve(config.storage[key]);
@@ -14,7 +12,7 @@ function mockStorage(config) {
         },
         save(key, data) {
             return new Promise((resolve, reject) => {
-                if(config.saveFail) {
+                if (config.saveFail) {
                     reject(config.saveError);
                 }
                 resolve();
