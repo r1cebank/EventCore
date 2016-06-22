@@ -4,5 +4,6 @@
 
 describe('Reducers', () => {
     require('./reducers/data.spec.js');
+    require('./reducers/filter.spec.js');
     require('./reducers/navigation.spec.js');
 });
