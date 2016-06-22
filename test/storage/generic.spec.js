@@ -1,32 +1,52 @@
 /* global it */
 /* global describe */
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
+import chai from 'chai';
 import { expect } from 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 
-const middlewares = [thunk]; // add your middlewares like `redux-thunk`
-const mockStore = configureStore(middlewares);
+chai.use(sinonChai);
 
+import MockStore from '../helpers/mockStore';
+import MockStorage from '../helpers/mockStorage';
+import MockFetch from '../helpers/mockFetch';
+
+// File to test
 import { Storage } from '../../src/global/globalIncludes';
 
+let fetchConfig = {
+    storageKey: 'navigation',
+    fetched: 'dataFetched',
+    update: 'updateData'
+};
+
 describe('Generic', () => {
-    it('should dispatch action', () => {
+    it('should fetch if content does not exist', (done) => {
         const getState = {}; // initial state of the store
 
-        const store = mockStore(getState);
-        const fakeStorage = {
-            get() {
+        const store = { appStore: MockStore(getState) };
 
-            },
-            save() {
-
+        const storage = MockStorage({
+            storage: {
             }
-        };
-        Storage.Generic(store, fakeStorage).fetch({});
-        store.dispatch(addTodo);
+        });
 
-        const actions = store.getActions();
+        const fetch = MockFetch({
+            jsonContent: {
+                success: true
+            }
+        });
 
-        expect(actions).to.eql([addTodo]);
+        // Get spies for mocked storage
+        const get = sinon.spy(storage, 'get');
+        const save = sinon.spy(storage, 'save');
+
+        store.appStore.subscribe(() => {
+            const actions = store.appStore.getActions();
+            expect('a').to.equal('a');
+            done();
+        });
+
+        Storage.Generic(store, storage, fetch, done).fetch(fetchConfig);
     });
 });

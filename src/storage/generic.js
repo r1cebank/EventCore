@@ -16,7 +16,7 @@ import { Store as GlobalStore } from '../global/globalIncludes';
 const DiffPatcher = require('jsondiffpatch').create({ cloneDiffValues: false });
 
 
-function Generic(Store = GlobalStore, Storage = SimpleStore) {
+function Generic(Store = GlobalStore, Storage = SimpleStore, fetch = fetch) {
     return {
         fetch: (config) => {
             Storage.get(config.storageKey).then((data) => {
@@ -28,6 +28,10 @@ function Generic(Store = GlobalStore, Storage = SimpleStore) {
                     }
                     Store.appStore.dispatch(DataActions[config.fetched](config, data));
                     Store.appStore.dispatch(DataActions[config.update](config));
+                    if (_.isFunction(config.afterDispatch)) {
+                        // Run callbacks
+                        config.afterDispatch();
+                    }
                 } else {
                     // Init the data storage, will call for non patch endpoint
                     // https://event.com/update/navigation/raw?appId=XXXXXXX
@@ -44,7 +48,11 @@ function Generic(Store = GlobalStore, Storage = SimpleStore) {
                             // Run callbacks
                             config.afterGet(requestedData);
                         }
-                        Store.appStore.dispatch(DataActions[config.fetched](requestedData));
+                        Store.appStore.dispatch(DataActions[config.fetched](config, requestedData));
+                        if (_.isFunction(config.afterDispatch)) {
+                            // Run callbacks
+                            config.afterDispatch();
+                        }
                         Storage.save(config.storageKey, requestedData).then(() => {
                             if (_.isFunction(config.afterSave)) {
                                 // Run callbacks
@@ -85,6 +93,10 @@ function Generic(Store = GlobalStore, Storage = SimpleStore) {
                                 config.afterPatch(patches, data);
                             }
                             Store.appStore.dispatch(DataActions[config.fetched](config, data));
+                            if (_.isFunction(config.afterDispatch)) {
+                                // Run callbacks
+                                config.afterDispatch();
+                            }
                         }).catch((e) => { Store.appStore.dispatch(UtilActions.appError(e)); });
                     }
                 })
