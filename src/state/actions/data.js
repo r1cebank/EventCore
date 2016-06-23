@@ -3,25 +3,30 @@
 */
 
 import * as ActionType from './actionTypes';
+import { Storage } from '../../global/globalIncludes';
 
 export function fetchData(config) {
+    return dispatch => {
+        return Storage.Generic().fetch(config).then((data) => {
+            dispatch({ type: ActionType.DATA_FETCHED, config, data });
+        })
+        .catch((error) => { dispatch({ type: ActionType.APP_ERROR, error }); });
+    };
+}
+
+export function loadingComplete() {
     return {
-        type: ActionType.FETCH_DATA,
-        config
+        type: ActionType.LOADING_COMPLETE
     };
 }
 
 export function updateData(config) {
-    return {
-        type: ActionType.UPDATE_DATA,
-        config
-    };
-}
-
-export function dataFetched(config, data) {
-    return {
-        type: ActionType.DATA_FETCHED,
-        config,
-        data
+    return dispatch => {
+        return Storage.Generic().update(config).then((data) => {
+            if (data.patched) {
+                dispatch({ type: ActionType.DATA_FETCHED, config, data: data.patched });
+            }
+        })
+        .catch((error) => { dispatch({ type: ActionType.APP_ERROR, error }); });
     };
 }

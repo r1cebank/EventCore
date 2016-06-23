@@ -2,35 +2,23 @@
  * This file includes all the basic app state reducers
  */
 
-import { Storage } from '../../global/globalIncludes';
 import * as ActionType from '../actions/actionTypes';
 import { InitialAppState } from '../initialState';
 
-function reducer(state = InitialAppState, action, skipLogic) {
+function reducer(state = InitialAppState, action) {
     switch (action.type) {
-        case ActionType.FETCH_DATA: {
-            if (!skipLogic) {
-                Storage.Generic().fetch(action.config);
-            }
-            return {
-                ...state
-            };
-        }
-        case ActionType.UPDATE_DATA: {
-            if (!skipLogic) {
-                Storage.Generic().update(action.config);
-            }
-            return {
-                ...state
-            };
-        }
         case ActionType.DATA_FETCHED: {
             const newState = {
-                ...state,
-                loading: false
+                ...state
             };
             newState[action.config.storageKey] = action.data;
             return newState;
+        }
+        case ActionType.LOADING_COMPLETE: {
+            return {
+                ...state,
+                loading: false
+            };
         }
         default:
             return state;

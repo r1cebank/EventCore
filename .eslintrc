@@ -19,6 +19,7 @@
     "no-const-assign": 2,
     "no-param-reassign": 0,
     "import/no-unresolved": 1,
+    "arrow-body-style": 0,
     "global-require": 0,
     "indent": [2, 4, {"SwitchCase": 1}],
     "react/prefer-stateless-function": 0,
