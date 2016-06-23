@@ -41,11 +41,12 @@ class TabView extends React.Component {
             Icon = { };
             Icon.TabBarItemIOS = TabBarIOS.Item;
         }
+        const defaultTab = this.props.tab || this.props.navigation.config.defaults.initialPage;
         return (
             <TabBarIOS tintColor={Colors.darkText}>
                 {this.props.navigation.pages.map((navItem, index) =>
                     <Icon.TabBarItemIOS
-                      selected={this.props.tab === navItem.name}
+                      selected={defaultTab === navItem.name}
                       title={navItem.title}
                       key={index}
                       onPress={() => { this.onTabSelect(navItem.name); }}
