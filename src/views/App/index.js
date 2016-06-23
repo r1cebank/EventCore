@@ -4,15 +4,24 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { StatusBar, View } from 'react-native';
+import { Defaults } from '../../global/globalIncludes';
+
 
 import Styles from './resources/styles';
 
 import Navigation from './navigation';
 
 class AppView extends React.Component {
+    static propTypes = {
+        loading: React.PropTypes.bool
+    };
     render() {
+        const loadingText = 'Loading...';
+        const navigationView = this.props.loading ?
+        <Defaults.LoadingView loadingText={loadingText} /> : <Navigation />;
         return (
             <View style={Styles.container}>
                 <StatusBar
@@ -20,10 +29,12 @@ class AppView extends React.Component {
                   backgroundColor="rgba(0, 0, 0, 0.2)"
                   barStyle="light-content"
                  />
-                <Navigation />
+                 {navigationView}
             </View>
         );
     }
 }
 
-module.exports = AppView;
+module.exports = connect((store) => ({
+    loading: store.data.loading
+}))(AppView);

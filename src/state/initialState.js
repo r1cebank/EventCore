@@ -1,15 +1,10 @@
 
 export const InitialAppState = {
-    loading: true,
-    navigation: {},
-    agenda: { data: [] },
-    maps: [],
-    speakers: []
+    loading: true
 };
 
 // TODO: Pull this setting out
 export const InitialNavigationState = {
-    day: 0
 };
 
 export const InitialFilterState = {

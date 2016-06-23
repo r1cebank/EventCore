@@ -1,22 +1,28 @@
 import chai, { expect } from 'chai';
+import MockStore from '../../helpers/mockStore';
 // File to test
 import { Actions } from '../../../src/global/globalIncludes';
 
 describe('Data', () => {
-    it('Fetch should return correct action', () => {
+    it('Fetch data should return a function', () => {
         const action = Actions.Data.fetchData({ config: true });
-        expect(action).to.have.property('type', 'FETCH_DATA');
-        expect(action).to.have.deep.property('config.config', true);
+        expect(action).to.be.a('function');
+
     });
-    it('Update should return correct action', () => {
+    it('Update data should return a function', () => {
         const action = Actions.Data.updateData({ config: true });
-        expect(action).to.have.property('type', 'UPDATE_DATA');
-        expect(action).to.have.deep.property('config.config', true);
+        expect(action).to.be.a('function');
+
     });
-    it('Fetched should return correct action', () => {
-        const action = Actions.Data.dataFetched({ config: true }, { data: true });
-        expect(action).to.have.property('type', 'DATA_FETCHED');
-        expect(action).to.have.deep.property('config.config', true);
-        expect(action).to.have.deep.property('data.data', true);
+    it('Loading complete should return correct action', () => {
+        const getState = {}; // initial state of the store
+
+        const store = MockStore(getState);
+
+        const action = Actions.Data.loadingComplete();
+
+        store.dispatch(action);
+        const actions = store.getActions();
+        expect(actions).to.eql([{ type: 'LOADING_COMPLETE' }]);
     });
 });

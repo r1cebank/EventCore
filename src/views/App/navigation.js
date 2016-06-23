@@ -16,11 +16,6 @@ class NavigationShell extends React.Component {
     render() {
         return (
             (() => {
-                //  If loading, return loading view
-                if (this.props.loading) {
-                    const loadingText = 'Loading...';
-                    return <Defaults.LoadingView loadingText={loadingText} />;
-                }
                 const NavigationView = Views[this.props.navigation.config.type];
                 //  If the component is missing, fallback to default with message
                 if (!NavigationView) {
@@ -35,6 +30,5 @@ class NavigationShell extends React.Component {
 
 
 module.exports = connect((store) => ({
-    loading: store.data.loading,
     navigation: store.data.navigation.data
 }))(NavigationShell);

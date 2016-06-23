@@ -33,10 +33,14 @@ function setup() {
             // 3) Populate agenda
             // 4) Populate maps
             // 5) Populate speakers
-            Store.appStore.dispatch(Actions.Data.fetchData(Env.config.navigation));
-            Store.appStore.dispatch(Actions.Data.fetchData(Env.config.agenda));
-            Store.appStore.dispatch(Actions.Data.fetchData(Env.config.maps));
-            Store.appStore.dispatch(Actions.Data.fetchData(Env.config.speakers));
+            Promise.all([
+                Store.appStore.dispatch(Actions.Data.fetchData(Env.config.navigation)),
+                Store.appStore.dispatch(Actions.Data.fetchData(Env.config.agenda)),
+                Store.appStore.dispatch(Actions.Data.fetchData(Env.config.maps)),
+                Store.appStore.dispatch(Actions.Data.fetchData(Env.config.speakers))
+            ]).then(() => {
+                Store.appStore.dispatch(Actions.Data.loadingComplete());
+            });
         }
         render() {
             return (
