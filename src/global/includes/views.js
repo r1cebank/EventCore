@@ -19,7 +19,8 @@ const views = {
     get PureListView() { return require('../../views/PureListView'); },
     get FilterScreenView() { return require('../../views/FilterScreenView'); },
     get SessionsCarouselView() { return require('../../views/SessionsCarouselView'); },
-    get MapView() { return require('../../views/MapView'); }
+    get MapView() { return require('../../views/MapView'); },
+    get ParallaxListView() { return require('../../views/ParallaxListView'); }
 };
 
 module.exports = views;
