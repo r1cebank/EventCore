@@ -14,6 +14,8 @@ var {
   PixelRatio,
 } = require('react-native');
 
+import { Views, Components, Assets, Utils, Actions } from '../../global/globalIncludes';
+
 var Parallax = require('react-native-parallax');
 
 var IMAGE_WIDTH = Dimensions.get('window').width;
@@ -69,20 +71,24 @@ var SECTIONS = [
 var Example = React.createClass({
   render: function() {
     return (
-      <Parallax.ScrollView style={styles.scrollView}>
-      {SECTIONS.map((section, i) => (
-        <Parallax.Image
-          key={i}
-          style={styles.image}
-          overlayStyle={styles.overlay}
-          source={{ uri: IMAGE_URI_PREFIX + section.keyword }}
-          parallaxFactor={PARALLAX_FACTOR}
-        >
-          <Text style={styles.title}>{section.title}</Text>
-          <Text style={styles.url}>Source: {IMAGE_URI_PREFIX + section.keyword}</Text>
-        </Parallax.Image>
-      ))}
-      </Parallax.ScrollView>
+        <Components.ListContainer
+          title="Notifications"
+          backgroundImage={Assets.ScheduleBackground}
+          backgroundColor={'#E78196'}>
+          <Parallax.ScrollView style={styles.scrollView}>
+          {SECTIONS.map((section, i) => (
+            <Parallax.Image
+              key={i}
+              style={styles.image}
+              overlayStyle={styles.overlay}
+              source={{ uri: IMAGE_URI_PREFIX + section.keyword }}
+              parallaxFactor={PARALLAX_FACTOR}>
+              <Text style={styles.title}>{section.title}</Text>
+              <Text style={styles.url}>Source: {IMAGE_URI_PREFIX + section.keyword}</Text>
+            </Parallax.Image>
+          ))}
+          </Parallax.ScrollView>
+        </Components.ListContainer>
     );
   },
 });
