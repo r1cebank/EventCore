@@ -68,26 +68,38 @@ var SECTIONS = [
   },
 ];
 
-var Example = React.createClass({
+var ParallaxView = React.createClass({
+    render: function() {
+    return (
+      <Parallax.ScrollView style={styles.scrollView}>
+      {SECTIONS.map((section, i) => (
+        <Parallax.Image
+          key={i}
+          style={styles.image}
+          overlayStyle={styles.overlay}
+          source={{ uri: IMAGE_URI_PREFIX + section.keyword }}
+          parallaxFactor={PARALLAX_FACTOR}
+        >
+          <Text style={styles.title}>{section.title}</Text>
+          <Text style={styles.url}>Source: {IMAGE_URI_PREFIX + section.keyword}</Text>
+        </Parallax.Image>
+      ))}
+      </Parallax.ScrollView>
+    );
+  },
+});
+
+var ParallaxListView = React.createClass({
   render: function() {
     return (
         <Components.ListContainer
           title="Notifications"
           backgroundImage={Assets.ScheduleBackground}
           backgroundColor={'#E78196'}>
-          <Parallax.ScrollView style={styles.scrollView}>
-          {SECTIONS.map((section, i) => (
-            <Parallax.Image
-              key={i}
-              style={styles.image}
-              overlayStyle={styles.overlay}
-              source={{ uri: IMAGE_URI_PREFIX + section.keyword }}
-              parallaxFactor={PARALLAX_FACTOR}>
-              <Text style={styles.title}>{section.title}</Text>
-              <Text style={styles.url}>Source: {IMAGE_URI_PREFIX + section.keyword}</Text>
-            </Parallax.Image>
-          ))}
-          </Parallax.ScrollView>
+          <Views.PureListView
+            title='Developer Garage'
+            renderEmptyList={() => <ParallaxView />}
+          />
         </Components.ListContainer>
     );
   },
@@ -96,6 +108,9 @@ var Example = React.createClass({
 var styles = StyleSheet.create({
   image: {
     height: IMAGE_HEIGHT,
+  },
+  scrollView: {
+      flex: 1
   },
   overlay: {
     alignItems: 'center',
@@ -126,4 +141,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = Example;
+module.exports = ParallaxListView;
