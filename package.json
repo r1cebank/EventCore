@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": ":beginner: React Native boilerplate using redux and webpack",
   "author": "Siyuan Gao <siyuangao@gmail.com> (http://ricebank.ca)",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": true,
   "keywords": [
     "React",
