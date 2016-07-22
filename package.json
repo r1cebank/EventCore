@@ -1,10 +1,10 @@
 {
   "name": "EventCore",
   "version": "0.0.1",
-  "description": ":beginner: React Native boilerplate using redux and webpack",
+  "description": "React Native event app",
   "author": "Siyuan Gao <siyuangao@gmail.com> (http://ricebank.ca)",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "keywords": [
     "React",
     "Native"
