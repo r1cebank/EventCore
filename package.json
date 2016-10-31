@@ -26,7 +26,7 @@
   "dependencies": {
     "json-query": "^2.1.0",
     "jsondiffpatch": "^0.1.43",
-    "lodash": "^4.13.1",
+    "lodash": "^4.16.5",
     "moment": "^2.13.0",
     "rctn-localization": "^0.1.14",
     "react": "^15.2.1",
